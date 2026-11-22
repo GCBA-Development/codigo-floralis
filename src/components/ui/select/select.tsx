@@ -6,6 +6,7 @@ import { HugeiconsIcon } from "@hugeicons/react";
 import { ArrowDown01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
 
 import { cn } from "@/lib/utils";
+import { Field, FieldLabel, FieldMessages } from "@/components/ui/field";
 
 function Select<Value, Multiple extends boolean | undefined = false>({
   ...props
@@ -19,7 +20,9 @@ function SelectValue({ ...props }: SelectPrimitive.Value.Props) {
 
 type SelectTriggerProps = SelectPrimitive.Trigger.Props & {
   label?: React.ReactNode;
-  /** Mensaje de error (string) o solo estado inválido (true). */
+  /** Texto de ayuda debajo del campo. */
+  description?: React.ReactNode;
+  /** Mensaje de error (string) o solo estado inválido (true). Tiene prioridad sobre `description`. */
   error?: string | boolean;
 };
 
@@ -27,21 +30,12 @@ function SelectTrigger({
   className,
   children,
   label,
+  description,
   error,
-  id,
-  "aria-describedby": ariaDescribedBy,
   ...props
 }: SelectTriggerProps) {
-  const generatedId = React.useId();
-  const triggerId = id ?? generatedId;
-  const errorId = `${triggerId}-error`;
-  const errorMessage = typeof error === "string" ? error : undefined;
-
   const trigger = (
     <SelectPrimitive.Trigger
-      id={triggerId}
-      aria-invalid={error ? true : undefined}
-      aria-describedby={cn(errorMessage && errorId, ariaDescribedBy) || undefined}
       data-slot="select-trigger"
       className={cn(
         "flex h-8 w-full items-center justify-between gap-1 rounded-t-md border-0 border-b-2 border-field-border bg-muted/40 bg-clip-padding px-2.5 text-s6 text-foreground outline-none select-none transition-all duration-200 hover:bg-muted/60 focus-visible:border-border data-[popup-open]:border-border data-[popup-open]:bg-muted/60 disabled:pointer-events-none disabled:border-field-border-disabled disabled:bg-transparent disabled:text-muted-foreground disabled:opacity-60 aria-invalid:border-destructive",
@@ -57,27 +51,22 @@ function SelectTrigger({
     </SelectPrimitive.Trigger>
   );
 
-  if (!label && !errorMessage) return trigger;
+  // Sin decoración queda suelto: si lo envuelve un `FormField`, ese `Field` lo asocia.
+  if (!label && !description && !error) return trigger;
 
   return (
-    <div className="w-full">
+    <Field invalid={Boolean(error)}>
       <div className="relative w-full">
         {trigger}
         {label && (
-          <label
-            htmlFor={triggerId}
-            className="pointer-events-none absolute top-1.5 left-2.5 text-s7 font-medium text-muted-foreground"
-          >
+          // Un <button> no puede ser el destino de un <label> nativo: se renderiza como div y Field vincula por aria-labelledby.
+          <FieldLabel inset nativeLabel={false} render={<div />}>
             {label}
-          </label>
+          </FieldLabel>
         )}
       </div>
-      {errorMessage && (
-        <p id={errorId} role="alert" className="mt-1 px-2.5 text-s7 text-destructive">
-          {errorMessage}
-        </p>
-      )}
-    </div>
+      <FieldMessages description={description} error={error} />
+    </Field>
   );
 }
 
@@ -153,7 +142,7 @@ const SELECT_ALL_VALUE = "__select-all__";
 
 type MultiSelectOption = { label: string; value: string };
 
-type MultiSelectProps = Pick<SelectTriggerProps, "label" | "error" | "className" | "id"> & {
+type MultiSelectProps = Pick<SelectTriggerProps, "label" | "description" | "error" | "className" | "id"> & {
   options: readonly MultiSelectOption[];
   value: string[];
   onValueChange: (value: string[]) => void;

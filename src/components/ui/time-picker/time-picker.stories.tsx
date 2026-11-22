@@ -28,7 +28,7 @@ export const Modern: Story = {
   args: {
     label: "Horario de Cierre",
     variant: "modern",
-    helperText: "Seleccione la hora de finalización del turno.",
+    description: "Seleccione la hora de finalización del turno.",
   },
 };
 
