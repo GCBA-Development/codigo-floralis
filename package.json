@@ -20,11 +20,9 @@
     "**/*.css"
   ],
   "scripts": {
-    "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "test:unit": "vitest run --project unit",
-    "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "gc": "node scripts/generate.mjs",
     "build-storybook": "storybook build",

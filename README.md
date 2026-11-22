@@ -71,3 +71,24 @@ export default defineConfig([
   },
 ])
 ```
+
+## Estructura
+
+Un componente = una carpeta en kebab-case, agrupada por propósito:
+
+```
+src/components/
+  ui/       primitivas y controles (button, input, select, dialog, ...)
+  data/     visualización de datos (table, kpi-card, simple-bar-chart, ...)
+  layout/   estructura de página (page-header, sidebar)
+  media/    imágenes y archivos (image-gallery)
+```
+
+Cada carpeta contiene:
+
+- `<nombre>.tsx`: el componente (las sub-partes viven al lado, también en kebab-case).
+- `<nombre>.variants.ts`: solo si tiene variantes CVA.
+- `<nombre>.stories.tsx`: story con título `GCBA/<Grupo>/<Nombre>`.
+- `index.ts`: API pública del componente; `src/index.ts` re-exporta cada carpeta.
+
+Para crear uno nuevo: `npm run gc <nombre> [ui|data|layout|media]` (por defecto `ui`). Después hay que sumarlo a `src/index.ts`.

@@ -1,92 +1,90 @@
 import fs from 'fs';
 import path from 'path';
 
-const componentName = process.argv[2];
+const GROUPS = ['ui', 'data', 'layout', 'media'];
+const [, , rawName, group = 'ui'] = process.argv;
 
-if (!componentName) {
-  console.error("❌ Por favor, indica el nombre del componente (ej: MyButton)");
+const toKebab = (value) =>
+  value
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/[\s_]+/g, '-')
+    .toLowerCase();
+const toPascal = (kebab) =>
+  kebab.split('-').map((part) => part[0].toUpperCase() + part.slice(1)).join('');
+const toCamel = (kebab) => {
+  const pascal = toPascal(kebab);
+  return pascal[0].toLowerCase() + pascal.slice(1);
+};
+
+if (!rawName || !GROUPS.includes(group)) {
+  console.error(`Uso: npm run gc <nombre> [${GROUPS.join('|')}]  (ej: npm run gc status-pill ui)`);
   process.exit(1);
 }
 
-const baseDir = path.join(process.cwd(), 'src', 'components', 'custom', componentName);
+const kebab = toKebab(rawName);
+const Name = toPascal(kebab);
+const variants = `${toCamel(kebab)}Variants`;
+const baseDir = path.join(process.cwd(), 'src', 'components', group, kebab);
 
-// Templates de los archivos corregidos
-const templates = {
-  component: `import * as React from "react";
+if (fs.existsSync(baseDir)) {
+  console.error(`El componente ya existe: src/components/${group}/${kebab}`);
+  process.exit(1);
+}
+
+const groupTitle = group[0].toUpperCase() + group.slice(1);
+
+const files = {
+  [`${kebab}.tsx`]: `import * as React from "react";
+import type { VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { ${componentName.toLowerCase()}Variants } from "./${componentName}.variants";
-import { VariantProps } from "class-variance-authority";
+import { ${variants} } from "./${kebab}.variants";
 
-export interface ${componentName}Props
+export interface ${Name}Props
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof ${componentName.toLowerCase()}Variants> {}
+    VariantProps<typeof ${variants}> {}
 
-const ${componentName} = React.forwardRef<HTMLDivElement, ${componentName}Props>(
-  ({ className, variant, ...props }, ref) => {
-    return (
-      <div
-        ref={ref}
-        className={cn(${componentName.toLowerCase()}Variants({ variant }), className)}
-        {...props}
-      >
-        ${componentName} Component
-      </div>
-    );
-  }
-);
+export function ${Name}({ className, variant, ...props }: ${Name}Props) {
+  return <div className={cn(${variants}({ variant }), className)} {...props} />;
+}
+`,
+  [`${kebab}.variants.ts`]: `import { cva } from "class-variance-authority";
 
-${componentName}.displayName = "${componentName}";
-export { ${componentName} };`,
-
-  variants: `import { cva } from "class-variance-authority";
-
-export const ${componentName.toLowerCase()}Variants = cva(
-  "transition-all duration-300",
-  {
-    variants: {
-      variant: {
-        default: "bg-transparent",
-        modern: "rounded-xl border border-slate-200 bg-white/50 backdrop-blur-md shadow-sm",
-      },
+export const ${variants} = cva("transition-all duration-300", {
+  variants: {
+    variant: {
+      default: "bg-transparent",
     },
-    defaultVariants: {
-      variant: "default",
-    },
-  }
-);`,
+  },
+  defaultVariants: {
+    variant: "default",
+  },
+});
+`,
+  [`${kebab}.stories.tsx`]: `import type { Meta, StoryObj } from "@storybook/react-vite";
+import { ${Name} } from "./${kebab}";
 
-  stories: `import type { Meta, StoryObj } from "@storybook/react";
-import { ${componentName} } from "./${componentName}";
-
-const meta: Meta<typeof ${componentName}> = {
-  title: "GCBA/Custom/${componentName}",
-  component: ${componentName},
+const meta: Meta<typeof ${Name}> = {
+  title: "GCBA/${groupTitle}/${Name}",
+  component: ${Name},
   tags: ["autodocs"],
 };
 
 export default meta;
-type Story = StoryObj<typeof ${componentName}>;
+type Story = StoryObj<typeof ${Name}>;
 
 export const Default: Story = {
-  args: {
-    variant: "default",
-  },
-};`
+  args: { children: "${Name}" },
+};
+`,
+  'index.ts': `export * from "./${kebab}";
+export * from "./${kebab}.variants";
+`,
 };
 
-// Crear carpeta y archivos
-try {
-  if (!fs.existsSync(baseDir)) {
-    fs.mkdirSync(baseDir, { recursive: true });
-  }
-
-  // Corregido: Uso de template strings limpias
-  fs.writeFileSync(path.join(baseDir, `${componentName}.tsx`), templates.component);
-  fs.writeFileSync(path.join(baseDir, `${componentName}.variants.ts`), templates.variants);
-  fs.writeFileSync(path.join(baseDir, `${componentName}.stories.tsx`), templates.stories);
-
-  console.log(`✅ Componente ${componentName} creado con éxito en:`);
-  console.log(`📂 src/components/custom/${componentName}`);
-} catch (error) {
-  console.error("❌ Error creando los archivos:", error);
+fs.mkdirSync(baseDir, { recursive: true });
+for (const [file, content] of Object.entries(files)) {
+  fs.writeFileSync(path.join(baseDir, file), content);
 }
+
+console.log(`Componente creado en src/components/${group}/${kebab}`);
+console.log(`Falta exportarlo en src/index.ts: export * from "./components/${group}/${kebab}";`);

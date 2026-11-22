@@ -23,7 +23,7 @@ const externalPackages = [
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [tailwindcss(),react(),dts({ tsconfigPath: "./tsconfig.app.json", include: ["src"], exclude: ["src/**/*.stories.*", "src/stories/**", "src/main.tsx", "src/App.tsx"], rollupTypes: true })],
+  plugins: [tailwindcss(),react(),dts({ tsconfigPath: "./tsconfig.app.json", include: ["src"], exclude: ["src/**/*.stories.*", "src/stories/**"], rollupTypes: true })],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
