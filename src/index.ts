@@ -31,6 +31,8 @@ export * from "./components/data/stat-card"
 export * from "./components/data/table"
 
 // layout
+export * from "./components/layout/app-navbar"
+export * from "./components/layout/app-sidebar"
 export * from "./components/layout/page-header"
 export * from "./components/layout/sidebar"
 
@@ -42,5 +44,6 @@ export * from "./hooks/use-in-view";
 export * from "./hooks/use-mobile";
 
 // lib
+export type { LinkComponent, LinkComponentProps } from "./lib/link-component";
 export * from "./lib/toast";
 export { cn } from "./lib/utils";
