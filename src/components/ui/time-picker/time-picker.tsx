@@ -10,7 +10,8 @@ export interface TimePickerProps
     VariantProps<typeof timePickerVariants> {
   label?: string;
   helperText?: string;
-  error?: boolean;
+  /** Mensaje de error (string) o solo estado inválido (true). */
+  error?: string | boolean;
 }
 
 const TimePickerCustom = React.forwardRef<HTMLInputElement, TimePickerProps>(
@@ -39,8 +40,9 @@ const TimePickerCustom = React.forwardRef<HTMLInputElement, TimePickerProps>(
             type="time"
             ref={ref}
             disabled={disabled}
+            aria-invalid={error ? true : undefined}
             className={cn(
-              timePickerVariants({ variant: error ? "error" : variant }),
+              timePickerVariants({ variant }),
               "pl-11 pr-4", 
               "w-[140px]", // <--- Tamaño fijo ideal para un Time Picker (hh:mm)
               className
@@ -49,12 +51,12 @@ const TimePickerCustom = React.forwardRef<HTMLInputElement, TimePickerProps>(
           />
         </div>
 
-        {helperText && (
+        {(helperText || typeof error === "string") && (
           <p className={cn(
             "text-[11px] leading-none max-w-[140px] break-words", // Limitamos el texto de ayuda también
             error ? "text-destructive font-semibold" : "text-muted-foreground opacity-80"
           )}>
-            {helperText}
+            {typeof error === "string" ? error : helperText}
           </p>
         )}
       </div>

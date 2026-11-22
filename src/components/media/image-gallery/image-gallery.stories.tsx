@@ -8,7 +8,7 @@ const meta: Meta<typeof ImageGallery> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "modern", "glass"],
+      options: ["outline", "modern", "glass"],
     },
     size: {
       control: "select",
@@ -27,12 +27,11 @@ const mockImages = [
 
 export const Modern: Story = {
   args: {
-    imagenes: mockImages,
+    value: mockImages,
     editable: true,
     variant: "modern",
     size: "md",
-    ruta: "informes/tormentas",
-    handleChange: (ruta, imgs) => console.log(ruta, imgs),
+    onValueChange: () => {},
   },
 };
 

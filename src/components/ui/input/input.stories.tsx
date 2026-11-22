@@ -21,6 +21,6 @@ export const WithStartIcon: Story = {
     ),
   },
 }
-export const OnlyNumbers: Story = { args: { label: "DNI", restrict: "numeros", helperText: "Solo números" } }
-export const Phone: Story = { args: { label: "Teléfono", restrict: "telefono", helperText: "Dígitos y +" } }
+export const OnlyNumbers: Story = { args: { label: "DNI", restrict: "digits", helperText: "Solo números" } }
+export const Phone: Story = { args: { label: "Teléfono", restrict: "phone", helperText: "Dígitos y +" } }
 export const SentenceCase: Story = { args: { label: "Nombre", restrict: "sentenceCase", helperText: "Primera letra en mayúscula" } }

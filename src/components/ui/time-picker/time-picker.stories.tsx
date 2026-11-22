@@ -8,7 +8,7 @@ const meta: Meta<typeof TimePickerCustom> = {
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "error", "modern"],
+      options: ["outline", "modern", "glass"],
     },
   },
 };
@@ -19,7 +19,7 @@ type Story = StoryObj<typeof TimePickerCustom>;
 export const Default: Story = {
   args: {
     label: "Horario de Inicio",
-    variant: "default",
+    variant: "outline",
     defaultValue: "08:00",
   },
 };
@@ -35,8 +35,7 @@ export const Modern: Story = {
 export const ConError: Story = {
   args: {
     label: "Hora de Entrega",
-    error: true,
-    helperText: "El horario seleccionado no es válido.",
+    error: "El horario seleccionado no es válido.",
     defaultValue: "25:00",
   },
 };

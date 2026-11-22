@@ -15,12 +15,12 @@ type Story = StoryObj<typeof CheckboxList>;
 
 export const Default: Story = {
   args: {
-    titulo: "Intereses del Usuario",
-    opciones: [
-      { codigo: "tec", nombre: "Tecnología" },
-      { codigo: "dep", nombre: "Deportes" },
-      { codigo: "art", nombre: "Arte y Cultura" },
+    label: "Intereses del Usuario",
+    options: [
+      { value: "tec", label: "Tecnología" },
+      { value: "dep", label: "Deportes" },
+      { value: "art", label: "Arte y Cultura" },
     ],
-    elegidos: ["tec"],
+    value: ["tec"],
   },
 };

@@ -5,7 +5,7 @@ export const imageItemVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-border bg-card hover:shadow-md",
+        outline: "border-border bg-card hover:shadow-md",
         modern: "border-transparent bg-muted hover:bg-border focus-within:ring-2 focus-within:ring-primary",
         glass: "bg-card/30 backdrop-blur-sm border-card/20 hover:bg-card/50",
       },

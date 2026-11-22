@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Badge } from "./badge"
 
-const VARIANTS = ["default", "secondary", "destructive", "outline", "soft", "success", "warning"] as const
+const VARIANTS = ["primary", "secondary", "destructive", "outline", "soft", "success", "warning"] as const
 const SIZES = ["sm", "md", "lg"] as const
 
 const meta: Meta<typeof Badge> = {

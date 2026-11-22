@@ -7,14 +7,14 @@ import { Button } from "@/components/ui/button";
 
 interface ImagePreviewProps {
   src: string | null;
-  isOpen: boolean;
-  onClose: () => void;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   onDelete?: () => void;
 }
 
-export const ImagePreview = ({ src, isOpen, onClose, onDelete }: ImagePreviewProps) => {
+export const ImagePreview = ({ src, open, onOpenChange, onDelete }: ImagePreviewProps) => {
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-[95vw] border-none bg-transparent p-0 shadow-none outline-none sm:max-w-4xl [&>button]:text-primary-foreground [&>button]:opacity-100 [&>button]:cursor-pointer">
         <DialogHeader className="sr-only">
           <DialogTitle>Vista previa</DialogTitle>
@@ -38,7 +38,7 @@ export const ImagePreview = ({ src, isOpen, onClose, onDelete }: ImagePreviewPro
                   onClick={(e: React.MouseEvent) => {
                     e.stopPropagation();
                     onDelete();
-                    onClose();
+                    onOpenChange(false);
                   }}
                 >
                   <HugeiconsIcon icon={Delete02Icon} className="size-5" />

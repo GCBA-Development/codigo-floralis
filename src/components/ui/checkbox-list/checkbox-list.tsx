@@ -8,60 +8,57 @@ import { checkboxVariants } from "./checkbox-list.variants";
 import type { VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-export interface Opcion {
-  codigo: string | number;
-  nombre: string;
+export interface CheckboxListOption {
+  value: string | number;
+  label: string;
 }
 
 export interface CheckboxListProps extends VariantProps<typeof checkboxVariants> {
-  opciones: Opcion[];
-  elegidos?: (string | number)[];
-  onChange?: (values: (string | number)[]) => void; // Este es el que usa RHF
-  titulo?: string;
+  options: CheckboxListOption[];
+  value?: (string | number)[];
+  onValueChange?: (value: (string | number)[]) => void;
+  label?: string;
+  /** Mensaje de error (string) o solo estado inválido (true). */
+  error?: string | boolean;
   disabled?: boolean;
   className?: string;
   name?: string; // Importante para RHF
 }
 
 const CheckboxList = React.forwardRef<HTMLDivElement, CheckboxListProps>(
-  ({ opciones, elegidos = [], onChange, titulo, disabled, variant, className, name }, ref) => {
+  ({ options, value = [], onValueChange, label, error, disabled, variant, className, name }, ref) => {
     
     // Función que maneja el cambio y notifica al padre / RHF
-    const handleToggle = (codigo: string | number) => {
+    const handleToggle = (optionValue: string | number) => {
       if (disabled) return;
 
-      const current = new Set(elegidos);
-      if (current.has(codigo)) {
-        current.delete(codigo);
+      const current = new Set(value);
+      if (current.has(optionValue)) {
+        current.delete(optionValue);
       } else {
-        current.add(codigo);
+        current.add(optionValue);
       }
       
-      const newValores = Array.from(current);
-      
-      // Notificamos el cambio
-      if (onChange) {
-        onChange(newValores);
-      }
+      onValueChange?.(Array.from(current));
     };
 
     return (
       <div ref={ref} className={cn("w-full space-y-3", className)}>
-        {titulo && (
+        {label && (
           <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground text-center mb-4">
-            {titulo}
+            {label}
           </h4>
         )}
         
         <div className="rounded-2xl border border-border/60 bg-card/50 backdrop-blur-md overflow-hidden shadow-sm">
           <div className="flex flex-col">
-            {opciones.map((opcion) => {
-              const isChecked = elegidos.includes(opcion.codigo);
+            {options.map((option) => {
+              const isChecked = value.includes(option.value);
               
               return (
                 <div
-                  key={opcion.codigo}
-                  onClick={() => handleToggle(opcion.codigo)}
+                  key={option.value}
+                  onClick={() => handleToggle(option.value)}
                   className={cn(
                     "group flex items-center justify-between px-6 py-4 transition-all duration-300 cursor-pointer border-b border-border last:border-none",
                     isChecked ? "bg-primary/[0.03]" : "hover:bg-muted/80",
@@ -72,16 +69,17 @@ const CheckboxList = React.forwardRef<HTMLDivElement, CheckboxListProps>(
                     "text-[13px] font-bold transition-all duration-300",
                     isChecked ? "text-foreground translate-x-1" : "text-muted-foreground group-hover:text-foreground"
                   )}>
-                    {opcion.nombre}
+                    {option.label}
                   </span>
 
                   <CheckboxPrimitive.Root
-                    id={`${name}-${opcion.codigo}`}
+                    id={name ? `${name}-${option.value}` : undefined}
                     checked={isChecked}
-                    onCheckedChange={() => handleToggle(opcion.codigo)}
+                    onCheckedChange={() => handleToggle(option.value)}
                     onClick={(e) => e.stopPropagation()}
-                    className={cn(checkboxVariants({ variant: isChecked ? variant : "default" }))}
+                    className={cn(checkboxVariants({ variant: isChecked ? variant : "primary" }))}
                     disabled={disabled}
+                    aria-invalid={error ? true : undefined}
                   >
                     <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
                       <HugeiconsIcon icon={Tick02Icon} strokeWidth={3} className="size-3.5" />

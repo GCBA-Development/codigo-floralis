@@ -27,7 +27,8 @@ export function Dropzone({
   /** Bytes */
   maxSize?: number
   disabled?: boolean
-  error?: string
+  /** Mensaje de error (string) o solo estado inválido (true). */
+  error?: string | boolean
   label?: string
   hint?: string
   className?: string
@@ -61,7 +62,7 @@ export function Dropzone({
     onFiles(files)
   }
 
-  const shownError = localError ?? error
+  const shownError = localError ?? error ?? undefined
 
   return (
     <div className={cn("w-full space-y-2", className)}>
@@ -110,7 +111,7 @@ export function Dropzone({
           }}
         />
       </div>
-      {shownError && (
+      {typeof shownError === "string" && shownError && (
         <p role="alert" className="text-s7 text-destructive">
           {shownError}
         </p>

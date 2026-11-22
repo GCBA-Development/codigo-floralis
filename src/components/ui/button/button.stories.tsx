@@ -7,7 +7,7 @@ const meta: Meta<typeof Button> = {
   tags: ["autodocs"],
   argTypes: {
     variant: { control: "select", options: ["primary", "secondary", "tertiary", "outline", "ghost", "destructive", "link"] },
-    size: { control: "select", options: ["default", "xs", "sm", "lg", "icon", "icon-xs", "icon-sm", "icon-lg"] },
+    size: { control: "select", options: ["md", "xs", "sm", "lg", "icon", "icon-xs", "icon-sm", "icon-lg"] },
   },
   args: { children: "Guardar" },
 }

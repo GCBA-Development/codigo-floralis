@@ -7,30 +7,22 @@ import { ImageThumbnail } from "./image-thumbnail";
 import { ImagePreview } from "./image-item";
 
 interface ListImagesProps extends VariantProps<typeof imageItemVariants> {
-  imagenes: string[];
+  value: string[];
   editable?: boolean;
-  handleChange: (ruta: string, imagenes: string[]) => void;
-  ruta: string;
+  onValueChange: (value: string[]) => void;
 }
 
-export function ImageGallery({ 
-  imagenes, 
-  editable, 
-  handleChange, 
-  ruta
-}: ListImagesProps) {
+export function ImageGallery({ value, editable, onValueChange }: ListImagesProps) {
   const [selectedIdx, setSelectedIdx] = React.useState<number | null>(null);
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const handleDelete = (index: number) => {
-    const newImages = [...imagenes];
-    newImages.splice(index, 1);
-    handleChange(ruta, newImages);
+    onValueChange(value.filter((_, imageIndex) => imageIndex !== index));
     setSelectedIdx(null);
   };
 
  return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-      {imagenes.map((src, index) => (
+      {value.map((src, index) => (
         <ImageThumbnail
           key={`${src}-${index}`}
           src={src}
@@ -41,8 +33,8 @@ export function ImageGallery({
 
     <ImagePreview
       src={selectedImage}
-      isOpen={!!selectedImage}
-      onClose={() => setSelectedImage(null)}
+      open={!!selectedImage}
+      onOpenChange={() => setSelectedImage(null)}
       onDelete={editable && selectedIdx !== null 
         ? () => handleDelete(selectedIdx) 
         : undefined

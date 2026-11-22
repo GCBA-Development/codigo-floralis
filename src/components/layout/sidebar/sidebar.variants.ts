@@ -5,19 +5,19 @@ export const sidebarMenuButtonVariants = cva(
   {
     variants: {
       variant: {
-        default: "hover:bg-sidebar-foreground/10",
+        ghost: "hover:bg-sidebar-foreground/10",
         outline:
           "bg-background shadow-[0_0_0_1px_var(--sidebar-border)] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:shadow-[0_0_0_1px_var(--sidebar-accent)]",
       },
       size: {
-        default: "h-8 text-s6",
+        md: "h-8 text-s6",
         sm: "h-7 text-s6",
         lg: "h-12 text-s6 group-data-[collapsible=icon]:p-0!",
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "ghost",
+      size: "md",
     },
   }
 )

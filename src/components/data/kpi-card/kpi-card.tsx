@@ -4,8 +4,8 @@ export type Kpi = { label: string; value: number; suffix?: string }
 
 type KpiCardProps = Kpi & {
   loading?: boolean
-  /** `highlight` es la cifra principal del módulo (fondo de marca); `default` las secundarias. */
-  variant?: "highlight" | "default"
+  /** `primary` es la cifra principal del módulo (fondo de marca); `secondary` las demás. */
+  variant?: "primary" | "secondary"
 }
 
 /*
@@ -15,8 +15,8 @@ type KpiCardProps = Kpi & {
   ("Total de intervenciones"), y eso es justo lo que un skeleton de alto fijo
   no puede replicar.
 */
-export function KpiCard({ label, value, suffix, loading = false, variant = "default" }: KpiCardProps) {
-  const isHighlight = variant === "highlight"
+export function KpiCard({ label, value, suffix, loading = false, variant = "secondary" }: KpiCardProps) {
+  const isHighlight = variant === "primary"
 
   return (
     <div
