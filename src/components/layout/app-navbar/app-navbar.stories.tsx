@@ -13,6 +13,8 @@ import {
 } from "@hugeicons/core-free-icons"
 
 import { SidebarProvider } from "@/components/layout/sidebar"
+import { FloralisProvider } from "@/components/providers/floralis-provider"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 import {
   AppNavbar,
   AppNavbarAction,
@@ -32,6 +34,7 @@ type DemoProps = Partial<AppNavbarUserProps> & { withUser?: boolean; manyActions
 
 function DemoNavbar({ withUser = true, manyActions = false, ...user }: DemoProps) {
   return (
+    <FloralisProvider theme={{ storageKey: "floralis-storybook-navbar-theme", defaultTheme: "light" }} toaster={false}>
     <SidebarProvider>
       <AppNavbar>
         <AppNavbarStart>
@@ -50,6 +53,7 @@ function DemoNavbar({ withUser = true, manyActions = false, ...user }: DemoProps
                 <AppNavbarAction icon={HelpCircleIcon} label="Ayuda" href="/ayuda" />
               </>
             ) : null}
+            <ThemeToggle className="size-9 text-sidebar-foreground hover:bg-sidebar-foreground/10 hover:text-sidebar-foreground" />
           </AppNavbarActions>
           {withUser ? (
             <AppNavbarUser name="Ana María Pérez" email="ana.perez@example.com" onLogout={fn()} {...user}>
@@ -64,6 +68,7 @@ function DemoNavbar({ withUser = true, manyActions = false, ...user }: DemoProps
         </AppNavbarEnd>
       </AppNavbar>
     </SidebarProvider>
+    </FloralisProvider>
   )
 }
 

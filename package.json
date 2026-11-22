@@ -15,6 +15,10 @@
       "types": "./dist/charts.d.ts",
       "import": "./dist/charts.js"
     },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.js"
+    },
     "./styles.css": "./dist/styles.css"
   },
   "files": [
