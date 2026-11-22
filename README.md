@@ -1,94 +1,20 @@
-# React + TypeScript + Vite
+# codigo-floralis
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Design system de React 19 + Tailwind v4 + Base UI. Se consume por git desde apps Next.js.
 
-Currently, two official plugins are available:
+## Uso
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```tsx
+// Una sola vez, en el layout raiz de la app
+import "codigo-floralis/styles.css";
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+import { Button } from "codigo-floralis";
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Los estilos ya no se importan desde `codigo-floralis` (el barrel no tiene efectos de CSS): hay que importar `styles.css` explicitamente.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Desarrollo
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-## Estructura
-
-Un componente = una carpeta en kebab-case, agrupada por propósito:
-
-```
-src/components/
-  ui/       primitivas y controles (button, input, select, dialog, ...)
-  data/     visualización de datos (table, kpi-card, simple-bar-chart, ...)
-  layout/   estructura de página (page-header, sidebar)
-  media/    imágenes y archivos (image-gallery)
-```
-
-Cada carpeta contiene:
-
-- `<nombre>.tsx`: el componente (las sub-partes viven al lado, también en kebab-case).
-- `<nombre>.variants.ts`: solo si tiene variantes CVA.
-- `<nombre>.stories.tsx`: story con título `GCBA/<Grupo>/<Nombre>`.
-- `index.ts`: API pública del componente; `src/index.ts` re-exporta cada carpeta.
-
-Para crear uno nuevo: `npm run gc <nombre> [ui|data|layout|media]` (por defecto `ui`). Después hay que sumarlo a `src/index.ts`.
+- `npm run storybook`: Storybook en el puerto 6006.
+- `npm run build:lib`: genera `dist/`.
+- `npm run test:unit`: tests unitarios.

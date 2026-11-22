@@ -1,5 +1,3 @@
-import "./index.css";
-
 // ui
 export * from "./components/ui/alert-dialog"
 export * from "./components/ui/badge"

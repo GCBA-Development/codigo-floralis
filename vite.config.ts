@@ -24,7 +24,7 @@ const externalPackages = [
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [tailwindcss(),react(),preserveDirectives(),dts({ tsconfigPath: "./tsconfig.app.json", include: ["src"], exclude: ["src/**/*.stories.*", "src/stories/**"], rollupTypes: true })],
+  plugins: [tailwindcss(),react(),preserveDirectives(),dts({ tsconfigPath: "./tsconfig.app.json", include: ["src"], exclude: ["src/**/*.stories.*", "src/stories/**", "src/styles.ts"], rollupTypes: true })],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -58,7 +58,10 @@ export default defineConfig({
   },build: {
     copyPublicDir: false,
     lib: {
-      entry: path.resolve(dirname, "src/index.ts"),
+      entry: {
+        index: path.resolve(dirname, "src/index.ts"),
+        styles: path.resolve(dirname, "src/styles.ts"),
+      },
       name: "CodigoFloralis",
       formats: ["es"],
       fileName: "index",
