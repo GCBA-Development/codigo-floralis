@@ -1,5 +1,11 @@
 # codigo-floralis
 
+## 0.3.1
+
+### Patch Changes
+
+- eb76577: `Field` ya no fuerza `w-full`: los campos con `label` (Select, Input, Textarea) respetan el ancho de su `className` y se acomodan en fila dentro de un contenedor `flex`. En un contenedor de bloque o `flex-col` siguen ocupando todo el ancho.
+
 ## 0.3.0
 
 ### Minor Changes
