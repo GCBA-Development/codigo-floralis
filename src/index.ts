@@ -27,7 +27,6 @@ export * from "./components/ui/tooltip"
 // data
 export * from "./components/data/breakdown-table"
 export * from "./components/data/kpi-card"
-export * from "./components/data/simple-bar-chart"
 export * from "./components/data/stat-card"
 export * from "./components/data/table"
 

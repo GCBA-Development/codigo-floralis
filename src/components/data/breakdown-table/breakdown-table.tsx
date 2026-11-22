@@ -4,8 +4,9 @@ import { useMemo, useState } from "react"
 
 import { Table, TableBody, TableCell, TableHeader, TableRow, TableSortableHead } from "@/components/data/table"
 import { Text } from "@/components/ui/text"
-import type { BreakdownItem } from "@/components/data/simple-bar-chart"
 import { cn } from "@/lib/utils"
+
+export type BreakdownItem = { label: string; value: number }
 
 type SortKey = "label" | "value"
 type SortDirection = "asc" | "desc"

@@ -61,6 +61,7 @@ export default defineConfig({
       entry: {
         index: path.resolve(dirname, "src/index.ts"),
         styles: path.resolve(dirname, "src/styles.ts"),
+        charts: path.resolve(dirname, "src/charts.ts"),
       },
       name: "CodigoFloralis",
       formats: ["es"],

@@ -18,3 +18,15 @@ Los estilos ya no se importan desde `codigo-floralis` (el barrel no tiene efecto
 - `npm run storybook`: Storybook en el puerto 6006.
 - `npm run build:lib`: genera `dist/`.
 - `npm run test:unit`: tests unitarios.
+
+## Graficos (opcional)
+
+Los componentes basados en `recharts` viven en un entry aparte para que el barrel principal no arrastre esa dependencia. `recharts` es una peer dependency opcional: instalala solo si usas graficos.
+
+```tsx
+import { SimpleBarChart } from "codigo-floralis/charts";
+```
+
+## Peer dependencies
+
+`react`, `react-dom`, `@base-ui/react`, `@hugeicons/react` y `@hugeicons/core-free-icons` deben estar instaladas en la app consumidora (`recharts` solo para `codigo-floralis/charts`).

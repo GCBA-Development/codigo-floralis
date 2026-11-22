@@ -3,7 +3,7 @@
 import { useId } from "react"
 import { Bar, BarChart, CartesianGrid, Cell, LabelList, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 
-export type BreakdownItem = { label: string; value: number }
+import type { BreakdownItem } from "@/components/data/breakdown-table"
 
 type SimpleBarChartProps = {
   data: BreakdownItem[]
