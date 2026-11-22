@@ -30,3 +30,21 @@ import { SimpleBarChart } from "codigo-floralis/charts";
 ## Peer dependencies
 
 `react`, `react-dom`, `@base-ui/react`, `@hugeicons/react` y `@hugeicons/core-free-icons` deben estar instaladas en la app consumidora (`recharts` solo para `codigo-floralis/charts`).
+
+## Versionado
+
+Usamos [Changesets](https://github.com/changesets/changesets). El paquete es privado (no se publica en npm): solo se versiona y se taggea. Estamos en `0.x`: la API no esta congelada.
+
+1. En tu PR corre `npm run changeset`, elegi el tipo de cambio (patch/minor/major) y describilo. Commitea el archivo generado en `.changeset/`.
+2. Al preparar un release: `npm run version-packages` (actualiza `package.json` y `CHANGELOG.md`), commit, y luego `npm run release` (crea el tag `v0.x.y`).
+3. Push del commit y de los tags (`git push --follow-tags`).
+
+La app consumidora fija la version por tag:
+
+```json
+"codigo-floralis": "github:GCBA-Development/codigo-floralis#v0.1.0"
+```
+
+### dist y `prepare`
+
+`dist` esta en `.gitignore`, asi que al instalar desde git el script `prepare` ejecuta `vite build` para generarlo. Tradeoff: cada `npm install` del consumidor compila la libreria (mas lento, requiere las devDependencies del DS y memoria suficiente). Si molesta, la alternativa es commitear `dist` en el tag de release.
