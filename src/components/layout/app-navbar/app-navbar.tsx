@@ -19,7 +19,7 @@ export function AppNavbar({ linkComponent = "a", className, children, ...props }
       <header
         data-slot="app-navbar"
         className={cn(
-          "sticky top-0 z-30 flex shrink-0 items-center gap-2 border-b border-sidebar-border bg-sidebar px-3 text-sidebar-foreground",
+          "sticky top-0 z-30 flex w-full min-w-0 shrink-0 items-center gap-2 border-b border-sidebar-border bg-sidebar px-3 text-sidebar-foreground",
           APP_NAVBAR_HEIGHT_CLASS,
           className
         )}
@@ -36,7 +36,7 @@ export function AppNavbarStart({ className, ...props }: React.ComponentProps<"di
 }
 
 export function AppNavbarEnd({ className, ...props }: React.ComponentProps<"div">) {
-  return <div data-slot="app-navbar-end" className={cn("ml-auto flex items-center gap-1", className)} {...props} />
+  return <div data-slot="app-navbar-end" className={cn("ml-auto flex shrink-0 items-center gap-1", className)} {...props} />
 }
 
 export function AppNavbarSidebarTrigger({ className, ...props }: React.ComponentProps<typeof SidebarTrigger>) {
@@ -56,19 +56,20 @@ export interface AppNavbarBrandProps {
   subtitle?: string
 }
 
-export function AppNavbarBrand({ href, logo, title, subtitle, className }: AppNavbarBrandProps) {
+export function AppNavbarBrand({ href, logo, title, subtitle, className }: AppNavbarBrandProps) {
   return (
     <AppLink
       href={href}
       className={cn(
-        "flex items-center gap-2 rounded-md px-1 py-1 outline-none transition-colors hover:bg-sidebar-foreground/10 focus-visible:ring-2 focus-visible:ring-sidebar-ring",
+        "flex min-w-0 items-center gap-2 rounded-md px-1 py-1 outline-none transition-colors hover:bg-sidebar-foreground/10 focus-visible:ring-2 focus-visible:ring-sidebar-ring",
         className
       )}
     >
       {logo}
-      <span className="flex items-baseline gap-1.5 leading-none">
-        <span className="text-s4 font-bold text-sidebar-foreground">{title}</span>
-        {subtitle ? <span className="text-s5 font-normal text-sidebar-foreground/70">{subtitle}</span> : null}
+      <span className="flex min-w-0 items-baseline gap-1.5 leading-none">
+        <span className="truncate text-s4 font-bold text-sidebar-foreground">{title}</span>
+        {/* En mobile el subtítulo se oculta para dejar lugar a las acciones y al usuario. */}
+        {subtitle ? <span className="hidden truncate text-s5 font-normal text-sidebar-foreground/70 sm:inline">{subtitle}</span> : null}
       </span>
     </AppLink>
   )
