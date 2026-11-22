@@ -10,3 +10,13 @@ export function isHrefActive(activeHref: string | undefined, href: string, match
   if (active === target) return true
   return match === "prefix" && target !== "/" && active.startsWith(`${target}/`)
 }
+
+export interface HrefTarget {
+  href: string
+  match?: ActiveMatch
+}
+
+/** ¿Algún sub-item coincide con la ruta actual? Define si el padre arranca expandido. */
+export function isAnyHrefActive(activeHref: string | undefined, targets: readonly HrefTarget[]) {
+  return targets.some(({ href, match }) => isHrefActive(activeHref, href, match))
+}

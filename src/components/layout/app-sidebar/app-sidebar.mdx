@@ -15,7 +15,7 @@ Barra lateral de navegación lista para usar: grupos (`AppSidebarGroup`), ítems
 
 ## Cuándo NO usarlo
 
-- Menús con comportamiento propio (acordeones, submenús): armalos con las primitivas de `Sidebar`.
+- Menús con comportamiento propio más allá de un nivel de sub-items: armalos con las primitivas de `Sidebar`.
 - Pocas secciones: alcanza con la barra superior.
 
 ## Anatomía
@@ -33,9 +33,38 @@ Barra lateral de navegación lista para usar: grupos (`AppSidebarGroup`), ítems
 
 ## Props clave
 
-`AppSidebar`: `activeHref` (ruta actual), `linkComponent`, `onNavigate`, `loading`. `AppSidebarItem`: `href`, `icon`, `badge`, `match` (`prefix` default o `exact`).
+`AppSidebar`: `activeHref` (ruta actual), `linkComponent`, `onNavigate`, `loading`. `AppSidebarItem`: `href`, `icon`, `badge`, `match` (`prefix` default o `exact`), y con sub-items `open` / `onOpenChange` / `defaultOpen`. `AppSidebarSubItem`: `href`, `icon`, `badge`, `match`. `AppSidebar` también acepta `collapsible="icon"`.
+
+## Sub-items
+
+Los `AppSidebarSubItem` van como hijos de `AppSidebarItem`, junto al texto del ítem. Tienen que ser hijos directos (no los envuelvas en otro componente ni en un fragment): el ítem los lee para saber si alguno está activo.
+
+```tsx
+<AppSidebarItem href="/reclamos" icon={File01Icon}>
+  Reclamos
+  <AppSidebarSubItem href="/reclamos/gestion">Gestión</AppSidebarSubItem>
+</AppSidebarItem>
+<AppSidebarItem icon={Wallet01Icon}>
+  Presupuesto
+  <AppSidebarSubItem href="/presupuesto/corridas">Corridas</AppSidebarSubItem>
+  <AppSidebarSubItem href="/presupuesto/indicadores">Indicadores</AppSidebarSubItem>
+</AppSidebarItem>
+```
+
+- El padre se expande solo cuando un sub-item está activo (según `activeHref`). Si el usuario lo abre o cierra a mano, se respeta; `defaultOpen` fija el estado inicial y `open` + `onOpenChange` lo controlan.
+- Con `href` el padre sigue siendo un link y el chevron es un botón aparte. Sin `href`, el padre entero es el botón que expande y colapsa.
+- Si un sub-item está activo, el padre no se marca con `aria-current`: hay un solo `aria-current="page"` por ruta.
+- Con `collapsible="icon"` y el sidebar colapsado, el padre muestra solo su ícono y al hacer click abre un popover a la derecha con sus links (el link del padre, si tiene `href`, va primero). El popover se cierra al navegar.
 
 ## Ejemplos
+
+### Con sub-items
+
+<Canvas of={Stories.ConSubItems} />
+
+### Sub-items con el sidebar colapsado
+
+<Canvas of={Stories.SubItemsColapsado} />
 
 ### Ítem activo
 
@@ -52,6 +81,7 @@ Barra lateral de navegación lista para usar: grupos (`AppSidebarGroup`), ítems
 ## Accesibilidad
 
 - El ítem activo lleva `aria-current="page"`.
+- El control de expandir lleva `aria-expanded` y `aria-controls` hacia la lista de sub-items.
 - Es navegable con Tab; en mobile se abre como panel modal con foco atrapado.
 - El botón de abrir/cerrar tiene texto accesible en español (`SidebarTrigger` → `label`).
 

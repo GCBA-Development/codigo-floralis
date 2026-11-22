@@ -1,11 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { HugeiconsIcon, type IconSvgElement } from "@hugeicons/react"
 
 import { cn } from "@/lib/utils"
 import { LinkComponentContext, type LinkComponent } from "@/lib/link-component"
-import { AppLink } from "@/lib/app-link"
 import { Skeleton } from "@/components/ui/skeleton"
 import {
   Sidebar,
@@ -16,26 +14,17 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuBadge,
-  SidebarMenuButton,
   SidebarMenuItem,
-  useSidebar,
 } from "@/components/layout/sidebar"
-import { isHrefActive, type ActiveMatch } from "./is-href-active"
+import { AppSidebarContext } from "./app-sidebar-context"
 
 const MIN_SKELETON_ROWS = 3
 // Anchos fijos (no random): el sidebar puede renderizarse en SSR y un random rompería la hidratación.
 const SKELETON_WIDTHS = ["w-20", "w-32", "w-24", "w-16", "w-28"]
 
-interface AppSidebarContextValue {
-  activeHref?: string
-  loading: boolean
-  onNavigate?: () => void
-}
-
-const AppSidebarContext = React.createContext<AppSidebarContextValue>({ loading: false })
-
 export interface AppSidebarProps extends React.ComponentProps<"div"> {
+  /** `icon` colapsa a solo íconos; los items con sub-items abren un popover. */
+  collapsible?: "offcanvas" | "icon" | "none"
   linkComponent?: LinkComponent
   /** Ruta actual (ej. `usePathname()`); define qué item queda con `aria-current="page"`. */
   activeHref?: string
@@ -110,41 +99,5 @@ export function AppSidebarGroup({ label, children }: AppSidebarGroupProps) {
         <SidebarMenu>{children}</SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  )
-}
-
-export interface AppSidebarItemProps {
-  href: string
-  icon?: IconSvgElement
-  badge?: React.ReactNode
-  /** `prefix` (default) también marca activo `/x/1` para `/x`. */
-  match?: ActiveMatch
-  children: React.ReactNode
-}
-
-export function AppSidebarItem({ href, icon, badge, match = "prefix", children }: AppSidebarItemProps) {
-  const { activeHref, onNavigate } = React.useContext(AppSidebarContext)
-  const { isMobile, setOpenMobile } = useSidebar()
-  const isActive = isHrefActive(activeHref, href, match)
-
-  function handleClick() {
-    if (isMobile) setOpenMobile(false)
-    onNavigate?.()
-  }
-
-  return (
-    <SidebarMenuItem>
-      <SidebarMenuButton
-        isActive={isActive}
-        aria-current={isActive ? "page" : undefined}
-        tooltip={typeof children === "string" ? children : undefined}
-        onClick={handleClick}
-        render={<AppLink href={href} />}
-      >
-        {icon ? <HugeiconsIcon icon={icon} strokeWidth={2} /> : null}
-        <span>{children}</span>
-      </SidebarMenuButton>
-      {badge !== undefined && badge !== null ? <SidebarMenuBadge>{badge}</SidebarMenuBadge> : null}
-    </SidebarMenuItem>
   )
 }
