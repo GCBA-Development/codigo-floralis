@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #ffe600;
+  --color-primary-foreground: #000000;
+  /* Texto negro sobre amarillo para legibilidad */
+
+  /* Ring (Enfoque de accesibilidad) */
+  --color-ring: #ffe600;
+
+  /* Colores complementarios para Gobierno */
+  --color-gov-blue: #003870;
+  --color-background: #ffffff;
+  --color-foreground: #1a1a1a;
+
+  /* Radio de bordes (moderno y redondeado) */
+  --radius-md: 0.5rem;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  .ButtonIcon {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button.ButtonIcon {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 6px 8px;
+    cursor: pointer;
+    min-width: 0 !important;
+    width: auto !important;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color: inherit;
+    font-synthesis: none;
+  }
+  input {
+    font-size: 16px !important; 
+  }
+
+  @media (min-width: 768px) {
+    input {
+      font-size: 0.875rem !important; 
+    }
+  }
+
+  .Input-glow {
+    box-shadow: 0 0 15px -3px rgba(255, 230, 0, 0.3);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
