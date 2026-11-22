@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils"
 
 /** Contenedor de un campo: `FieldLabel`, el control, `FieldDescription` y `FieldError` quedan asociados solos (ids, aria-labelledby/describedby/invalid). */
 function Field({ className, ...props }: FieldPrimitive.Root.Props) {
-  return <FieldPrimitive.Root data-slot="field" className={cn("flex w-full flex-col", className)} {...props} />
+  return <FieldPrimitive.Root data-slot="field" className={cn("flex flex-col", className)} {...props} />
 }
 
 type FieldLabelProps = FieldPrimitive.Label.Props & {
