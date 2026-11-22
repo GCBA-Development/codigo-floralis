@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=6144
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: node --max-old-space-size=6144 node_modules/typescript/bin/tsc --noEmit -p tsconfig.app.json
+      - run: npm run test:unit
+      - run: npx playwright install --with-deps chromium
+      - run: npx vitest run --project storybook
+      - run: npm run build:lib

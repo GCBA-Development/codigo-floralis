@@ -705,5 +705,7 @@ export {
   SidebarRail,
   SidebarSeparator,
   SidebarTrigger,
+  // El hook se exporta junto al provider porque forman una unica API publica.
+  // eslint-disable-next-line react-refresh/only-export-components
   useSidebar,
 }
