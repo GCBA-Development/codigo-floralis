@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
+import { expect, userEvent, within } from "storybook/test"
 import { Input } from "./input"
 
 const meta: Meta<typeof Input> = { title: "GCBA/UI/Input", component: Input, tags: ["autodocs"] }
@@ -21,6 +22,27 @@ export const WithStartIcon: Story = {
     ),
   },
 }
-export const OnlyNumbers: Story = { args: { label: "DNI", restrict: "digits", description: "Solo números" } }
-export const Phone: Story = { args: { label: "Teléfono", restrict: "phone", description: "Dígitos y +" } }
-export const SentenceCase: Story = { args: { label: "Nombre", restrict: "sentenceCase", description: "Primera letra en mayúscula" } }
+export const OnlyNumbers: Story = {
+  args: { label: "DNI", restrict: "digits", description: "Solo números" },
+  play: async ({ canvasElement }) => {
+    const input = within(canvasElement).getByLabelText("DNI")
+    await userEvent.type(input, "12a-3 4")
+    await expect(input).toHaveValue("1234")
+  },
+}
+export const Phone: Story = {
+  args: { label: "Teléfono", restrict: "phone", description: "Dígitos y +" },
+  play: async ({ canvasElement }) => {
+    const input = within(canvasElement).getByLabelText("Teléfono")
+    await userEvent.type(input, "+54 (11) 4444")
+    await expect(input).toHaveValue("+54114444")
+  },
+}
+export const SentenceCase: Story = {
+  args: { label: "Nombre", restrict: "sentenceCase", description: "Primera letra en mayúscula" },
+  play: async ({ canvasElement }) => {
+    const input = within(canvasElement).getByLabelText("Nombre")
+    await userEvent.type(input, "hola mundo")
+    await expect(input).toHaveValue("Hola mundo")
+  },
+}

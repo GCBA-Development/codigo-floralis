@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { AlertDialog, AlertDialogClose, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogTitle, AlertDialogTrigger } from "./alert-dialog"
 import { Button } from "@/components/ui/button"
+import { expect, screen, userEvent, waitFor, within } from "storybook/test"
 
 const meta: Meta<typeof AlertDialog> = { title: "GCBA/UI/AlertDialog", component: AlertDialog, tags: ["autodocs"] }
 export default meta
@@ -20,4 +21,12 @@ export const Default: Story = {
       </AlertDialogContent>
     </AlertDialog>
   ),
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole("button", { name: "Eliminar" })
+    await userEvent.click(trigger)
+    await expect(await screen.findByRole("alertdialog", { name: "¿Eliminar el registro?" })).toBeVisible()
+    await userEvent.keyboard("{Escape}")
+    await waitFor(() => expect(screen.queryByRole("alertdialog")).not.toBeInTheDocument())
+    await waitFor(() => expect(trigger).toHaveFocus())
+  },
 }

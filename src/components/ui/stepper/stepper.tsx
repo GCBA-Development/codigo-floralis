@@ -43,6 +43,7 @@ export function Stepper({
               type="button"
               disabled={!clickable}
               onClick={() => onStepClick?.(i)}
+              aria-label={`${i + 1}. ${step.title}`}
               aria-current={active ? "step" : undefined}
               className={cn(
                 "flex size-8 items-center justify-center rounded-full border-2 text-sm font-semibold transition-colors disabled:cursor-default",

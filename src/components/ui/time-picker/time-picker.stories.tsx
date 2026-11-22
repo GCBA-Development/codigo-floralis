@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, userEvent, within } from "storybook/test";
 import  { TimePickerCustom } from "./time-picker";
 
 const meta: Meta<typeof TimePickerCustom> = {
@@ -24,6 +25,15 @@ export const Default: Story = {
   },
 };
 
+export const TypeATime: Story = {
+  args: { label: "Horario de Apertura" },
+  play: async ({ canvasElement }) => {
+    const input = within(canvasElement).getByLabelText(/Horario de Apertura/)
+    await userEvent.type(input, "09:30")
+    await expect(input).toHaveValue("09:30")
+  },
+};
+
 export const Modern: Story = {
   args: {
     label: "Horario de Cierre",
@@ -37,6 +47,11 @@ export const ConError: Story = {
     label: "Hora de Entrega",
     error: "El horario seleccionado no es válido.",
     defaultValue: "25:00",
+  },
+  play: async ({ canvasElement }) => {
+    const input = within(canvasElement).getByLabelText(/Hora de Entrega/)
+    await expect(input).toBeInvalid()
+    await expect(input).toHaveAccessibleDescription("El horario seleccionado no es válido.")
   },
 };
 

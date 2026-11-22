@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
+import { expect, screen, userEvent, waitFor, within } from "storybook/test"
 import { MultiSelect, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select"
 
 const meta: Meta<typeof Select> = { title: "GCBA/UI/Select", component: Select, tags: ["autodocs"] }
@@ -18,6 +19,26 @@ export const Default: Story = {
       </SelectContent>
     </Select>
   ),
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole("combobox", { name: /Comuna/ })
+    await userEvent.click(trigger)
+    await userEvent.click(await screen.findByRole("option", { name: "Comuna 2" }))
+    await waitFor(() => expect(trigger).toHaveTextContent("Comuna 2"))
+  },
+}
+
+export const Keyboard: Story = {
+  render: Default.render,
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole("combobox", { name: /Comuna/ })
+    trigger.focus()
+    await userEvent.keyboard("{Enter}")
+    await screen.findByRole("listbox")
+    await userEvent.keyboard("{ArrowDown}{Enter}")
+    await waitFor(() => expect(trigger).toHaveTextContent("Comuna 2"))
+    await waitFor(() => expect(screen.queryByRole("listbox")).not.toBeInTheDocument())
+    await expect(trigger).toHaveFocus()
+  },
 }
 
 export const WithError: Story = {
@@ -52,6 +73,19 @@ function MultiSelectDemo({ withSelectAll = true, error }: { withSelectAll?: bool
   )
 }
 
-export const Multiple: Story = { render: () => <MultiSelectDemo /> }
+export const Multiple: Story = {
+  render: () => <MultiSelectDemo />,
+  play: async ({ canvasElement }) => {
+    const trigger = within(canvasElement).getByRole("combobox", { name: /Comunas/ })
+    await expect(trigger).toHaveTextContent("2 seleccionados")
+    await userEvent.click(trigger)
+    await userEvent.click(await screen.findByRole("option", { name: "Seleccionar todo" }))
+    await waitFor(() => expect(trigger).toHaveTextContent("5 seleccionados"))
+    await userEvent.click(screen.getByRole("option", { name: "Seleccionar todo" }))
+    await waitFor(() => expect(trigger).toHaveTextContent("Seleccionar..."))
+    await userEvent.click(screen.getByRole("option", { name: "Comuna 3" }))
+    await waitFor(() => expect(trigger).toHaveTextContent("Comuna 3"))
+  },
+}
 export const MultipleWithoutSelectAll: Story = { render: () => <MultiSelectDemo withSelectAll={false} /> }
 export const MultipleWithError: Story = { render: () => <MultiSelectDemo error="Elegí al menos una" /> }
