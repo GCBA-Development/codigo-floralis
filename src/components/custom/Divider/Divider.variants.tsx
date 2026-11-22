@@ -5,10 +5,10 @@ export const dividerVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-slate-200",
+        default: "bg-border",
         primary: "bg-primary/40", 
-        strong: "bg-slate-300",
-        light: "bg-slate-100/50",
+        strong: "bg-field-border-disabled",
+        light: "bg-muted/50",
       },
       orientation: {
         horizontal: "h-[1px] w-full my-6",
@@ -16,7 +16,7 @@ export const dividerVariants = cva(
       },
       // Agregamos un toque moderno: gradientes
       gradient: {
-        true: "bg-gradient-to-r from-transparent via-slate-200 to-transparent",
+        true: "bg-gradient-to-r from-transparent via-border to-transparent",
         false: "",
       }
     },

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Button, buttonVariants } from "../../ui/button"
+import { buttonVariants } from "./ButtonIcon.variants"
 import { type VariantProps } from "class-variance-authority"
 import { cn } from "../../../lib/utils";
 
@@ -22,14 +22,12 @@ const ButtonIcon = React.memo(React.forwardRef<HTMLButtonElement, ButtonIconProp
     const sizeVariant = (hasChildren && hasAnyIcon) ? "withIcon" : "small";
 
     return (
-<Button
+<button
         ref={ref}
-        variant={variant}
-        size={sizeVariant as any}
-      className={cn("ButtonIcon group relative overflow-hidden shrink-0 gap-2.5", className)} 
+        className={cn(buttonVariants({ variant, size: sizeVariant }), "ButtonIcon group relative overflow-hidden shrink-0 gap-2.5", className)}
         {...props}
       >
-        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+        <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-primary-foreground/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
         {startIcon && (
           <span className="flex shrink-0 items-center justify-center transition-transform group-hover:scale-110">
             {startIcon}
@@ -47,7 +45,7 @@ const ButtonIcon = React.memo(React.forwardRef<HTMLButtonElement, ButtonIconProp
             {endIcon}
           </span>
         )}
-      </Button>
+      </button>
     );
   }
 ));

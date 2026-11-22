@@ -23,7 +23,7 @@ const Loading = React.forwardRef<HTMLDivElement, LoadingProps>(
         <div className="relative flex items-center justify-center w-full h-full">
           <Loader2 
             className={cn(
-              "animate-spin text-[#ffe600] p-2", 
+              "animate-spin text-primary p-2", 
               variant === "fullscreen" 
                 ? "fixed top-[140px] h-[110px] w-[110px]"
                 : "h-20 w-20"
@@ -45,7 +45,7 @@ const Loading = React.forwardRef<HTMLDivElement, LoadingProps>(
           )}
 
           {label && variant === "fullscreen" && (
-            <span className="fixed top-[250px] text-[11px] font-bold uppercase tracking-[0.4em] text-slate-500 animate-pulse">
+            <span className="fixed top-[250px] text-[11px] font-bold uppercase tracking-[0.4em] text-muted-foreground animate-pulse">
               {label}
             </span>
           )}

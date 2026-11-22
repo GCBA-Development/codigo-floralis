@@ -31,7 +31,7 @@ export const Table = ({ children, data, pagination, onPageChange, onRowsChange }
 // --- CONTENEDOR CON ESTILO MODERN ---
 Table.Container = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <div className={cn(
-    "relative overflow-hidden rounded-2xl border border-slate-200/60 bg-white/50 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)]",
+    "relative overflow-hidden rounded-2xl border border-border/60 bg-card/50 backdrop-blur-xl shadow-(--shadow-surface)",
     className
   )}>
     <div className="overflow-x-auto">
@@ -42,7 +42,7 @@ Table.Container = ({ children, className }: { children: React.ReactNode; classNa
 
 // --- HEADER CON GRADIENTE SUTIL ---
 Table.Header = ({ columns }: { columns: any[] }) => (
-  <thead className="bg-slate-900 text-white border-b border-slate-800">
+  <thead className="bg-primary text-primary-foreground border-b border-sidebar-border">
     <tr>
       {columns.map((col, i) => (
         <th key={i} className={cn(
@@ -73,7 +73,7 @@ Table.Body = ({ renderRow }: { renderRow: (row: any, index: number) => React.Rea
   const { data } = useTableContext();
 
   return (
-    <tbody className="divide-y divide-slate-100/80">
+    <tbody className="divide-y divide-border/80">
       {data.length > 0 ? (
         data.map((row, index) => (
           <tr 
@@ -106,21 +106,21 @@ Table.Pagination = () => {
   const to = Math.min(pagination.page * pagination.limit, pagination.totalDocs);
 
   return (
-    <div className="flex items-center justify-between px-6 py-4 bg-slate-50/50 rounded-xl border border-slate-200/50 mt-2">
+    <div className="flex items-center justify-between px-6 py-4 bg-muted/50 rounded-xl border border-border/50 mt-2">
       <div className="flex items-center gap-3">
-        <span className="text-[11px] font-black uppercase tracking-widest text-slate-400">Mostrar</span>
+        <span className="text-[11px] font-black uppercase tracking-widest text-muted-foreground">Mostrar</span>
         <select 
           value={pagination.limit}
           onChange={(e) => onRowsChange(Number(e.target.value))}
-          className="bg-white border border-slate-200 rounded-lg px-2 py-1 text-xs font-bold shadow-sm focus:ring-2 focus:ring-primary/20 outline-none cursor-pointer"
+          className="bg-card border border-border rounded-lg px-2 py-1 text-xs font-bold shadow-sm focus:ring-2 focus:ring-primary/20 outline-none cursor-pointer"
         >
           {[5, 10, 25, 50].map(s => <option key={s} value={s}>{s}</option>)}
         </select>
       </div>
 
       <div className="flex items-center gap-8">
-        <span className="text-[12px] font-medium text-slate-500 italic">
-          Mostrando <b className="text-slate-900">{from}-{to}</b> de {pagination.totalDocs}
+        <span className="text-[12px] font-medium text-muted-foreground italic">
+          Mostrando <b className="text-foreground">{from}-{to}</b> de {pagination.totalDocs}
         </span>
         
         <div className="flex gap-1">
@@ -137,7 +137,7 @@ const PaginationBtn = ({ disabled, onClick, icon }: any) => (
   <button 
     disabled={disabled}
     onClick={onClick}
-    className="h-9 w-9 flex items-center justify-center rounded-xl bg-white border border-slate-200 shadow-sm hover:border-primary hover:text-primary disabled:opacity-30 disabled:hover:border-slate-200 disabled:hover:text-current transition-all duration-300 font-bold"
+    className="h-9 w-9 flex items-center justify-center rounded-xl bg-card border border-border shadow-sm hover:border-primary hover:text-primary disabled:opacity-30 disabled:hover:border-border disabled:hover:text-current transition-all duration-300 font-bold"
   >
     {icon}
   </button>

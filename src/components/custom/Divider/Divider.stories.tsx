@@ -13,9 +13,9 @@ type Story = StoryObj<typeof Divider>;
 export const Default: Story = {
   render: () => (
     <div className="w-[400px] p-4">
-      <p className="text-sm text-slate-500 mb-2">Sección Superior</p>
+      <p className="text-sm text-muted-foreground mb-2">Sección Superior</p>
       <Divider />
-      <p className="text-sm text-slate-500 mt-2">Sección Inferior</p>
+      <p className="text-sm text-muted-foreground mt-2">Sección Inferior</p>
     </div>
   ),
 };

@@ -5,8 +5,8 @@ export const loadingVariants = cva(
   {
     variants: {
       variant: {
-        fullscreen: "fixed inset-0 w-full h-full bg-[rgba(255,255,255,0.6)] z-[100] ml-0!",
-        section: "relative w-full h-80 bg-slate-50/30 rounded-3xl border border-slate-200/50",
+        fullscreen: "fixed inset-0 w-full h-full bg-card/60 z-[100] ml-0!",
+        section: "relative w-full h-80 bg-muted/30 rounded-3xl border border-border/50",
         inline: "inline-flex bg-transparent",
       },
       size: {

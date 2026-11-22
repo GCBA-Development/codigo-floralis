@@ -36,14 +36,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="w-full space-y-2 group">
         {label && (
-          <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 group-focus-within:text-primary transition-all">
+          <label className="text-[10px] font-black uppercase tracking-widest text-muted-foreground group-focus-within:text-primary transition-all">
             {label}
           </label>
         )}
         
         <div className="relative flex items-center group/input">
           {startIcon && (
-            <div className="absolute left-3.5 text-slate-400 group-focus-within/input:text-primary transition-colors">
+            <div className="absolute left-3.5 text-muted-foreground group-focus-within/input:text-primary transition-colors">
               {startIcon}
             </div>
           )}
@@ -54,7 +54,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             className={cn(
               inputVariants({ variant: error ? "error" : variant }),
               startIcon && "pl-11",
-              "bg-white/80 backdrop-blur-sm shadow-sm",
+              "bg-card/80 backdrop-blur-sm shadow-sm",
               className
             )}
             {...props}
@@ -62,7 +62,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         </div>
 
         {helperText && (
-          <p className={cn("text-[11px] font-bold px-1", error ? "text-red-500 animate-pulse" : "text-slate-400")}>
+          <p className={cn("text-[11px] font-bold px-1", error ? "text-destructive animate-pulse" : "text-muted-foreground")}>
             {helperText}
           </p>
         )}

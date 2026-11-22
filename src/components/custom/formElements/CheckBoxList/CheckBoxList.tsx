@@ -45,12 +45,12 @@ const CheckboxList = React.forwardRef<HTMLDivElement, CheckboxListProps>(
     return (
       <div ref={ref} className={cn("w-full space-y-3", className)}>
         {titulo && (
-          <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 text-center mb-4">
+          <h4 className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground text-center mb-4">
             {titulo}
           </h4>
         )}
         
-        <div className="rounded-2xl border border-slate-200/60 bg-white/50 backdrop-blur-md overflow-hidden shadow-sm">
+        <div className="rounded-2xl border border-border/60 bg-card/50 backdrop-blur-md overflow-hidden shadow-sm">
           <div className="flex flex-col">
             {opciones.map((opcion) => {
               const isChecked = elegidos.includes(opcion.codigo);
@@ -60,14 +60,14 @@ const CheckboxList = React.forwardRef<HTMLDivElement, CheckboxListProps>(
                   key={opcion.codigo}
                   onClick={() => handleToggle(opcion.codigo)}
                   className={cn(
-                    "group flex items-center justify-between px-6 py-4 transition-all duration-300 cursor-pointer border-b border-slate-100 last:border-none",
-                    isChecked ? "bg-primary/[0.03]" : "hover:bg-slate-50/80",
+                    "group flex items-center justify-between px-6 py-4 transition-all duration-300 cursor-pointer border-b border-border last:border-none",
+                    isChecked ? "bg-primary/[0.03]" : "hover:bg-muted/80",
                     disabled && "opacity-40 cursor-not-allowed"
                   )}
                 >
                   <span className={cn(
                     "text-[13px] font-bold transition-all duration-300",
-                    isChecked ? "text-slate-900 translate-x-1" : "text-slate-500 group-hover:text-slate-700"
+                    isChecked ? "text-foreground translate-x-1" : "text-muted-foreground group-hover:text-foreground"
                   )}>
                     {opcion.nombre}
                   </span>

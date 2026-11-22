@@ -1,31 +1,71 @@
-import * as React from "react"
-import * as PopoverPrimitive from "@radix-ui/react-popover"
+"use client"
+
+import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 
 import { cn } from "@/lib/utils"
 
-const Popover = PopoverPrimitive.Root
+function Popover({ ...props }: PopoverPrimitive.Root.Props) {
+  return <PopoverPrimitive.Root data-slot="popover" {...props} />
+}
 
-const PopoverTrigger = PopoverPrimitive.Trigger
+function PopoverTrigger({ ...props }: PopoverPrimitive.Trigger.Props) {
+  return <PopoverPrimitive.Trigger data-slot="popover-trigger" {...props} />
+}
+ 
+function PopoverClose({ ...props }: PopoverPrimitive.Close.Props) {
+  return <PopoverPrimitive.Close data-slot="popover-close" {...props} />
+}
 
-const PopoverAnchor = PopoverPrimitive.Anchor
-
-const PopoverContent = React.forwardRef<
-  React.ElementRef<typeof PopoverPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof PopoverPrimitive.Content>
->(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
-  <PopoverPrimitive.Portal>
-    <PopoverPrimitive.Content
-      ref={ref}
-      align={align}
-      sideOffset={sideOffset}
+function PopoverBackdrop({ className, ...props }: PopoverPrimitive.Backdrop.Props) {
+  return (
+    <PopoverPrimitive.Backdrop
+      data-slot="popover-backdrop"
       className={cn(
-        "z-50 w-72 rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-popover-content-transform-origin]",
+        "fixed inset-0 z-[90] bg-black/30 transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-backdrop-filter:backdrop-blur-[2px]",
         className
       )}
       {...props}
     />
-  </PopoverPrimitive.Portal>
-))
-PopoverContent.displayName = PopoverPrimitive.Content.displayName
+  )
+}
 
-export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor }
+function PopoverContent({
+  className,
+  side = "bottom",
+  sideOffset = 8,
+  align = "start",
+  alignOffset = 0,
+  showBackdrop = true,
+  children,
+  ...props
+}: PopoverPrimitive.Popup.Props &
+  Pick<
+    PopoverPrimitive.Positioner.Props,
+    "align" | "alignOffset" | "side" | "sideOffset"
+  > & { showBackdrop?: boolean }) {
+  return (
+    <PopoverPrimitive.Portal>
+      {showBackdrop ? <PopoverBackdrop /> : null}
+      <PopoverPrimitive.Positioner
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        alignOffset={alignOffset}
+        className="z-[100] outline-none"
+      >
+        <PopoverPrimitive.Popup
+          data-slot="popover-content"
+          className={cn(
+            "w-72 origin-(--transform-origin) rounded-lg border-0 bg-popover bg-clip-padding p-4 text-popover-foreground shadow-2xl outline-none ring-1 ring-black/5 transition duration-150 ease-in-out data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </PopoverPrimitive.Popup>
+      </PopoverPrimitive.Positioner>
+    </PopoverPrimitive.Portal>
+  )
+}
+
+export { Popover, PopoverTrigger, PopoverContent, PopoverBackdrop, PopoverClose }

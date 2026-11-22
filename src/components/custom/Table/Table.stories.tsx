@@ -28,7 +28,7 @@ export const ModernView: StoryObj<typeof Table> = {
     const pagination = { totalDocs: 48, page: page, limit: 5 };
 
     return (
-      <div className="bg-slate-50 p-10 min-h-screen">
+      <div className="bg-muted p-10 min-h-screen">
         <Table data={MOCK_DATA} pagination={pagination} onPageChange={setPage} onRowsChange={() => {}}>
           <Table.Container>
             <Table.Header columns={[
@@ -40,15 +40,15 @@ export const ModernView: StoryObj<typeof Table> = {
               <>
                 <Table.Cell>
                   <div className="flex flex-col">
-                    <span className="font-bold text-slate-900">{row.nombre}</span>
-                    <span className="text-xs text-slate-400 font-medium">ID: {row._id}</span>
+                    <span className="font-bold text-foreground">{row.nombre}</span>
+                    <span className="text-xs text-muted-foreground font-medium">ID: {row._id}</span>
                   </div>
                 </Table.Cell>
                 
                 <Table.Cell align="center">
                   <div className={cn(
                     "inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest",
-                    row.estado === "Activo" ? "bg-emerald-50 text-emerald-600 border border-emerald-100" : "bg-slate-100 text-slate-500"
+                    row.estado === "Activo" ? "bg-success/10 text-success border border-success/20" : "bg-muted text-muted-foreground"
                   )}>
                     <span className="mr-1.5 h-1.5 w-1.5 rounded-full bg-current animate-pulse" />
                     {row.estado}
@@ -56,7 +56,7 @@ export const ModernView: StoryObj<typeof Table> = {
                 </Table.Cell>
 
                 <Table.Cell align="right">
-                  <button className="text-xs font-bold text-slate-400 hover:text-primary transition-colors px-3 py-1 border border-transparent hover:border-primary/20 rounded-lg bg-slate-50 group-hover:bg-white">
+                  <button className="text-xs font-bold text-muted-foreground hover:text-primary transition-colors px-3 py-1 border border-transparent hover:border-primary/20 rounded-lg bg-muted group-hover:bg-card">
                     Gestionar
                   </button>
                 </Table.Cell>

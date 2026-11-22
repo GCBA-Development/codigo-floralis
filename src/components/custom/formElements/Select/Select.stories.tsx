@@ -65,9 +65,9 @@ export const Interactivo: Story = {
           }} 
         />
         {/* Debug visual del valor actual */}
-        <div className="mt-8 p-3 rounded-lg bg-slate-50 border border-slate-200">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Current Value:</p>
-          <code className="text-xs text-slate-700">{JSON.stringify(val)}</code>
+        <div className="mt-8 p-3 rounded-lg bg-muted border border-border">
+          <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mb-1">Current Value:</p>
+          <code className="text-xs text-muted-foreground">{JSON.stringify(val)}</code>
         </div>
       </div>
     );

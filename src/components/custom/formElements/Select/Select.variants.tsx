@@ -5,9 +5,9 @@ export const selectVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-slate-200 bg-white text-slate-900 hover:border-slate-400 hover:shadow-sm",
-        modern: "border-slate-100 bg-slate-50/50 backdrop-blur-md text-slate-900 hover:bg-white hover:border-slate-300 hover:shadow-xl hover:shadow-slate-200/50",
-        glass: "border-white/20 bg-white/10 backdrop-blur-xl text-slate-900 hover:bg-white/20 hover:border-white/40 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)]",
+        default: "border-border bg-card text-foreground hover:border-field-border hover:shadow-sm",
+        modern: "border-border bg-muted/50 backdrop-blur-md text-foreground hover:bg-card hover:border-field-border-disabled hover:shadow-xl hover:shadow-border/50",
+        glass: "border-card/20 bg-card/10 backdrop-blur-xl text-foreground hover:bg-card/20 hover:border-card/40 shadow-(--shadow-surface)",
       },
       size: {
         sm: "h-9 px-3 text-[11px] font-bold uppercase tracking-tight gap-2",
@@ -15,7 +15,7 @@ export const selectVariants = cva(
         lg: "h-16 px-6 text-base font-semibold gap-4 rounded-[1.5rem]",
       },
       hasError: {
-        true: "border-red-400 bg-red-50/50 text-red-900 focus:ring-red-100",
+        true: "border-destructive bg-destructive/5 text-destructive focus:ring-destructive/20",
         false: "",
       },
     },
