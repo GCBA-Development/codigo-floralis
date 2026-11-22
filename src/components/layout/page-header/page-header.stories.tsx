@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { PageHeader } from "./page-header"
 
-const meta: Meta<typeof PageHeader> = { title: "GCBA/Layout/PageHeader", component: PageHeader, tags: ["autodocs"] }
+const meta: Meta<typeof PageHeader> = { title: "GCBA/Layout/PageHeader", component: PageHeader }
 export default meta
 type Story = StoryObj<typeof PageHeader>
 

@@ -4,7 +4,7 @@ import { expect, screen, userEvent, waitFor, within } from "storybook/test"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./dialog"
 
-const meta: Meta<typeof Dialog> = { title: "GCBA/UI/Dialog", component: Dialog, tags: ["autodocs"] }
+const meta: Meta<typeof Dialog> = { title: "GCBA/UI/Dialog", component: Dialog }
 export default meta
 type Story = StoryObj<typeof Dialog>
 

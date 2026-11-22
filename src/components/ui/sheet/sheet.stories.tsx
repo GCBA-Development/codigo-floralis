@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "./sheet"
 import { Button } from "@/components/ui/button"
 
-const meta: Meta<typeof Sheet> = { title: "GCBA/UI/Sheet", component: Sheet, tags: ["autodocs"] }
+const meta: Meta<typeof Sheet> = { title: "GCBA/UI/Sheet", component: Sheet }
 export default meta
 type Story = StoryObj<typeof Sheet>
 

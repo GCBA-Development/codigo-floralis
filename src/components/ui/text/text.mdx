@@ -1,0 +1,53 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./text.stories";
+
+<Meta of={Stories} />
+
+# Text
+
+Componente tipográfico: aplica la escala de la librería (`text-s1` a `text-s7`) según el rol del texto.
+
+## Cuándo usarlo
+
+- Cualquier texto con un rol definido (título de página, encabezado, cuerpo, etiqueta, número destacado).
+- Estados de carga de texto con `loading`.
+
+## Cuándo NO usarlo
+
+- Estilos puntuales sin rol: usá las utilidades `text-s*` directamente.
+- Título de página con subtítulo y acciones: usá `PageHeader`, que ya usa `Text`.
+
+## Props clave
+
+`variant`: `pageTitle | header | subtitle | body | label | muted | link | number` (rol tipográfico, no aspecto). `as`: `p | span | h1..h4 | label | div`. `loading`: enmascara el texto sin cambiar el layout.
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Body
+
+<Canvas of={Stories.Body} />
+
+### Título de página
+
+<Canvas of={Stories.PageTitle} />
+
+### Cargando
+
+<Canvas of={Stories.Loading} />
+
+## Accesibilidad
+
+- Elegí `as` por semántica, no por tamaño: la variante no cambia el nivel del encabezado.
+- Con `loading` se agrega `aria-busy` y el texto queda en el DOM pero transparente.
+
+## Do / Don't
+
+**Do**
+
+- `as="h1"` una sola vez por página.
+
+**Don't**
+
+- No saltees niveles de encabezado para lograr un tamaño: cambiá la variante.

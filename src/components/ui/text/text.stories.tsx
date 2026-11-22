@@ -4,7 +4,6 @@ import { Text } from "./text"
 const meta: Meta<typeof Text> = {
   title: "GCBA/UI/Text",
   component: Text,
-  tags: ["autodocs"],
   argTypes: { variant: { control: "select", options: ["pageTitle", "header", "subtitle", "body", "label", "muted", "link", "number"] } },
   args: { children: "Texto de ejemplo" },
 }

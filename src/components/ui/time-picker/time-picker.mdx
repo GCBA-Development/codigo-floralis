@@ -1,0 +1,56 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./time-picker.stories";
+
+<Meta of={Stories} />
+
+# TimePicker
+
+Campo de hora (`hh:mm`) nativo, con el estilo de la librería. `TimePickerCustom` es un alias deprecado.
+
+## Cuándo usarlo
+
+- Horarios de inicio/fin, turnos.
+
+## Cuándo NO usarlo
+
+- Fechas: no hay `DatePicker` todavía.
+- Duraciones en minutos: usá `Input type="number"`.
+
+## Props clave
+
+`label`, `description`, `error`, `required`, `variant` (`outline | modern | glass`). Props de `input` (`min`, `max`, `step`, `value`). `helperText` quedó como alias deprecado de `description`.
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Escribir la hora
+
+<Canvas of={Stories.TypeATime} />
+
+### Modern
+
+<Canvas of={Stories.Modern} />
+
+### Con error
+
+<Canvas of={Stories.ConError} />
+
+## Accesibilidad
+
+- Usa `input type="time"`: el teclado y los lectores usan el control nativo del sistema.
+- Label y error asociados por `Field`.
+
+## Do / Don't
+
+**Do**
+
+- Validá rangos con `min`/`max`.
+
+**Don't**
+
+- No lo uses para fechas completas.

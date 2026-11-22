@@ -1,0 +1,62 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./button.stories";
+
+<Meta of={Stories} />
+
+# Button
+
+Botón de acción. Base UI `Button` con variantes y tamaños de la librería. Para navegar a otra página usá la prop `render` con un link, no un `onClick` con `router.push`.
+
+## Cuándo usarlo
+
+- Disparar una acción (guardar, enviar, confirmar).
+- Acción principal de una pantalla (`primary`) y acciones secundarias (`outline`, `ghost`).
+- Acciones destructivas (`destructive`), siempre detrás de una confirmación (`AlertDialog`).
+
+## Cuándo NO usarlo
+
+- Navegar entre páginas sin acción asociada: usá un link (`<Button render={<a href="..." />}>` o `variant="link"`).
+- Alternar un estado on/off: usá `Checkbox`.
+- Botón solo con ícono sin nombre: usá `size="icon"` y agregá `aria-label`.
+
+## Props clave
+
+Variantes: `primary | secondary | tertiary | outline | ghost | destructive | link`. Tamaños: `xs | sm | md | lg | icon | icon-xs | icon-sm | icon-lg` (`xs` solo para tablas densas). Hereda las props de Base UI `Button` (`disabled`, `render`, `focusableWhenDisabled`).
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Primary
+
+<Canvas of={Stories.Primary} />
+
+### Secondary
+
+<Canvas of={Stories.Secondary} />
+
+### Destructive
+
+<Canvas of={Stories.Destructive} />
+
+### Deshabilitado
+
+<Canvas of={Stories.Disabled} />
+
+## Accesibilidad
+
+- Es un `button` nativo: Enter y Espacio lo activan.
+- Con `size="icon*"` no hay texto visible: pasá `aria-label`.
+- El foco visible usa el token `ring`; no lo quites con `outline-none` sin reemplazo.
+
+## Do / Don't
+
+**Do**
+
+- Un solo `primary` por vista.
+- Texto con verbo: "Guardar cambios".
+
+**Don't**
+
+- No uses `destructive` para acciones reversibles.
+- No pongas `onClick` en un `div` con aspecto de botón.

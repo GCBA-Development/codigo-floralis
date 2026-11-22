@@ -1,0 +1,71 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./field.stories";
+
+<Meta of={Stories} />
+
+# Field
+
+Contenedor de un campo de formulario: asocia solo label, control, descripción y error (ids, `aria-labelledby`, `aria-describedby`, `aria-invalid`). `Input`, `Textarea`, `Select`, `TimePicker` y `CheckboxList` lo usan por dentro.
+
+## Cuándo usarlo
+
+- Armar un campo con un control propio o de terceros: `FormField` envuelve label + control + mensajes.
+- Composición fina con `Field`, `FieldLabel`, `FieldDescription` y `FieldError` cuando `FormField` no alcanza.
+
+## Cuándo NO usarlo
+
+- Con `Input`, `Textarea`, `Select`, `TimePicker`: ya incluyen su `Field`; pasales `label`, `description` y `error` directo.
+- Agrupar varios checkboxes: usá `CheckboxList`.
+
+## Anatomía
+
+```tsx
+<Field>
+  <FieldLabel>Nombre</FieldLabel>
+  <Input />
+  <FieldDescription>Como figura en el DNI</FieldDescription>
+  <FieldError>Obligatorio</FieldError>
+</Field>
+```
+
+## Props clave
+
+`FormField`: `label`, `description`, `error` (`string | boolean`, tiene prioridad sobre `description`), `required`, `disabled`, `name`, `children` (el control). `FieldMessages` muestra el error y, si no hay, la descripción.
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Con error
+
+<Canvas of={Stories.ConError} />
+
+### Con Select
+
+<Canvas of={Stories.ConSelect} />
+
+### Composición manual
+
+<Canvas of={Stories.Compuesto} />
+
+## Accesibilidad
+
+- El label queda asociado al control sin que pases `htmlFor`.
+- El error se anuncia (`role="alert"`) y el control recibe `aria-invalid`.
+- `error={true}` marca inválido sin texto: usalo solo si el motivo es evidente.
+
+## Do / Don't
+
+**Do**
+
+- Mensajes de error que digan cómo corregir.
+- Mantené el valor que escribió el usuario ante un error.
+
+**Don't**
+
+- No uses placeholder como label.
+- No muestres el error antes de que el usuario interactúe.

@@ -1,0 +1,51 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./kpi-card.stories";
+
+<Meta of={Stories} />
+
+# KpiCard
+
+Tarjeta de indicador con una cifra grande, su etiqueta y un sufijo opcional.
+
+## Cuándo usarlo
+
+- Cifras clave de un módulo en el dashboard (`primary` para la principal, `secondary` para el resto).
+
+## Cuándo NO usarlo
+
+- Cifras con subtítulo en una banda de indicadores: usá `StatCard`.
+- Datos tabulares: usá `Table` o `BreakdownTable`.
+
+## Props clave
+
+`label`, `value: number`, `suffix?`, `variant: "primary" | "secondary"`, `loading`.
+
+## Ejemplos
+
+### Primary
+
+<Canvas of={Stories.Primary} />
+
+### Secondary
+
+<Canvas of={Stories.Secondary} />
+
+### Cargando
+
+<Canvas of={Stories.Loading} />
+
+## Accesibilidad
+
+- El texto de la tarjeta es plano: etiqueta y valor se leen en orden.
+- En carga el contenido se enmascara sin cambiar de tamaño (sin CLS).
+
+## Do / Don't
+
+**Do**
+
+- Etiquetas cortas.
+- Un solo `primary` por grupo.
+
+**Don't**
+
+- No metas más de una cifra por tarjeta.

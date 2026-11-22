@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { useState } from "react"
 import { Pagination } from "./pagination"
 
-const meta: Meta<typeof Pagination> = { title: "GCBA/UI/Pagination", component: Pagination, tags: ["autodocs"] }
+const meta: Meta<typeof Pagination> = { title: "GCBA/UI/Pagination", component: Pagination }
 export default meta
 type Story = StoryObj<typeof Pagination>
 

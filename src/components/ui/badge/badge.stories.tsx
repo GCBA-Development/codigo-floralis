@@ -7,7 +7,6 @@ const SIZES = ["sm", "md", "lg"] as const
 const meta: Meta<typeof Badge> = {
   title: "GCBA/UI/Badge",
   component: Badge,
-  tags: ["autodocs"],
   args: { children: "Etiqueta" },
 }
 export default meta

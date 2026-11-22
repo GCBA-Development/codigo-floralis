@@ -1,0 +1,44 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./simple-bar-chart.stories";
+
+<Meta of={Stories} />
+
+# SimpleBarChart
+
+Gráfico de barras simple basado en `recharts`. Vive en el entry `codigo-floralis/charts` para no arrastrar `recharts` al resto de la librería.
+
+## Cuándo usarlo
+
+- Comparar valores por categoría (hasta ~15 barras).
+- Barras clickeables para filtrar (`onBarClick`).
+
+## Cuándo NO usarlo
+
+- Evolución en el tiempo: hace falta un gráfico de líneas (no incluido).
+- Detalle numérico exacto: usá `BreakdownTable`.
+
+## Props clave
+
+`data: { label, value }[]`, `onBarClick?(item)`. Requiere `recharts` instalado en la app (`import { SimpleBarChart } from "codigo-floralis/charts"`).
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Es un SVG: no es navegable por teclado ni lo leen los lectores de pantalla por sí solo.
+- Cuando el dato importa, ofrecé la misma información en una tabla (`BreakdownTable`).
+- Los colores salen de los tokens y cambian con el tema.
+
+## Do / Don't
+
+**Do**
+
+- Acompañalo con una tabla o resumen textual.
+
+**Don't**
+
+- No dependas solo de `onBarClick` para una acción: ofrecé una alternativa accesible.

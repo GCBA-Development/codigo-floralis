@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { Separator } from "./separator"
 
-const meta: Meta<typeof Separator> = { title: "GCBA/UI/Separator", component: Separator, tags: ["autodocs"] }
+const meta: Meta<typeof Separator> = { title: "GCBA/UI/Separator", component: Separator }
 export default meta
 type Story = StoryObj<typeof Separator>
 

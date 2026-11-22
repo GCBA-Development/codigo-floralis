@@ -1,0 +1,52 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./checkbox-list.stories";
+
+<Meta of={Stories} />
+
+# CheckboxList
+
+Grupo de checkboxes controlado, con título, descripción y error. El título es la leyenda de un `fieldset`.
+
+## Cuándo usarlo
+
+- Elegir varias opciones de una lista corta y visible (días, tipos, módulos).
+
+## Cuándo NO usarlo
+
+- Más de ~10 opciones: usá `MultiSelect`.
+- Elegir solo una: usá `RadioGroup`.
+
+## Props clave
+
+`options: { value, label }[]`, `value`, `onValueChange`, `label`, `description`, `error` (`string | boolean`), `disabled`, `name`, `variant` (`modern | glass`, pieles).
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Interacción
+
+<Canvas of={Stories.Toggle} />
+
+### Con error
+
+<Canvas of={Stories.WithError} />
+
+## Accesibilidad
+
+- `fieldset` + `legend`: el lector anuncia el grupo y luego cada opción.
+- La descripción/error se vincula con `aria-describedby`.
+
+## Do / Don't
+
+**Do**
+
+- Dale un `label` que describa el grupo.
+
+**Don't**
+
+- No lo uses sin `onValueChange` si lo pasás `value`: queda de solo lectura.

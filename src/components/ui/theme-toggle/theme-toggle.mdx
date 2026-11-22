@@ -1,0 +1,50 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./theme-toggle.stories";
+
+<Meta of={Stories} />
+
+# ThemeToggle
+
+Botón de ícono que cicla el tema claro, oscuro y del sistema. Vive en `codigo-floralis/theme` y necesita `FloralisProvider` (o el `ThemeProvider` de next-themes) y la peer dependency `next-themes`.
+
+## Cuándo usarlo
+
+- En la barra de navegación o en el menú de preferencias.
+- Cuando el usuario tiene que poder elegir el tema manualmente.
+
+## Cuándo NO usarlo
+
+- Si la app no soporta modo oscuro.
+- Para leer o forzar el tema por código: usá `useTheme()`.
+
+## Props clave
+
+`label` (nombre accesible base, default "Cambiar tema"), `themeLabels` (`{ light, dark, system }`, textos con los que se anuncia el tema actual) y las props de `Button` (`variant` default `ghost`, `size` default `icon`, `className`...).
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Etiquetas personalizadas
+
+<Canvas of={Stories.EtiquetasPersonalizadas} />
+
+## Accesibilidad
+
+- El nombre accesible incluye el tema actual: "Cambiar tema (actual: oscuro)".
+- Es un `button`: Enter y Espacio lo activan.
+- Hasta que el cliente hidrata renderiza un botón deshabilitado del mismo tamaño: sin mismatch de hidratación ni salto de layout.
+
+## Do / Don't
+
+**Do**
+
+- Ponelo en un lugar fijo y predecible.
+
+**Don't**
+
+- No lo uses fuera de un provider de next-themes.

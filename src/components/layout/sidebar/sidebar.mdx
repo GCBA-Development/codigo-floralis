@@ -1,0 +1,57 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./sidebar.stories";
+
+<Meta of={Stories} />
+
+# Sidebar
+
+Primitivas de barra lateral (`SidebarProvider`, `Sidebar`, `SidebarContent`, `SidebarMenu*`, `SidebarInset`, `SidebarTrigger`, `SidebarRail`...). Es la base de `AppSidebar`.
+
+## Cuándo usarlo
+
+- Cuando `AppSidebar` no alcanza y necesitás componer el menú a mano (submenús, acciones, skeletons).
+
+## Cuándo NO usarlo
+
+- Navegación estándar por módulos: usá `AppSidebar`.
+
+## Anatomía
+
+```tsx
+<SidebarProvider>
+  <Sidebar collapsible="icon">
+    <SidebarContent>
+      <SidebarMenu>
+        <SidebarMenuItem><SidebarMenuButton>Inicio</SidebarMenuButton></SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarContent>
+  </Sidebar>
+  <SidebarInset>...</SidebarInset>
+</SidebarProvider>
+```
+
+## Props clave
+
+`SidebarProvider`: `defaultOpen`, `open`, `onOpenChange`. `Sidebar`: `side`, `variant` (`sidebar | floating | inset`), `collapsible` (`offcanvas | icon | none`), `mobileTitle`, `mobileDescription`. `SidebarTrigger` y `SidebarRail`: `label`. `SidebarMenuButton`: `variant`, `size`, `isActive`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- En mobile es un `Sheet` modal: pasale `mobileTitle` y `mobileDescription` en español.
+- Atajo de teclado para alternar (Ctrl/Cmd + B).
+- `SidebarTrigger` y `SidebarRail` tienen nombre accesible configurable (`label`).
+
+## Do / Don't
+
+**Do**
+
+- Un `SidebarProvider` por shell.
+
+**Don't**
+
+- No mezcles `Sidebar` y `AppSidebar` en la misma pantalla.

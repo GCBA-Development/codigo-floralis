@@ -1,0 +1,58 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./alert-dialog.stories";
+
+<Meta of={Stories} />
+
+# AlertDialog
+
+Diálogo de confirmación que obliga a decidir (Base UI `AlertDialog`). No se cierra al hacer clic afuera.
+
+## Cuándo usarlo
+
+- Confirmar acciones destructivas o irreversibles (eliminar, descartar cambios).
+
+## Cuándo NO usarlo
+
+- Formularios o contenido informativo: usá `Dialog`.
+- Avisos que no requieren decisión: usá `toast`.
+
+## Anatomía
+
+```tsx
+<AlertDialog>
+  <AlertDialogTrigger render={<Button variant="destructive" />}>Eliminar</AlertDialogTrigger>
+  <AlertDialogContent>
+    <AlertDialogTitle>¿Eliminar?</AlertDialogTitle>
+    <AlertDialogDescription>No se puede deshacer.</AlertDialogDescription>
+    <AlertDialogFooter>
+      <AlertDialogClose>Cancelar</AlertDialogClose>
+    </AlertDialogFooter>
+  </AlertDialogContent>
+</AlertDialog>
+```
+
+## Props clave
+
+`AlertDialog`: `open`, `onOpenChange`. Las acciones se arman con `AlertDialogClose` usando `render` (`<AlertDialogClose render={<Button />}>`).
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Rol `alertdialog`: los lectores lo anuncian como interrupción.
+- El foco entra al diálogo; ofrecé "Cancelar" siempre.
+- Título y descripción son obligatorios en la práctica.
+
+## Do / Don't
+
+**Do**
+
+- Nombrá la acción en el botón ("Eliminar reclamo"), no "Aceptar".
+
+**Don't**
+
+- No lo uses para cada acción: la fatiga de confirmación hace que se ignore.

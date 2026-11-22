@@ -1,0 +1,54 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./card.stories";
+
+<Meta of={Stories} />
+
+# Card
+
+Superficie elevada para agrupar contenido relacionado. Se compone con `Card`, `CardTitle` y `CardContent`.
+
+## Cuándo usarlo
+
+- Agrupar un bloque de información o un formulario corto.
+- Contenedor de gráficos y tablas dentro del dashboard.
+
+## Cuándo NO usarlo
+
+- Separar secciones sin elevación: usá `Separator` o espaciado.
+- Mostrar una cifra destacada: usá `KpiCard` o `StatCard`.
+- Cards dentro de cards: aplanalo.
+
+## Anatomía
+
+```tsx
+<Card>
+  <CardTitle>Título</CardTitle>
+  <CardContent>...</CardContent>
+</Card>
+```
+
+## Props clave
+
+`Card` y `CardContent` aceptan las props de un `div`; `CardTitle` las de un `h3` (usa `Text variant="header"`). Se personalizan con `className`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- `CardTitle` renderiza un `h3`: respetá la jerarquía de encabezados de la página.
+- No tiene rol propio; si la card es un grupo con nombre, agregá `role="group"` y `aria-labelledby`.
+
+## Do / Don't
+
+**Do**
+
+- Un título por card.
+- Usá tokens (`bg-card`) si la envolvés.
+
+**Don't**
+
+- No hardcodees `bg-white`: rompe el modo oscuro.

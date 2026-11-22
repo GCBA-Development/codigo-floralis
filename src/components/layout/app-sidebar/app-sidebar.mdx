@@ -1,0 +1,67 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./app-sidebar.stories";
+import * as ShellStories from "./app-shell.stories";
+
+<Meta of={Stories} />
+
+# AppSidebar
+
+Barra lateral de navegación lista para usar: grupos (`AppSidebarGroup`), ítems (`AppSidebarItem`) con ítem activo por ruta, cabecera y pie. Se apoya en `Sidebar`. En mobile se convierte en un `Sheet`.
+
+## Cuándo usarlo
+
+- Navegación principal entre módulos.
+- Junto con `AppNavbar` y `SidebarProvider` para el shell de la app (ver `AppShell`).
+
+## Cuándo NO usarlo
+
+- Menús con comportamiento propio (acordeones, submenús): armalos con las primitivas de `Sidebar`.
+- Pocas secciones: alcanza con la barra superior.
+
+## Anatomía
+
+```tsx
+<SidebarProvider>
+  <AppSidebar activeHref={pathname} linkComponent={NextLink}>
+    <AppSidebarGroup label="Módulos">
+      <AppSidebarItem href="/reclamos" icon={File01Icon} badge={12}>Reclamos</AppSidebarItem>
+    </AppSidebarGroup>
+  </AppSidebar>
+  <SidebarInset>...</SidebarInset>
+</SidebarProvider>
+```
+
+## Props clave
+
+`AppSidebar`: `activeHref` (ruta actual), `linkComponent`, `onNavigate`, `loading`. `AppSidebarItem`: `href`, `icon`, `badge`, `match` (`prefix` default o `exact`).
+
+## Ejemplos
+
+### Ítem activo
+
+<Canvas of={Stories.ItemActivo} />
+
+### Cargando
+
+<Canvas of={Stories.Cargando} />
+
+### Shell completo (navbar + sidebar)
+
+<Canvas of={ShellStories.Default} />
+
+## Accesibilidad
+
+- El ítem activo lleva `aria-current="page"`.
+- Es navegable con Tab; en mobile se abre como panel modal con foco atrapado.
+- El botón de abrir/cerrar tiene texto accesible en español (`SidebarTrigger` → `label`).
+
+## Do / Don't
+
+**Do**
+
+- Pasale `activeHref` desde el router.
+- Usá `match="exact"` en el inicio (`/`).
+
+**Don't**
+
+- No anides más de dos niveles.

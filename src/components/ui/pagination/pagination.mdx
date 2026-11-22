@@ -1,0 +1,47 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./pagination.stories";
+
+<Meta of={Stories} />
+
+# Pagination
+
+Paginador con contador de resultados y botones anterior/siguiente. Es controlado: la página vive en el padre (idealmente en la URL).
+
+## Cuándo usarlo
+
+- Listas y tablas con paginación del lado del servidor.
+- Cuando el usuario necesita saber cuántos resultados hay.
+
+## Cuándo NO usarlo
+
+- Listas muy largas sin concepto de página: usá scroll infinito o virtualización.
+- Navegar entre pasos de un flujo: usá `Stepper`.
+
+## Props clave
+
+`page` (empieza en 1), `pageCount`, `totalItems`, `onPageChange(page)`. Con `totalItems = 0` muestra "Sin resultados".
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Sin resultados
+
+<Canvas of={Stories.Empty} />
+
+## Accesibilidad
+
+- Los botones tienen `aria-label` ("Página anterior" / "Página siguiente") y se deshabilitan en los extremos.
+- Esos textos están fijos en español.
+
+## Do / Don't
+
+**Do**
+
+- Guardá `page` en `searchParams` para poder compartir el link.
+
+**Don't**
+
+- No pagines en el cliente listas grandes: pedí la página al servidor.

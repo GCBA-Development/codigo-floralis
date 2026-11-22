@@ -1,0 +1,55 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./tooltip.stories";
+
+<Meta of={Stories} />
+
+# Tooltip
+
+Descripción breve que aparece al enfocar o pasar el mouse sobre un elemento (Base UI `Tooltip`).
+
+## Cuándo usarlo
+
+- Nombrar botones de solo ícono.
+- Aclarar abreviaturas.
+
+## Cuándo NO usarlo
+
+- Contenido interactivo o largo: usá `Popover`.
+- Información esencial: tiene que estar visible en pantalla.
+- En mobile no hay hover: no dependas de él.
+
+## Anatomía
+
+```tsx
+<TooltipProvider>
+  <Tooltip>
+    <TooltipTrigger render={<Button />}>Guardar</TooltipTrigger>
+    <TooltipContent>Guardar cambios</TooltipContent>
+  </Tooltip>
+</TooltipProvider>
+```
+
+## Props clave
+
+`TooltipProvider`: `delay` (default 0; `FloralisProvider` lo expone como `tooltipDelay`). `TooltipContent`: `side`, `sideOffset`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Se muestra también al enfocar con teclado.
+- No reemplaza al `aria-label`: un botón de ícono necesita ambos.
+
+## Do / Don't
+
+**Do**
+
+- Texto de pocas palabras.
+
+**Don't**
+
+- No pongas links ni botones adentro.

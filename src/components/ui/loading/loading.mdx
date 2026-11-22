@@ -1,0 +1,46 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./loading.stories";
+
+<Meta of={Stories} />
+
+# Loading
+
+Indicador de carga con el logo. Tres modos: pantalla completa, sección o en línea.
+
+## Cuándo usarlo
+
+- `fullscreen`: arranque de la app o transiciones bloqueantes.
+- `section`: una región de la página que carga.
+- `inline`: dentro de un botón o línea de texto.
+
+## Cuándo NO usarlo
+
+- Cuando conocés la forma del contenido: usá `Skeleton` o `Text loading`.
+- Progreso medible (porcentaje): usá una barra de progreso.
+
+## Props clave
+
+`variant`: `fullscreen | section | inline` (modo de uso). `size`: `sm | md | lg`. `showLogo`, `label` (solo se ve en `fullscreen`). Acepta las props de un `div`.
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- No trae `role="status"` ni texto accesible por defecto: pasalos por props (`role="status"`, `aria-label="Cargando"`) para que los lectores de pantalla lo anuncien.
+- `fullscreen` bloquea la interacción: no lo dejes sin límite de tiempo.
+
+## Do / Don't
+
+**Do**
+
+- Pasá `role="status"` y `aria-label`.
+
+**Don't**
+
+- No lo uses para cargas de menos de ~300 ms: parpadea.

@@ -1,0 +1,74 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./app-navbar.stories";
+
+<Meta of={Stories} />
+
+# AppNavbar
+
+Barra superior de la aplicación, compuesta por slots: `AppNavbarStart`, `AppNavbarEnd`, `AppNavbarBrand`, `AppNavbarSidebarTrigger`, `AppNavbarActions`/`AppNavbarAction` y `AppNavbarUser`.
+
+## Cuándo usarlo
+
+- Marca, acciones globales (avisos, tema) y menú de usuario en todas las pantallas.
+
+## Cuándo NO usarlo
+
+- Navegación principal con muchos ítems: usá `AppSidebar`.
+- Acciones específicas de una página: usá `PageHeader`.
+
+## Anatomía
+
+```tsx
+<AppNavbar linkComponent={NextLink}>
+  <AppNavbarStart>
+    <AppNavbarSidebarTrigger />
+    <AppNavbarBrand href="/" logo={...} title="GCBA" />
+  </AppNavbarStart>
+  <AppNavbarEnd>
+    <AppNavbarActions>
+      <AppNavbarAction icon={Notification03Icon} label="Avisos" badge={3} />
+    </AppNavbarActions>
+    <AppNavbarUser name="Ana" onLogout={...} />
+  </AppNavbarEnd>
+</AppNavbar>
+```
+
+## Props clave
+
+`AppNavbar`: `linkComponent` (ej. `next/link`). `AppNavbarAction`: `icon`, `label` (obligatoria: nombre accesible y tooltip), `badge`, `href` o `onClick`. `AppNavbarUser`: `name`, `email`, `avatar`, `loading`, `onLogout`, `logoutLabel`, `menuLabel`; sus `children` son `AppNavbarUserItem`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Sin usuario
+
+<Canvas of={Stories.SinUsuario} />
+
+### Cargando
+
+<Canvas of={Stories.Cargando} />
+
+### Muchas acciones
+
+<Canvas of={Stories.MuchasAcciones} />
+
+## Accesibilidad
+
+- Es un `header`; las acciones de solo ícono tienen `aria-label` (con el contador: "Avisos: 3") y tooltip.
+- El menú de usuario es un botón con `aria-label` configurable (`menuLabel`).
+- En carga el usuario se anuncia con `role="status"`.
+
+## Do / Don't
+
+**Do**
+
+- Siempre `label` en cada acción.
+- Para el tema, ponele `ThemeToggle` dentro de `AppNavbarActions`.
+
+**Don't**
+
+- No metas más de 4 o 5 acciones visibles.
+- No uses colores fijos: la barra usa los tokens `sidebar*`.

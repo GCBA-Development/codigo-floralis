@@ -1,0 +1,43 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./skeleton.stories";
+
+<Meta of={Stories} />
+
+# Skeleton
+
+Bloque animado que ocupa el lugar de contenido que se está cargando.
+
+## Cuándo usarlo
+
+- Cargas de listas, tarjetas o gráficos cuando ya conocés la forma del contenido.
+- Placeholders con tamaño propio (avatar, imagen).
+
+## Cuándo NO usarlo
+
+- Texto: usá `Text loading`, que enmascara el texto real y conserva su alto.
+- Cargas sin forma conocida o bloqueantes: usá `Loading`.
+
+## Props clave
+
+Acepta las props de un `div`; el tamaño se da con `className` (`h-4 w-32`).
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Es decorativo: no anuncia nada. Poné `role="status"` y un texto `sr-only` en el contenedor que carga.
+- La animación es `animate-pulse`: agregá `motion-reduce:animate-none` en `className` si tu app necesita respetar `prefers-reduced-motion`.
+
+## Do / Don't
+
+**Do**
+
+- Que tenga el mismo tamaño que el contenido final (evita CLS).
+
+**Don't**
+
+- No lo dejes indefinidamente: mostrá un error si la carga falla.

@@ -3,7 +3,7 @@ import { useState } from "react"
 import { expect, screen, userEvent, waitFor, within } from "storybook/test"
 import { MultiSelect, Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select"
 
-const meta: Meta<typeof Select> = { title: "GCBA/UI/Select", component: Select, tags: ["autodocs"] }
+const meta: Meta<typeof Select> = { title: "GCBA/UI/Select", component: Select }
 export default meta
 type Story = StoryObj<typeof Select>
 

@@ -1,0 +1,46 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./stat-card.stories";
+
+<Meta of={Stories} />
+
+# StatCard
+
+Indicador abierto (sin caja) con etiqueta, valor y subtítulo, pensado para bandas de indicadores. `featured` escala el número para dar jerarquía.
+
+## Cuándo usarlo
+
+- Resumen de 3 a 5 indicadores en fila, con uno protagonista.
+
+## Cuándo NO usarlo
+
+- Cifras en tarjetas independientes: usá `KpiCard`.
+- Series o comparaciones: usá un gráfico.
+
+## Props clave
+
+`label`, `value: string` (ya formateado), `subtitle`, `loading`, `featured`.
+
+## Ejemplos
+
+### Destacado
+
+<Canvas of={Stories.Featured} />
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Texto plano en orden de lectura: etiqueta, valor, subtítulo.
+- El valor es un string: formatealo con `toLocaleString("es-AR")`.
+
+## Do / Don't
+
+**Do**
+
+- Uno solo con `featured`.
+
+**Don't**
+
+- No lo uses para valores que cambian rápido sin región `aria-live`.

@@ -5,7 +5,6 @@ import  { TimePicker } from "./time-picker";
 const meta: Meta<typeof TimePicker> = {
   title: "GCBA/UI/TimePicker",
   component: TimePicker,
-  tags: ["autodocs"],
   argTypes: {
     variant: {
       control: "select",

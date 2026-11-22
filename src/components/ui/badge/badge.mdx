@@ -1,0 +1,56 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./badge.stories";
+
+<Meta of={Stories} />
+
+# Badge
+
+Etiqueta compacta para estado o categoría ("Activo", "Pendiente"). Es informativa, no interactiva.
+
+## Cuándo usarlo
+
+- Mostrar el estado de un registro en tablas y tarjetas.
+- Marcar categorías o conteos cortos.
+
+## Cuándo NO usarlo
+
+- Filtro activo que se puede quitar: usá `Chip`.
+- Algo clickeable: usá `Button` con `size="sm"`.
+- Mensajes largos: usá un texto, no un badge.
+
+## Props clave
+
+Variantes: `primary | secondary | destructive | outline | soft | success | warning`. Tamaños: `sm | md | lg`.
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Variantes
+
+<Canvas of={Stories.Variants} />
+
+### Tamaños
+
+<Canvas of={Stories.Sizes} />
+
+### Todas las combinaciones
+
+<Canvas of={Stories.AllCombinations} />
+
+## Accesibilidad
+
+- El color no puede ser el único portador del significado: el texto tiene que decir el estado.
+- Es un `div` sin rol; si el estado cambia dinámicamente, anunciálo con una región `aria-live` aparte.
+
+## Do / Don't
+
+**Do**
+
+- Texto corto (1-2 palabras).
+- El mismo variant para el mismo estado en toda la app.
+
+**Don't**
+
+- No uses `success`/`destructive` sin texto que los explique.
+- No lo uses como botón.

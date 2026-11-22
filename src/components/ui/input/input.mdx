@@ -1,0 +1,68 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./input.stories";
+
+<Meta of={Stories} />
+
+# Input
+
+Campo de texto de una línea con label, ayuda, error, íconos y restricciones de tipeo.
+
+## Cuándo usarlo
+
+- Texto corto: nombre, email, número, teléfono, búsqueda.
+- Entradas que se pueden filtrar mientras se escribe (`restrict`).
+
+## Cuándo NO usarlo
+
+- Texto largo: usá `Textarea`.
+- Elegir de una lista cerrada: usá `Select`.
+- Horas: usá `TimePicker`.
+
+## Props clave
+
+`label`, `description`, `error` (`string | boolean`), `startIcon`, `icon` + `onIconClick` + `iconLabel`, `restrict` (`digits | phone | sentenceCase`...; `onChange` recibe el valor ya filtrado). El resto son props de `input`. `helperText` quedó como alias deprecado de `description`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Con ayuda
+
+<Canvas of={Stories.HelperText} />
+
+### Con error
+
+<Canvas of={Stories.WithError} />
+
+### Ícono inicial
+
+<Canvas of={Stories.WithStartIcon} />
+
+### Solo números
+
+<Canvas of={Stories.OnlyNumbers} />
+
+### Teléfono
+
+<Canvas of={Stories.Phone} />
+
+## Accesibilidad
+
+- El label se asocia solo (vía `Field`).
+- Un ícono clickeable (`onIconClick`) necesita `iconLabel`: es su nombre accesible.
+- En mobile el tamaño de fuente es 16 px para evitar el zoom automático de iOS.
+- El estilo de error sale de `aria-invalid`, no solo del color.
+
+## Do / Don't
+
+**Do**
+
+- Elegí el `type` correcto (`email`, `tel`, `password`) para el teclado móvil.
+- Usá `restrict` en lugar de validar a posteriori cuando el formato es estricto.
+
+**Don't**
+
+- No uses `restrict` para validar: restringe lo que se escribe, no reemplaza al esquema de validación.
+- No uses `placeholder` como label.

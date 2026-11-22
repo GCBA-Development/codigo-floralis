@@ -4,7 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
-  Tokens en dos niveles (ver docs/adr/0003-tokens-dos-niveles.md):
+  Tokens en dos niveles (ver docs/adr/0003-tokens-de-diseno-en-dos-niveles.md):
   - Nivel 1, primitivas `--fl-<escala>-<paso>`: la paleta cruda. Solo se referencian desde el nivel 2
     (los componentes no las usan; lo valida ESLint). Llevan prefijo `fl-` para no pisar `--color-blue-*`,
     `--color-red-*`, etc. del tema por defecto de Tailwind en la app consumidora.

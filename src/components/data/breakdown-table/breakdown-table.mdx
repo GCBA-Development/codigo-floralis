@@ -1,0 +1,43 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./breakdown-table.stories";
+
+<Meta of={Stories} />
+
+# BreakdownTable
+
+Tabla ordenable de un desglose. Cada fila muestra su participación sobre el total de todos los ítems (no solo los visibles) con una barra proporcional.
+
+## Cuándo usarlo
+
+- Ver el peso relativo de categorías (por solicitud, por área).
+
+## Cuándo NO usarlo
+
+- Tablas genéricas: usá `Table`.
+- Visualizar la distribución como gráfico: usá `SimpleBarChart`.
+
+## Props clave
+
+`items: { label, value }[]`, `labelHeader` (encabezado de la primera columna), `limit` (filas visibles), `loading`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Tabla nativa con encabezados ordenables (`aria-sort`).
+- La barra es decorativa (`aria-hidden`): el porcentaje está también como texto.
+- En carga expone `aria-busy`.
+
+## Do / Don't
+
+**Do**
+
+- Elegí un `limit` razonable (5 a 10).
+
+**Don't**
+
+- No lo uses con valores negativos.

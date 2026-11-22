@@ -1,0 +1,52 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./toast.stories";
+
+<Meta of={Stories} />
+
+# Toast
+
+Notificaciones temporales. Se montan una vez con `<Toaster />` (o `FloralisProvider`) y se disparan desde cualquier lado con `toast.*`.
+
+## Cuándo usarlo
+
+- Confirmar el resultado de una acción (guardado, importado).
+- Avisos no bloqueantes.
+
+## Cuándo NO usarlo
+
+- Errores de un campo: usá el `error` del campo.
+- Decisiones del usuario: usá `AlertDialog`.
+- Información que tiene que quedarse en pantalla: usá un aviso en la página.
+
+## Anatomía
+
+```tsx
+toast.success("Guardado", { description: "Se actualizaron 3 registros" })
+toast.error("No se pudo guardar")
+```
+
+## Props clave
+
+`toast.success | error | warning | info(message, { description?, timeout? })` y `toast.dismiss(id)`. Los errores tienen prioridad alta.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- El viewport es una región con foco y los toasts se anuncian a lectores de pantalla.
+- Los errores no desaparecen tan rápido como los éxitos: dales tiempo de lectura.
+- El botón de cerrar tiene `aria-label` en español.
+
+## Do / Don't
+
+**Do**
+
+- Mensajes cortos y específicos.
+
+**Don't**
+
+- No dispares varios toasts seguidos por la misma acción.

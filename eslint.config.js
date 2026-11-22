@@ -38,7 +38,7 @@ export default defineConfig([
           ['TemplateElement', 'value.raw'],
         ].map(([node, field]) => ({
           selector: `${node}[${field}=${RAW_COLOR_PATTERN}]`,
-          message: 'Usá tokens semánticos (bg-primary, text-muted-foreground...), no la paleta cruda ni colores fijos. Ver docs/adr/0003-tokens-dos-niveles.md.',
+          message: 'Usá tokens semánticos (bg-primary, text-muted-foreground...), no la paleta cruda ni colores fijos. Ver docs/adr/0003-tokens-de-diseno-en-dos-niveles.md.',
         })),
       ],
     },

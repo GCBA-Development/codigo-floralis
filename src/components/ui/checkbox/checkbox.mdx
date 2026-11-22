@@ -1,0 +1,52 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./checkbox.stories";
+
+<Meta of={Stories} />
+
+# Checkbox
+
+Casilla de verificación individual (Base UI `Checkbox`).
+
+## Cuándo usarlo
+
+- Una opción on/off independiente ("Acepto los términos").
+- Dentro de tablas para seleccionar filas.
+
+## Cuándo NO usarlo
+
+- Un grupo de opciones con label y error: usá `CheckboxList`.
+- Elegir exactamente una opción: usá `RadioGroup`.
+- Una acción inmediata sin enviar formulario: considerá un switch.
+
+## Props clave
+
+Props de Base UI `Checkbox`: `checked`/`onCheckedChange`, `defaultChecked`, `disabled`, `indeterminate`, `required`, `name`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Marcado
+
+<Canvas of={Stories.Checked} />
+
+### Deshabilitado
+
+<Canvas of={Stories.Disabled} />
+
+## Accesibilidad
+
+- Sin label visible no tiene nombre: envolvelo en un `label` o pasá `aria-label`.
+- Espacio lo alterna; el foco es visible.
+
+## Do / Don't
+
+**Do**
+
+- Asociá siempre un texto clickeable.
+
+**Don't**
+
+- No lo uses solo con color para indicar el estado.

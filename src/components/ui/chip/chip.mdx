@@ -1,0 +1,44 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./chip.stories";
+
+<Meta of={Stories} />
+
+# Chip
+
+Chip removible para mostrar un filtro activo. Al hacer clic se quita.
+
+## Cuándo usarlo
+
+- Listar los filtros aplicados sobre una tabla o dashboard.
+- Selecciones múltiples que el usuario va quitando una a una.
+
+## Cuándo NO usarlo
+
+- Estado de solo lectura: usá `Badge`.
+- Acciones generales: usá `Button`.
+
+## Props clave
+
+`label: string` y `onRemove: () => void`, ambas obligatorias.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Es un `button`: se alcanza con Tab y se activa con Enter o Espacio.
+- El nombre accesible es el `label`; el ícono de cerrar es decorativo. Si hace falta más contexto, armá el `label` en consecuencia ("Comuna 3").
+
+## Do / Don't
+
+**Do**
+
+- Un chip por filtro, con el valor visible.
+- Ofrecer "limpiar todo" si hay muchos.
+
+**Don't**
+
+- No lo uses para datos que no se pueden quitar.

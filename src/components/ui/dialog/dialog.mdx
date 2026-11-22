@@ -1,0 +1,61 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./dialog.stories";
+
+<Meta of={Stories} />
+
+# Dialog
+
+Ventana modal para tareas o contenido que requieren atención (Base UI `Dialog`).
+
+## Cuándo usarlo
+
+- Formularios cortos, vistas previas, detalles.
+- Tareas que bloquean el resto de la pantalla hasta cerrarse.
+
+## Cuándo NO usarlo
+
+- Confirmar una acción destructiva: usá `AlertDialog`.
+- Panel lateral o navegación en mobile: usá `Sheet`.
+- Contenido contextual pequeño anclado a un elemento: usá `Popover`.
+
+## Anatomía
+
+```tsx
+<Dialog>
+  <DialogTrigger render={<Button />}>Abrir</DialogTrigger>
+  <DialogContent closeLabel="Cerrar">
+    <DialogHeader>
+      <DialogTitle>Título</DialogTitle>
+      <DialogDescription>Descripción</DialogDescription>
+    </DialogHeader>
+    <DialogFooter>...</DialogFooter>
+  </DialogContent>
+</Dialog>
+```
+
+## Props clave
+
+`Dialog`: `open`, `onOpenChange`, `defaultOpen`. `DialogContent`: `closeLabel` (texto accesible del botón X, default "Cerrar").
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Atrapa el foco y lo devuelve al trigger al cerrar; Escape cierra.
+- Siempre incluí `DialogTitle` (aunque sea `sr-only`): es el nombre accesible.
+- El botón de cierre tiene texto accesible configurable con `closeLabel`.
+
+## Do / Don't
+
+**Do**
+
+- Un título claro y una acción principal.
+
+**Don't**
+
+- No apiles diálogos uno sobre otro.
+- No lo uses para mensajes que no requieren acción: usá `toast`.

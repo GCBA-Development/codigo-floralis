@@ -9,7 +9,6 @@ import { Field, FieldDescription, FieldError, FieldLabel, FormField } from "./fi
 const meta: Meta<typeof FormField> = {
   title: "GCBA/UI/Field",
   component: FormField,
-  tags: ["autodocs"],
   decorators: [(Story) => <div className="w-72"><Story /></div>],
 }
 export default meta

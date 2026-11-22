@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite"
 import { expect, fn, userEvent, waitFor, within } from "storybook/test"
 import { Dropzone } from "./dropzone"
 
-const meta: Meta<typeof Dropzone> = { title: "GCBA/UI/Dropzone", component: Dropzone, tags: ["autodocs"] }
+const meta: Meta<typeof Dropzone> = { title: "GCBA/UI/Dropzone", component: Dropzone }
 export default meta
 type Story = StoryObj<typeof Dropzone>
 

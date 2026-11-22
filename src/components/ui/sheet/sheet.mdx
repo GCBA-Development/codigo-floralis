@@ -1,0 +1,59 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./sheet.stories";
+
+<Meta of={Stories} />
+
+# Sheet
+
+Panel deslizante desde un borde de la pantalla (Base UI `Dialog` con estilo de panel). Lo usa `Sidebar` en mobile.
+
+## Cuándo usarlo
+
+- Navegación o filtros en mobile.
+- Formularios de edición que conviene ver junto al contenido.
+
+## Cuándo NO usarlo
+
+- Confirmaciones: usá `AlertDialog`.
+- Contenido pequeño anclado: usá `Popover`.
+- Tareas centradas y breves: usá `Dialog`.
+
+## Anatomía
+
+```tsx
+<Sheet>
+  <SheetTrigger render={<Button />}>Abrir</SheetTrigger>
+  <SheetContent side="right" closeLabel="Cerrar">
+    <SheetHeader>
+      <SheetTitle>Título</SheetTitle>
+      <SheetDescription>Descripción</SheetDescription>
+    </SheetHeader>
+  </SheetContent>
+</Sheet>
+```
+
+## Props clave
+
+`SheetContent`: `side` (`top | right | bottom | left`), `showCloseButton`, `closeLabel` (default "Cerrar").
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Modal: atrapa el foco, Escape cierra.
+- Incluí `SheetTitle` (puede ser `sr-only`).
+- Con `showCloseButton={false}` ofrecé otra forma visible de cerrar.
+
+## Do / Don't
+
+**Do**
+
+- Usá `side` según el origen natural (menú a la izquierda).
+
+**Don't**
+
+- No lo uses con contenido que necesita mucho ancho en desktop.

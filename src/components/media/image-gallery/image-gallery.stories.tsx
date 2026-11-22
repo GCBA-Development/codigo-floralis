@@ -6,7 +6,6 @@ import { ImageGallery } from "./image-gallery"
 const meta: Meta<typeof ImageGallery> = {
   title: "GCBA/Media/ImageGallery",
   component: ImageGallery,
-  tags: ["autodocs"],
 }
 
 export default meta

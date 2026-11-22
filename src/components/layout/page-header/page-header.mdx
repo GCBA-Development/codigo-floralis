@@ -1,0 +1,40 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./page-header.stories";
+
+<Meta of={Stories} />
+
+# PageHeader
+
+Encabezado de página: título (`h1`), subtítulo, etiqueta superior y acciones.
+
+## Cuándo usarlo
+
+- Parte superior de cada página, una vez.
+
+## Cuándo NO usarlo
+
+- Títulos de secciones internas: usá `CardTitle` o `Text variant="header"`.
+
+## Props clave
+
+`title`, `subtitle?`, `eyebrow?` (etiqueta chica sobre el título), `actions?` (nodo, típicamente `Button`).
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Renderiza el único `h1` de la página.
+
+## Do / Don't
+
+**Do**
+
+- Un título que describa la página, no el sitio.
+
+**Don't**
+
+- No lo repitas en la misma vista.

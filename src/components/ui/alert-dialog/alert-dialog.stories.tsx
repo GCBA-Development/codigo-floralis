@@ -3,7 +3,7 @@ import { AlertDialog, AlertDialogClose, AlertDialogContent, AlertDialogDescripti
 import { Button } from "@/components/ui/button"
 import { expect, screen, userEvent, waitFor, within } from "storybook/test"
 
-const meta: Meta<typeof AlertDialog> = { title: "GCBA/UI/AlertDialog", component: AlertDialog, tags: ["autodocs"] }
+const meta: Meta<typeof AlertDialog> = { title: "GCBA/UI/AlertDialog", component: AlertDialog }
 export default meta
 type Story = StoryObj<typeof AlertDialog>
 

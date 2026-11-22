@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { SimpleBarChart } from "./simple-bar-chart"
 
-const meta: Meta<typeof SimpleBarChart> = { title: "GCBA/Data/SimpleBarChart", component: SimpleBarChart, tags: ["autodocs"] }
+const meta: Meta<typeof SimpleBarChart> = { title: "GCBA/Data/SimpleBarChart", component: SimpleBarChart }
 export default meta
 type Story = StoryObj<typeof SimpleBarChart>
 

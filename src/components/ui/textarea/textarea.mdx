@@ -1,0 +1,42 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./textarea.stories";
+
+<Meta of={Stories} />
+
+# Textarea
+
+Campo de texto multilínea con label, descripción y error.
+
+## Cuándo usarlo
+
+- Comentarios, observaciones y descripciones largas.
+
+## Cuándo NO usarlo
+
+- Texto de una línea: usá `Input`.
+- Texto con formato: usá un editor, no un `textarea`.
+
+## Props clave
+
+`label`, `description`, `error` (`string | boolean`). El resto son props de `textarea` (`rows`, `maxLength`...).
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Label y mensajes asociados por `Field`.
+- Si limitás `maxLength`, mostrá el contador en la descripción.
+
+## Do / Don't
+
+**Do**
+
+- Dimensioná con `rows` según lo esperado.
+
+**Don't**
+
+- No lo uses para valores de una línea.

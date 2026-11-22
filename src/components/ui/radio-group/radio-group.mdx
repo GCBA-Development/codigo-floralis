@@ -1,0 +1,50 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./radio-group.stories";
+
+<Meta of={Stories} />
+
+# RadioGroup
+
+Elección de una única opción entre pocas, todas visibles (Base UI `RadioGroup`).
+
+## Cuándo usarlo
+
+- 2 a 5 opciones mutuamente excluyentes.
+
+## Cuándo NO usarlo
+
+- Más opciones: usá `Select`.
+- Opciones combinables: usá `CheckboxList`.
+
+## Anatomía
+
+```tsx
+<RadioGroup value={value} onValueChange={setValue}>
+  <label><RadioGroupItem value="a" /> Opción A</label>
+</RadioGroup>
+```
+
+## Props clave
+
+`RadioGroup`: `value`, `onValueChange`, `defaultValue`, `disabled`, `name`. `RadioGroupItem`: `value`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Flechas mueven y seleccionan; Tab entra y sale del grupo.
+- Cada item necesita un label asociado.
+
+## Do / Don't
+
+**Do**
+
+- Preseleccioná la opción más probable si tiene sentido.
+
+**Don't**
+
+- No lo uses con una sola opción.

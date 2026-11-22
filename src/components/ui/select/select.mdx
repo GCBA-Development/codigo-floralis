@@ -1,0 +1,75 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./select.stories";
+
+<Meta of={Stories} />
+
+# Select
+
+Selector de lista cerrada (Base UI `Select`) en versión simple y `MultiSelect` con selección múltiple y "Seleccionar todo".
+
+## Cuándo usarlo
+
+- Elegir una opción entre 5 y ~15 (`Select`).
+- Filtros con varias opciones (`MultiSelect`).
+
+## Cuándo NO usarlo
+
+- Pocas opciones (2-4) visibles a la vez: usá `RadioGroup`.
+- Muchas opciones con búsqueda: hace falta un combobox (no incluido todavía).
+- Varias opciones visibles y tildables: usá `CheckboxList`.
+
+## Anatomía
+
+```tsx
+<Select value={value} onValueChange={setValue}>
+  <SelectTrigger label="Comuna">
+    <SelectValue placeholder="Elegí" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="1">Comuna 1</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+## Props clave
+
+`Select` es el root de Base UI (`value`, `onValueChange`). `SelectTrigger`: `label`, `description`, `error`. `MultiSelect`: `options: { label, value }[]`, `value`, `onValueChange`, `placeholder`, `selectAllLabel` (`null` la oculta), `disabled`, `label`, `description`, `error`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Teclado
+
+<Canvas of={Stories.Keyboard} />
+
+### Con error
+
+<Canvas of={Stories.WithError} />
+
+### Múltiple
+
+<Canvas of={Stories.Multiple} />
+
+### Múltiple sin "Seleccionar todo"
+
+<Canvas of={Stories.MultipleWithoutSelectAll} />
+
+## Accesibilidad
+
+- Se abre con Enter, Espacio o flechas; las flechas navegan y Escape cierra.
+- El trigger se vincula al label por `aria-labelledby` (un `button` no puede ser destino de un `label` nativo).
+- El error marca `aria-invalid`.
+
+## Do / Don't
+
+**Do**
+
+- Dale siempre un `label`.
+- Ordená las opciones con un criterio (alfabético, frecuencia).
+
+**Don't**
+
+- No lo uses para acciones: es un campo de datos.

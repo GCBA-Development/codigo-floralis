@@ -9,7 +9,6 @@ const STORAGE_KEY = "floralis-storybook-theme-toggle"
 const meta: Meta<typeof ThemeToggle> = {
   title: "GCBA/UI/ThemeToggle",
   component: ThemeToggle,
-  tags: ["autodocs"],
   beforeEach: () => localStorage.removeItem(STORAGE_KEY),
   decorators: [
     (Story) => (

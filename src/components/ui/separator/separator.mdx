@@ -1,0 +1,41 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./separator.stories";
+
+<Meta of={Stories} />
+
+# Separator
+
+Línea divisoria horizontal o vertical (Base UI `Separator`).
+
+## Cuándo usarlo
+
+- Separar grupos dentro de un menú, toolbar o card.
+
+## Cuándo NO usarlo
+
+- Dar aire entre secciones: usá espaciado (`gap`, `space-y`).
+- Borde decorativo: usá `border` de Tailwind.
+
+## Props clave
+
+`orientation: "horizontal" | "vertical"` (default horizontal). En vertical, el contenedor tiene que ser flex.
+
+## Ejemplos
+
+### Horizontal
+
+<Canvas of={Stories.Horizontal} />
+
+## Accesibilidad
+
+- Base UI le pone `role="separator"` y `aria-orientation`. Si es puramente decorativo, evaluá no usarlo.
+
+## Do / Don't
+
+**Do**
+
+- Usalo para separar grupos con significado distinto.
+
+**Don't**
+
+- No lo uses para espaciar.

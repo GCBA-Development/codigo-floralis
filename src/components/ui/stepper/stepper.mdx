@@ -1,0 +1,47 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./stepper.stories";
+
+<Meta of={Stories} />
+
+# Stepper
+
+Indicador de pasos de un flujo (por ejemplo, el asistente de importación). Los pasos son datos, no `children`.
+
+## Cuándo usarlo
+
+- Asistentes con 3 a 6 pasos lineales.
+
+## Cuándo NO usarlo
+
+- Navegación entre secciones sin orden: usá tabs o `AppSidebar`.
+- Paginación de resultados: usá `Pagination`.
+
+## Props clave
+
+`steps: { title, description? }[]`, `activeStep` (empieza en 0), `onStepClick(index)` (si se pasa, solo los pasos completados son clickeables), `className`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Solo pasos completados clickeables
+
+<Canvas of={Stories.OnlyCompletedStepsClickable} />
+
+## Accesibilidad
+
+- Es una lista ordenada (`ol`).
+- El paso activo lleva `aria-current="step"` y cada paso tiene `aria-label` con su número y título.
+- Los pasos clickeables son botones alcanzables con Tab.
+
+## Do / Don't
+
+**Do**
+
+- Títulos cortos y descriptivos.
+
+**Don't**
+
+- No lo uses si el usuario puede saltear pasos libremente.

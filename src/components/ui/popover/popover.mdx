@@ -1,0 +1,52 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./popover.stories";
+
+<Meta of={Stories} />
+
+# Popover
+
+Contenido flotante anclado a un elemento, que se abre al hacer clic (Base UI `Popover`).
+
+## Cuándo usarlo
+
+- Menús de usuario, filtros rápidos, información adicional interactiva.
+
+## Cuándo NO usarlo
+
+- Texto breve al pasar el mouse: usá `Tooltip`.
+- Tareas que bloquean: usá `Dialog`.
+
+## Anatomía
+
+```tsx
+<Popover>
+  <PopoverTrigger render={<Button />}>Abrir</PopoverTrigger>
+  <PopoverContent>...</PopoverContent>
+</Popover>
+```
+
+## Props clave
+
+`Popover`: `open`, `onOpenChange`. `PopoverContent`: posicionamiento (`side`, `align`, `sideOffset`) de Base UI.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- El trigger anuncia `aria-expanded`.
+- Escape cierra y devuelve el foco al trigger.
+- No pongas información crítica solo dentro de un popover.
+
+## Do / Don't
+
+**Do**
+
+- Contenido corto y enfocado.
+
+**Don't**
+
+- No lo uses como menú de navegación principal.

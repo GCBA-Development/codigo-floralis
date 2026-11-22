@@ -1,0 +1,50 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./image-gallery.stories";
+
+<Meta of={Stories} />
+
+# ImageGallery
+
+Grilla de miniaturas con vista previa ampliada y, si es `editable`, eliminación desde la grilla o desde la vista previa. Es controlada.
+
+## Cuándo usarlo
+
+- Fotos adjuntas a un registro.
+- Mostrar y, si hace falta, quitar imágenes ya cargadas.
+
+## Cuándo NO usarlo
+
+- Subir archivos: combiná con `Dropzone`.
+- Carruseles de portada o contenido editorial.
+
+## Props clave
+
+`value: string[]` (URLs), `onValueChange(urls)`, `editable`.
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Solo lectura
+
+<Canvas of={Stories.Default} />
+
+### Editable
+
+<Canvas of={Stories.Editable} />
+
+## Accesibilidad
+
+- La vista previa es un `Dialog`: foco atrapado y Escape cierra; el botón de cerrar tiene nombre accesible.
+- Las miniaturas son clickeables con mouse; todavía no son enfocables con teclado (pendiente).
+- Los `alt` son genéricos ("Miniatura", "Vista previa"): si tenés descripciones reales, es mejor usarlas.
+
+## Do / Don't
+
+**Do**
+
+- Actualizá `value` en `onValueChange`: sin eso la eliminación no se refleja.
+
+**Don't**
+
+- No lo uses con cientos de imágenes sin paginar.

@@ -1,0 +1,51 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./dropzone.stories";
+
+<Meta of={Stories} />
+
+# Dropzone
+
+Zona de arrastre y selección de archivos. No sube nada: entrega los `File` válidos a `onFiles`.
+
+## Cuándo usarlo
+
+- Importaciones de Excel/CSV.
+- Adjuntar uno o varios archivos con validación de tipo y tamaño.
+
+## Cuándo NO usarlo
+
+- Imágenes con vista previa: combinalo con `ImageGallery`.
+- Subida directa: el componente solo entrega archivos, la subida es tuya.
+
+## Props clave
+
+`onFiles`, `accept` (igual que `<input accept>`), `multiple`, `maxSize` (bytes), `disabled`, `error`, `label`, `hint`. Valida `maxSize` y muestra el error en línea.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+### Con error
+
+<Canvas of={Stories.WithError} />
+
+### Rechaza archivos grandes
+
+<Canvas of={Stories.RejectsOversizedFile} />
+
+## Accesibilidad
+
+- Tiene `role="button"` y `tabIndex`: se opera con Tab y teclado.
+- `aria-invalid` refleja el error, que se anuncia con `role="alert"`.
+
+## Do / Don't
+
+**Do**
+
+- Indicá formatos y tamaño máximo en `hint`.
+
+**Don't**
+
+- No confíes solo en `accept`: validá de nuevo en el servidor.

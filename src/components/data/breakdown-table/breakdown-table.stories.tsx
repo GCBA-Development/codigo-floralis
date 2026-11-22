@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
 import { BreakdownTable } from "./breakdown-table"
 
-const meta: Meta<typeof BreakdownTable> = { title: "GCBA/Data/BreakdownTable", component: BreakdownTable, tags: ["autodocs"] }
+const meta: Meta<typeof BreakdownTable> = { title: "GCBA/Data/BreakdownTable", component: BreakdownTable }
 export default meta
 type Story = StoryObj<typeof BreakdownTable>
 

@@ -1,0 +1,61 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./table.stories";
+
+<Meta of={Stories} />
+
+# Table
+
+Primitivas de tabla estilizadas: `Table`, `TableHeader`, `TableBody`, `TableRow`, `TableHead`, `TableSortableHead` y `TableCell`.
+
+## Cuándo usarlo
+
+- Datos tabulares comparables por fila y columna.
+- Columnas ordenables con `TableSortableHead`.
+
+## Cuándo NO usarlo
+
+- Desglose con participación y barra: usá `BreakdownTable`.
+- Maquetación: usá CSS grid/flex.
+
+## Anatomía
+
+```tsx
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Nombre</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow><TableCell>Ana</TableCell></TableRow>
+  </TableBody>
+</Table>
+```
+
+## Props clave
+
+Todas aceptan las props del elemento HTML correspondiente. `TableSortableHead` expone el sentido de orden (`asc | desc | none`) y refleja `aria-sort`.
+
+## Ejemplos
+
+### Default
+
+<Canvas of={Stories.Default} />
+
+## Accesibilidad
+
+- Usa elementos nativos (`table`, `th`, `td`): los lectores navegan por celdas.
+- `TableSortableHead` publica `aria-sort`.
+- Para tablas anchas, verificá el scroll horizontal en mobile.
+
+## Do / Don't
+
+**Do**
+
+- Usá `TableHead` para los encabezados.
+- Paginá con `Pagination` si hay muchas filas.
+
+**Don't**
+
+- No uses tablas para maquetar.
+- No dependas del color para marcar filas importantes.

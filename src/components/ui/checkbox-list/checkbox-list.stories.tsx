@@ -9,7 +9,6 @@ const meta: Meta<typeof CheckboxList> = {
     parameters: {
     layout: "centered",
   },
-  tags: ["autodocs"],
 };
 
 export default meta;

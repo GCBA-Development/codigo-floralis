@@ -1,0 +1,49 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+
+<Meta title="GCBA/Providers/FloralisProvider" />
+
+# FloralisProvider
+
+Provider raíz de la librería: tema claro/oscuro (next-themes), `TooltipProvider` y `Toaster`. Va una sola vez en el layout. Vive en `codigo-floralis/theme` y requiere la peer dependency `next-themes`.
+
+## Cuándo usarlo
+
+- En el layout raíz de la app (Next.js o Vite) para tener tema, tooltips y toasts.
+
+## Cuándo NO usarlo
+
+- Si no necesitás modo oscuro: alcanza con `styles.css`; montá `TooltipProvider` y `Toaster` a mano.
+- Más de una vez: duplica el `Toaster` y el estado de tema.
+
+## Anatomía
+
+```tsx
+import "codigo-floralis/styles.css"
+import { FloralisProvider } from "codigo-floralis/theme"
+
+<html lang="es" suppressHydrationWarning>
+  <body>
+    <FloralisProvider>{children}</FloralisProvider>
+  </body>
+</html>
+```
+
+## Props clave
+
+`theme?: Partial<ThemeProviderProps>` (sobrescribe `attribute="class"`, `defaultTheme="system"`, `enableSystem`, `disableTransitionOnChange`), `toaster?: boolean` (default `true`; `false` si montás el tuyo), `tooltipDelay?: number`. También reexporta `useTheme`.
+
+## Accesibilidad
+
+- El tema `system` respeta `prefers-color-scheme`.
+- `disableTransitionOnChange` evita destellos de transición al cambiar de tema.
+- Poné `suppressHydrationWarning` en `<html>`: next-themes agrega la clase `dark` antes de hidratar.
+
+## Do / Don't
+
+**Do**
+
+- Persistí la preferencia con el `storageKey` por defecto salvo que haya conflictos entre apps.
+
+**Don't**
+
+- No lo uses sin `next-themes` instalado.
