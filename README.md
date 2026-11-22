@@ -13,6 +13,37 @@ import { Button } from "codigo-floralis";
 
 Los estilos ya no se importan desde `codigo-floralis` (el barrel no tiene efectos de CSS): hay que importar `styles.css` explicitamente.
 
+## Tipografia (Archivo)
+
+`styles.css` **no carga la fuente**: usa `var(--font-archivo)` y cae a `"Archivo"` del sistema. Asi la app decide como cargarla y no hay un request externo extra.
+
+Next.js:
+
+```tsx
+// app/layout.tsx
+import { Archivo } from "next/font/google";
+
+const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="es" className={archivo.variable} suppressHydrationWarning>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+Otras apps: agrega el link de Google Fonts en el `<head>`.
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+```
+
+Storybook de la libreria la carga desde `.storybook/preview-head.html`.
+
 ## Tema claro/oscuro (opcional)
 
 `FloralisProvider` y `ThemeToggle` viven en el entry `codigo-floralis/theme` y requieren `next-themes` (peer dependency opcional). Setup en Next.js (App Router):

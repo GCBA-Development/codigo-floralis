@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
@@ -21,9 +20,12 @@
   Excepciones de contraste aceptadas en el tema claro (decisión de marca, ver theme-tokens.test.ts):
     muted-foreground sobre background/muted (~4.3:1) y warning-foreground blanco sobre warning (~2.6:1).
 */
-:root {
+/* Especificidad 0: el --font-archivo de next/font (u otro loader) siempre gana sobre este default. */
+:where(:root) {
   --font-archivo: "Archivo";
+}
 
+:root {
   /* Nivel 1: primitivas */
   --fl-navy-50: #f3f6f8;
   --fl-navy-100: #e8edf1;
