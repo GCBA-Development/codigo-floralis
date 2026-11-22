@@ -65,6 +65,12 @@ export default defineConfig({
     },
     rollupOptions: {
       external: (id) => externalPackages.some((name) => id === name || id.startsWith(name + "/")),
+      // Un archivo por módulo: lo que no se importa no entra al bundle del consumidor.
+      output: {
+        preserveModules: true,
+        preserveModulesRoot: "src",
+        entryFileNames: "[name].js",
+      },
     },
   },
 });
