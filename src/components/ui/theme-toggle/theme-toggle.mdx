@@ -5,7 +5,7 @@ import * as Stories from "./theme-toggle.stories";
 
 # ThemeToggle
 
-Botón de ícono que cicla el tema claro, oscuro y del sistema. Vive en `codigo-floralis/theme` y necesita `FloralisProvider` (o el `ThemeProvider` de next-themes) y la peer dependency `next-themes`.
+Botón de ícono que cicla el tema claro, oscuro y (si el provider lo habilita) del sistema, o alterna solo claro/oscuro con `mode="toggle"`. Vive en `codigo-floralis/theme` y necesita `FloralisProvider` (o el `ThemeProvider` de next-themes) y la peer dependency `next-themes`.
 
 ## Cuándo usarlo
 
@@ -19,7 +19,7 @@ Botón de ícono que cicla el tema claro, oscuro y del sistema. Vive en `codigo-
 
 ## Props clave
 
-`label` (nombre accesible base, default "Cambiar tema"), `themeLabels` (`{ light, dark, system }`, textos con los que se anuncia el tema actual) y las props de `Button` (`variant` default `ghost`, `size` default `icon`, `className`...).
+`mode` (`cycle` default o `toggle`), `label` (nombre accesible base, default "Cambiar tema"), `themeLabels` (`{ light, dark, system }`, textos con los que se anuncia el próximo tema) y las props de `Button` (`variant` default `ghost`, `size` default `icon`, `className`...).
 
 <ArgTypes of={Stories} />
 
@@ -29,13 +29,25 @@ Botón de ícono que cicla el tema claro, oscuro y del sistema. Vive en `codigo-
 
 <Canvas of={Stories.Default} />
 
+### Sin sistema
+
+Si el provider tiene `enableSystem={false}`, el botón lo detecta (`themes` de `useTheme()`) y solo cicla claro y oscuro.
+
+<Canvas of={Stories.SinSistema} />
+
+### Toggle
+
+`mode="toggle"` alterna claro y oscuro según el tema resuelto, incluso si el elegido era "sistema".
+
+<Canvas of={Stories.Toggle} />
+
 ### Etiquetas personalizadas
 
 <Canvas of={Stories.EtiquetasPersonalizadas} />
 
 ## Accesibilidad
 
-- El nombre accesible incluye el tema actual: "Cambiar tema (actual: oscuro)".
+- El nombre accesible anuncia la próxima acción: "Cambiar tema (siguiente: oscuro)". El ícono muestra el tema actual.
 - Es un `button`: Enter y Espacio lo activan.
 - Hasta que el cliente hidrata renderiza un botón deshabilitado del mismo tamaño: sin mismatch de hidratación ni salto de layout.
 
