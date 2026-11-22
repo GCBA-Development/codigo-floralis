@@ -1,5 +1,16 @@
 # codigo-floralis
 
+## 0.3.0
+
+### Minor Changes
+
+- d7d3bbd: `AppSidebarItem` acepta `AppSidebarSubItem` como hijos (submenú colapsable con `open` / `onOpenChange` / `defaultOpen`, expandido automático según `activeHref`). Con `collapsible="icon"` los sub-items se muestran en un popover. `AppSidebarProps` expone `collapsible` y `AppSidebarItem.href` pasa a ser opcional cuando tiene sub-items.
+- af54cd9: `ThemeToggle` respeta `enableSystem: false` (solo cicla los temas disponibles según `themes` de next-themes) y suma `mode?: "cycle" | "toggle"`. El nombre accesible ahora anuncia el próximo tema: "Cambiar tema (siguiente: oscuro)" en lugar de "(actual: ...)".
+
+### Patch Changes
+
+- 008cca0: `styles.css` ya no hace `@import` de Google Fonts: la app carga Archivo (ej. `next/font/google` con `variable: "--font-archivo"`) y `--font-archivo` del consumidor tiene prioridad. Ver README, sección Tipografía.
+
 ## 0.2.0
 
 ### Minor Changes
