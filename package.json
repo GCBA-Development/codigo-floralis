@@ -47,7 +47,8 @@
     "@hugeicons/react": "^1.1.10",
     "react": ">=19",
     "react-dom": ">=19",
-    "recharts": "^3.11.0"
+    "recharts": "^3.11.0",
+    "next-themes": "^0.4.6"
   },
   "devDependencies": {
     "@base-ui/react": "^1.9.0",
@@ -58,6 +59,7 @@
     "@hugeicons/react": "^1.1.10",
     "@storybook/addon-a11y": "^10.1.11",
     "@storybook/addon-docs": "^10.1.11",
+    "@storybook/addon-themes": "^10.1.11",
     "@storybook/addon-vitest": "^10.1.11",
     "@storybook/react-vite": "^10.1.11",
     "@tailwindcss/vite": "^4.1.18",
@@ -72,6 +74,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "eslint-plugin-storybook": "^10.1.11",
     "globals": "^16.5.0",
+    "next-themes": "^0.4.6",
     "playwright": "^1.57.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -87,6 +90,9 @@
   },
   "peerDependenciesMeta": {
     "recharts": {
+      "optional": true
+    },
+    "next-themes": {
       "optional": true
     }
   }
