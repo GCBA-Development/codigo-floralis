@@ -1,6 +1,7 @@
 import * as React from "react";
-import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
-import { Check } from "lucide-react";
+import { Checkbox as CheckboxPrimitive } from "@base-ui/react/checkbox";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Tick02Icon } from "@hugeicons/core-free-icons";
 import { checkboxVariants } from "./CheckBoxList.variant";
 import type { VariantProps } from "class-variance-authority";
 import { cn } from "../../../../lib/utils";
@@ -76,11 +77,12 @@ const CheckboxList = React.forwardRef<HTMLDivElement, CheckboxListProps>(
                     id={`${name}-${opcion.codigo}`}
                     checked={isChecked}
                     onCheckedChange={() => handleToggle(opcion.codigo)}
+                    onClick={(e) => e.stopPropagation()}
                     className={cn(checkboxVariants({ variant: isChecked ? variant : "default" }))}
                     disabled={disabled}
                   >
                     <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
-                      <Check className="h-3.5 w-3.5 stroke-[4px]" />
+                      <HugeiconsIcon icon={Tick02Icon} strokeWidth={3} className="size-3.5" />
                     </CheckboxPrimitive.Indicator>
                   </CheckboxPrimitive.Root>
                 </div>

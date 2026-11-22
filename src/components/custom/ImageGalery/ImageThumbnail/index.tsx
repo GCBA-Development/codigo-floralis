@@ -1,4 +1,5 @@
-import { Trash2 } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Delete02Icon } from "@hugeicons/core-free-icons";
 import { Button } from "../../../ui/button";
 
 interface ImageThumbnailProps {
@@ -33,7 +34,7 @@ export const ImageThumbnail = ({ src, onDelete, onClick }: ImageThumbnailProps) 
               onDelete(e);
             }}
           >
-            <Trash2 className="h-4 w-4" />
+            <HugeiconsIcon icon={Delete02Icon} className="size-4" />
           </Button>
         </div>
       )}

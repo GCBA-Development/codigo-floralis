@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Loader2 } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Loading03Icon } from "@hugeicons/core-free-icons";
 import { loadingVariants } from "./Loading.variants";
 import type { VariantProps } from "class-variance-authority";
 import { cn } from "../../../lib/utils";
@@ -21,7 +22,8 @@ const Loading = React.forwardRef<HTMLDivElement, LoadingProps>(
         {...props}
       >
         <div className="relative flex items-center justify-center w-full h-full">
-          <Loader2 
+          <HugeiconsIcon
+            icon={Loading03Icon}
             className={cn(
               "animate-spin text-primary p-2", 
               variant === "fullscreen" 

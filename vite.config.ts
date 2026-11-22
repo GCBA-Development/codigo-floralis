@@ -6,13 +6,24 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
-import dts from 'vite-plugin-dts'; 
+import dts from 'vite-plugin-dts';
+import pkg from './package.json' with { type: 'json' };
 
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
+const externalPackages = [
+  ...new Set([
+    'react',
+    'react-dom',
+    'react/jsx-runtime',
+    ...Object.keys(pkg.dependencies ?? {}),
+    ...Object.keys(pkg.peerDependencies ?? {}),
+  ]),
+];
+
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [tailwindcss(),react(),dts({ insertTypesEntry: true })],
+  plugins: [tailwindcss(),react(),dts({ tsconfigPath: "./tsconfig.app.json", include: ["src"], exclude: ["src/**/*.stories.*", "src/stories/**", "src/main.tsx", "src/App.tsx"], rollupTypes: true })],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
@@ -41,21 +52,16 @@ export default defineConfig({
       }
     }]
   },build: {
+    copyPublicDir: false,
     lib: {
-      entry: path.resolve(__dirname, 'src/index.ts'),
-      name: 'NombreDeTuLibreria',
-      formats: ['es', 'umd'],
-      fileName: (format) => `index.${format}.js`,
+      entry: path.resolve(dirname, "src/index.ts"),
+      name: "CodigoFloralis",
+      formats: ["es"],
+      fileName: "index",
+      cssFileName: "styles",
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'tailwindcss'],
-      output: {
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-          tailwindcss: 'Tailwindcss',
-        },
-      },
+      external: (id) => externalPackages.some((name) => id === name || id.startsWith(name + "/")),
     },
   },
 });

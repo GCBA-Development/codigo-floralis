@@ -5,9 +5,9 @@ export const checkboxVariants = cva(
   {
     variants: {
       variant: {
-        default: "border-field-border-disabled data-[state=checked]:bg-primary data-[state=checked]:border-primary data-[state=checked]:text-primary-foreground focus-visible:ring-primary/50",
-        error: "border-destructive data-[state=checked]:bg-destructive data-[state=checked]:border-destructive focus-visible:ring-destructive/50",
-        modern: "border-border bg-card/50 backdrop-blur-sm data-[state=checked]:bg-primary data-[state=checked]:shadow-[0_0_10px] data-[state=checked]:shadow-ring/50",
+        default: "border-field-border-disabled data-checked:bg-primary data-checked:border-primary data-checked:text-primary-foreground focus-visible:ring-primary/50",
+        error: "border-destructive data-checked:bg-destructive data-checked:border-destructive focus-visible:ring-destructive/50",
+        modern: "border-border bg-card/50 backdrop-blur-sm data-checked:bg-primary data-checked:shadow-[0_0_10px] data-checked:shadow-ring/50",
       },
     },
     defaultVariants: {

@@ -1,4 +1,5 @@
-import { Trash2 } from "lucide-react";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { Delete02Icon } from "@hugeicons/core-free-icons";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../../../ui/dialog";
 import { Button } from "../../../ui/button";
 
@@ -38,7 +39,7 @@ export const ImagePreview = ({ src, isOpen, onClose, onDelete }: ImagePreviewPro
                     onClose();
                   }}
                 >
-                  <Trash2 className="h-5 w-5" />
+                  <HugeiconsIcon icon={Delete02Icon} className="size-5" />
                   <span className="font-semibold">Eliminar imagen</span>
                 </Button>
               </div>
