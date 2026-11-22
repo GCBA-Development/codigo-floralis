@@ -23,7 +23,7 @@ export function KpiCard({ label, value, suffix, loading = false, variant = "seco
       className={cn(
         "@container flex min-w-40 flex-1 flex-col justify-between gap-4 rounded-2xl px-5 py-4 transition-shadow duration-200",
         isHighlight
-          ? "bg-linear-to-br from-primary to-secondary text-primary-foreground shadow-[0_14px_30px_-14px_rgba(3,92,128,0.75)] md:flex-[1.4]"
+          ? "bg-linear-to-br from-primary to-secondary text-primary-foreground shadow-[0_14px_30px_-14px_color-mix(in_srgb,var(--secondary)_75%,transparent)] md:flex-[1.4]"
           : "bg-muted/60 ring-1 ring-inset ring-(--hairline) hover:shadow-(--shadow-surface)",
       )}
     >
@@ -31,7 +31,7 @@ export function KpiCard({ label, value, suffix, loading = false, variant = "seco
         as="span"
         variant="muted"
         title={label}
-        className={cn("line-clamp-2 text-s7 font-semibold uppercase tracking-[0.1em]", isHighlight && "text-primary-foreground/80", loading && isHighlight && "bg-white/20")}
+        className={cn("line-clamp-2 text-s7 font-semibold uppercase tracking-[0.1em]", isHighlight && "text-primary-foreground/80", loading && isHighlight && "bg-primary-foreground/20")}
         loading={loading}
       >
         {label}
@@ -39,7 +39,7 @@ export function KpiCard({ label, value, suffix, loading = false, variant = "seco
       <Text
         as="span"
         variant="number"
-        className={cn(isHighlight ? "text-[clamp(1.25rem,13cqw,2rem)]" : "text-[clamp(1.125rem,11cqw,1.5rem)]", "block whitespace-nowrap font-bold leading-none tracking-tight tabular-nums", isHighlight && "text-primary-foreground", loading && isHighlight && "bg-white/20")}
+        className={cn(isHighlight ? "text-[clamp(1.25rem,13cqw,2rem)]" : "text-[clamp(1.125rem,11cqw,1.5rem)]", "block whitespace-nowrap font-bold leading-none tracking-tight tabular-nums", isHighlight && "text-primary-foreground", loading && isHighlight && "bg-primary-foreground/20")}
         loading={loading}
       >
         {value.toLocaleString("es-AR")}

@@ -35,7 +35,7 @@ export function AppNavbarAction({ icon, label, badge, href, onClick, className }
       {badgeText ? (
         <span
           aria-hidden="true"
-          className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-s7 font-bold leading-none text-white tabular-nums"
+          className="absolute -top-0.5 -right-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-destructive px-1 text-s7 font-bold leading-none text-destructive-foreground tabular-nums"
         >
           {badgeText}
         </span>

@@ -95,7 +95,7 @@ export function BreakdownTable({ items, labelHeader, limit, loading = false }: B
                       aria-hidden
                       className={cn(
                         "flex size-5 shrink-0 items-center justify-center rounded-md text-s7 font-bold tabular-nums",
-                        isTop ? "bg-secondary text-white" : "bg-muted text-secondary",
+                        isTop ? "bg-secondary text-secondary-foreground" : "bg-muted text-secondary",
                       )}
                     >
                       {index + 1}
