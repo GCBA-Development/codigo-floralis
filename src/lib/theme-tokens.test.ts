@@ -11,9 +11,18 @@ describe.each(themes)("tema %s", (theme) => {
 
   it.each(SEMANTIC_COLOR_PAIRS)("%s sobre %s cumple AA", (foreground, background) => {
     const ratio = contrastRatio(tokens[`--${foreground}`], tokens[`--${background}`])
-    expect(passesAA(ratio), `${foreground}/${background} = ${ratio.toFixed(2)}:1`).toBe(true)
+    const accepted = theme === "light" && ACCEPTED_LIGHT_EXCEPTIONS.includes(`${foreground}/${background}`)
+    // Una excepción que empieza a cumplir AA ya no lo es: hay que sacarla de la lista.
+    expect(passesAA(ratio), `${foreground}/${background} = ${ratio.toFixed(2)}:1`).toBe(!accepted)
   })
 })
+
+// Pares que no cumplen AA en el tema claro y se aceptan para conservar los colores de front-arbolado.
+const ACCEPTED_LIGHT_EXCEPTIONS = [
+  "muted-foreground/background",
+  "muted-foreground/muted",
+  "warning-foreground/warning",
+]
 
 describe("paridad de temas", () => {
   it("el tema oscuro redefine todos los tokens semánticos de color", () => {
@@ -40,7 +49,7 @@ const ALLOWED_SAME_IN_BOTH = [
 const ORIGINAL_LIGHT_TOKENS: Record<string, string> = {
   "--background": "#f1f1f3", "--foreground": "#1d3343", "--card": "#ffffff", "--popover": "#ffffff",
   "--primary": "#1d3343", "--primary-foreground": "#ffffff", "--secondary": "#035c80",
-  "--muted": "#f4f5f6", "--accent": "#f4f5f6", "--destructive": "#cb3232", "--success": "#00642f",
+  "--muted": "#f4f5f6", "--muted-foreground": "#6b7280", "--warning-foreground": "#ffffff", "--accent": "#f4f5f6", "--destructive": "#cb3232", "--success": "#00642f",
   "--warning": "#e88700", "--info": "#00769a", "--border": "#dde2e8", "--input": "#e5e7eb",
   "--ring": "#0892cb", "--field-border": "#9ca3af", "--field-border-disabled": "#d1d5db",
   "--sidebar": "#1d3343", "--sidebar-border": "#2c4256", "--sidebar-accent": "#035c80",
@@ -48,7 +57,7 @@ const ORIGINAL_LIGHT_TOKENS: Record<string, string> = {
 }
 
 describe("tema claro", () => {
-  it("conserva los colores originales (excepto warning-foreground y muted-foreground, documentados en index.css)", () => {
+  it("conserva los colores originales de front-arbolado", () => {
     const light = resolveThemeTokens(css, "light")
     for (const [name, hex] of Object.entries(ORIGINAL_LIGHT_TOKENS)) expect(light[name], name).toBe(hex)
   })
