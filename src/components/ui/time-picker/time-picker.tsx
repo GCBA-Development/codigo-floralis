@@ -21,7 +21,7 @@ export interface TimePickerProps
   error?: string | boolean;
 }
 
-const TimePickerCustom = React.forwardRef<HTMLInputElement, TimePickerProps>(
+const TimePicker = React.forwardRef<HTMLInputElement, TimePickerProps>(
   ({ className, variant, label, description, helperText, error, required, ...props }, ref) => {
     return (
       <Field invalid={Boolean(error)} className="group/field w-fit gap-2">
@@ -64,5 +64,9 @@ const TimePickerCustom = React.forwardRef<HTMLInputElement, TimePickerProps>(
   }
 );
 
-TimePickerCustom.displayName = "TimePickerCustom";
-export { TimePickerCustom };
+TimePicker.displayName = "TimePicker";
+
+/** @deprecated Usá `TimePicker`. Se elimina en la próxima versión. */
+const TimePickerCustom = TimePicker;
+
+export { TimePicker, TimePickerCustom };

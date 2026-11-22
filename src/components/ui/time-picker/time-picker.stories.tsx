@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { expect, userEvent, within } from "storybook/test";
-import  { TimePickerCustom } from "./time-picker";
+import  { TimePicker } from "./time-picker";
 
-const meta: Meta<typeof TimePickerCustom> = {
+const meta: Meta<typeof TimePicker> = {
   title: "GCBA/UI/TimePicker",
-  component: TimePickerCustom,
+  component: TimePicker,
   tags: ["autodocs"],
   argTypes: {
     variant: {
@@ -15,7 +15,7 @@ const meta: Meta<typeof TimePickerCustom> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof TimePickerCustom>;
+type Story = StoryObj<typeof TimePicker>;
 
 export const Default: Story = {
   args: {

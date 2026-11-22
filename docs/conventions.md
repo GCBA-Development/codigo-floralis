@@ -13,7 +13,7 @@ Vocabulario compartido, en este orden de énfasis:
 - Se admiten valores propios solo si describen algo que el vocabulario no cubre. Hoy:
   - `Button`: `tertiary`, `link`.
   - `Badge`: `soft`.
-  - `TimePicker`, `ImageGallery`, `CheckboxList`: `modern`, `glass` (pieles del componente).
+  - `TimePicker`, `CheckboxList`: `modern`, `glass` (pieles del componente).
 - Cuando `variant` no es "aspecto" sino un **modo** del componente, el nombre se justifica por su dominio y se documenta:
   - `Text.variant`: rol tipográfico (`pageTitle`, `body`, ...).
   - `Loading.variant`: `fullscreen | section | inline`.

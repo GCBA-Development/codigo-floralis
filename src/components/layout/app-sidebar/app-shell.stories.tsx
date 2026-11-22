@@ -98,7 +98,7 @@ export const Default: Story = {
     await expect(canvas.getByRole("link", { name: /Reclamos/ })).toHaveAttribute("aria-current", "page")
     await expect(canvas.getByRole("link", { name: "Inicio" })).not.toHaveAttribute("aria-current")
     await expect(sidebar).toHaveAttribute("data-state", "expanded")
-    await userEvent.click(canvas.getByRole("button", { name: "Toggle Sidebar" }))
+    await userEvent.click(canvas.getByRole("button", { name: "Alternar barra lateral" }))
     await waitFor(() => expect(sidebar).toHaveAttribute("data-state", "collapsed"))
   },
 }

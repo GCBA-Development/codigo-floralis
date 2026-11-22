@@ -24,7 +24,7 @@ export const ImagePreview = ({ src, open, onOpenChange, onDelete }: ImagePreview
           <div className="relative group/maximized">
             <img
               src={src || ""}
-              alt="Preview"
+              alt="Vista previa"
               className="max-h-[90vh] w-auto rounded-xl object-contain shadow-2xl ring-1 ring-card/10 animate-in fade-in zoom-in-95 duration-300"
             />
 

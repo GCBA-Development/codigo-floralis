@@ -39,8 +39,12 @@ function DialogOverlay({ className, ...props }: DialogPrimitive.Backdrop.Props) 
 function DialogContent({
   className,
   children,
+  closeLabel = "Cerrar",
   ...props
-}: DialogPrimitive.Popup.Props) {
+}: DialogPrimitive.Popup.Props & {
+  /** Texto accesible del botón de cierre. */
+  closeLabel?: string
+}) {
   return (
     <DialogPortal>
       <DialogOverlay />
@@ -55,7 +59,7 @@ function DialogContent({
         {children}
         <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none">
           <HugeiconsIcon icon={Cancel01Icon} strokeWidth={2} className="size-4" />
-          <span className="sr-only">Close</span>
+          <span className="sr-only">{closeLabel}</span>
         </DialogPrimitive.Close>
       </DialogPrimitive.Popup>
     </DialogPortal>

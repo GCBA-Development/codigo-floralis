@@ -18,7 +18,7 @@ export const ImageThumbnail = ({ src, onDelete, onClick }: ImageThumbnailProps) 
     >
       <img
         src={src}
-        alt="Thumbnail"
+        alt="Miniatura"
         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
       />
 
