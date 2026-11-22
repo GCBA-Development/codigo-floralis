@@ -1,5 +1,49 @@
 # codigo-floralis
 
+## 0.2.0
+
+### Minor Changes
+
+- dca9de8: Convención de props unificada (ver `docs/conventions.md`). **Cambios que rompen compatibilidad** (la librería es 0.x):
+
+  - `Badge`: `variant="default"` pasa a `variant="primary"` (nuevo valor por defecto).
+  - `Button`: `size="default"` pasa a `size="md"`. Si pasabas `size="default"` explícito, cambialo.
+  - `SidebarMenuButton`: `variant="default"` pasa a `"ghost"` y `size="default"` a `"md"`.
+  - `KpiCard`: `variant="highlight"` pasa a `"primary"` y `variant="default"` a `"secondary"`.
+  - `CheckboxList`: props en inglés y controladas.
+    - `opciones` -> `options`, con `{ codigo, nombre }` -> `{ value, label }` (el tipo `Opcion` pasa a `CheckboxListOption`).
+    - `elegidos` -> `value`, `onChange` -> `onValueChange`, `titulo` -> `label`.
+    - `variant="error"` se elimina: usá la prop `error` (`string | boolean`). `variant="default"` pasa a `"primary"`.
+    - Con React Hook Form: `onValueChange={field.onChange}` y `value={field.value}`.
+  - `TimePickerCustom`: `variant="error"` se elimina (usá `error`, ahora `string | boolean`; con string se muestra como mensaje). `variant="default"` pasa a `"outline"`.
+  - `ImageGallery`: `imagenes` -> `value`, `handleChange(ruta, imagenes)` -> `onValueChange(imagenes)` (se elimina `ruta`; resolvelo en el closure). `variant="default"` pasa a `"outline"`.
+  - `ImagePreview`: `isOpen` -> `open`, `onClose` -> `onOpenChange(open)`.
+  - `Input` `restrict`: `"numeros"` -> `"digits"`, `"telefono"` -> `"phone"`.
+  - `Dropzone`: `error` ahora acepta `string | boolean` (compatible hacia atrás).
+
+- ba4ad22: - `ImageGallery`: el botón "Eliminar" de la vista previa ahora funciona (no se seteaba el índice seleccionado). Se eliminan las props `variant`/`size`, que no tenían efecto.
+  - `TimePickerCustom` se renombra a `TimePicker`. `TimePickerCustom` queda como alias deprecado por un release.
+  - Textos por defecto en español y sobrescribibles: `DialogContent`/`SheetContent` (`closeLabel`, antes "Close"), `SidebarTrigger`/`SidebarRail` (`label`, antes "Toggle Sidebar"), `Sidebar` (`mobileTitle`, `mobileDescription`). `alt` de `ImageGallery` en español.
+- 7ea16b7: Nuevo `Field` (`Field`, `FieldLabel`, `FieldDescription`, `FieldError`, `FormField`) sobre `@base-ui/react/field`. Label, descripción y error quedan asociados al control (ids, `aria-labelledby`, `aria-describedby`, `aria-invalid`) en un solo lugar.
+
+  `Input`, `Textarea`, `SelectTrigger`/`MultiSelect`, `TimePickerCustom` y `CheckboxList` lo usan internamente:
+
+  - `helperText` se renombra a `description`. `helperText` sigue funcionando en `Input` y `TimePickerCustom` como alias deprecado y se elimina en la próxima versión.
+  - `Textarea` y `SelectTrigger` ganan `label`, `description` y `error` (`string | boolean`) con el mismo comportamiento que `Input`.
+  - `CheckboxList` ahora renderiza un `<fieldset>` (la prop `label` es su leyenda), acepta `description` y cada checkbox tiene nombre accesible. Si tenías estilos sobre el `div` raíz, revisalos.
+  - Ya no se generan ids propios (`${id}-message`, `${id}-error`): si dependías de ellos, usá el `id` que expone Base UI.
+
+- fa7dd22: Nuevo entry `codigo-floralis/theme` con `FloralisProvider` (next-themes + `TooltipProvider` + `Toaster`), `useTheme` y `ThemeToggle`. `next-themes` es peer dependency opcional; va en un entry aparte (como `/charts`) para que el barrel principal no lo requiera.
+- c4a2bb4: Modo oscuro: la clase `.dark` en `<html>` redefine los tokens semánticos (todos los pares texto/fondo cumplen AA en ambos temas, validado por test). Se agrega `@custom-variant dark` para Tailwind v4. Storybook suma un selector de tema claro/oscuro.
+- b0d7698: Tokens en dos niveles: primitivas `--fl-<escala>-<paso>` (navy, blue, neutral, red, green, amber) y semánticos (`--primary`, `--card`...) que las referencian. Los nombres semánticos y las utilidades de Tailwind no cambian. El tema claro se renderiza exactamente igual que antes. Por decisión de marca se conservan dos pares que no cumplen AA: `--muted-foreground` sobre `--background`/`--muted` (~4.3:1) y `--warning-foreground` blanco sobre `--warning` (~2.6:1); están listados como excepciones en el test de contraste.
+
+  `--color-number-highlight` ahora sale de `--number-highlight`. `KpiCard` y `BreakdownTable` dejan de usar blanco/rgba fijos.
+
+### Patch Changes
+
+- `AppNavbar` ocupa todo el ancho disponible y no desborda en mobile: el título se trunca y el subtítulo se oculta debajo de `sm`.
+- 515e033: Documentación de uso (MDX en español) para cada componente en Storybook Docs y ADRs en `docs/adr`. Las historias que ahora tienen MDX dejan de usar `tags: ["autodocs"]`.
+
 ## 0.1.0
 
 ### Minor Changes
