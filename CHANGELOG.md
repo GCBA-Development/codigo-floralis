@@ -1,5 +1,11 @@
 # codigo-floralis
 
+## 0.3.2
+
+### Patch Changes
+
+- 6b4a68d: `KpiCard` en `loading` con `variant="primary"` ya no muestra la cifra en blanco sobre la máscara (el color del texto pisaba `text-transparent`). `BreakdownTable` en `loading` sin datos reserva `limit` filas de skeleton con el alto de una fila real, así la tabla no crece al llegar los datos.
+
 ## 0.3.1
 
 ### Patch Changes
