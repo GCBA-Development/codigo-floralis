@@ -31,7 +31,7 @@ export function KpiCard({ label, value, suffix, loading = false, variant = "seco
         as="span"
         variant="muted"
         title={label}
-        className={cn("line-clamp-2 text-s7 font-semibold uppercase tracking-[0.1em]", isHighlight && "text-primary-foreground/80", loading && isHighlight && "bg-primary-foreground/20")}
+        className={cn("line-clamp-2 text-s7 font-semibold uppercase tracking-[0.1em]", isHighlight && (loading ? "bg-primary-foreground/20" : "text-primary-foreground/80"))}
         loading={loading}
       >
         {label}
@@ -39,7 +39,7 @@ export function KpiCard({ label, value, suffix, loading = false, variant = "seco
       <Text
         as="span"
         variant="number"
-        className={cn(isHighlight ? "text-[clamp(1.25rem,13cqw,2rem)]" : "text-[clamp(1.125rem,11cqw,1.5rem)]", "block whitespace-nowrap font-bold leading-none tracking-tight tabular-nums", isHighlight && "text-primary-foreground", loading && isHighlight && "bg-primary-foreground/20")}
+        className={cn(isHighlight ? "text-[clamp(1.25rem,13cqw,2rem)]" : "text-[clamp(1.125rem,11cqw,1.5rem)]", "block whitespace-nowrap font-bold leading-none tracking-tight tabular-nums", isHighlight && (loading ? "bg-primary-foreground/20" : "text-primary-foreground"))}
         loading={loading}
       >
         {value.toLocaleString("es-AR")}
