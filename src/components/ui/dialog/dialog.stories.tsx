@@ -26,7 +26,9 @@ export const Default: Story = {
   play: async ({ canvasElement }) => {
     const trigger = within(canvasElement).getByRole("button", { name: "Abrir" })
     await userEvent.click(trigger)
-    await expect(await screen.findByRole("dialog", { name: "Editar registro" })).toBeVisible()
+    const dialog = await screen.findByRole("dialog", { name: "Editar registro" })
+    // El popup entra con opacity 0 (data-starting-style) y se anima: esperamos a que termine de aparecer.
+    await waitFor(() => expect(dialog).toBeVisible())
     await userEvent.keyboard("{Escape}")
     await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument())
     await waitFor(() => expect(trigger).toHaveFocus())
