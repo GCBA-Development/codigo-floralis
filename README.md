@@ -1,6 +1,25 @@
 # codigo-floralis
 
-Design system de React 19 + Tailwind v4 + Base UI. Se consume por git desde apps Next.js.
+Design system de React 19 + Tailwind v4 + Base UI. Se publica en GitHub Packages como `@gcba-development/codigo-floralis`.
+
+## Instalación
+
+En la app, `.npmrc` (el token necesita `read:packages`; en CI alcanza con `GITHUB_TOKEN` si el repo tiene acceso al paquete):
+
+```
+@gcba-development:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
+```
+
+Instalalo con alias para mantener los imports `codigo-floralis`:
+
+```bash
+npm install codigo-floralis@npm:@gcba-development/codigo-floralis
+```
+
+## Publicación
+
+`npm run version-packages` → commit → `npm run release` (crea el tag `vX.Y.Z`) → `git push --follow-tags`. El workflow `publish.yml` compila y publica.
 
 ## Uso
 
@@ -12,6 +31,18 @@ import { Button } from "codigo-floralis";
 ```
 
 Los estilos ya no se importan desde `codigo-floralis` (el barrel no tiene efectos de CSS): hay que importar `styles.css` explicitamente.
+
+### Apps que ya usan Tailwind v4 (recomendado)
+
+`styles.css` trae Tailwind compilado (preflight + utilidades). En una app con Tailwind eso duplica la base y mezcla capas. Usá `tokens.css` desde el CSS global de la app, en lugar de `styles.css`:
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+@import "codigo-floralis/tokens.css";
+```
+
+`tokens.css` trae los tokens, el tema y un `@source` a los componentes de la librería: la app genera esas clases en su propio build, una sola vez.
 
 ## Tipografia (Archivo)
 

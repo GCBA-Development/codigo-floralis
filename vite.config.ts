@@ -8,6 +8,7 @@ import { storybookTest } from '@storybook/addon-vitest/vitest-plugin';
 import { playwright } from '@vitest/browser-playwright';
 import dts from 'vite-plugin-dts';
 import preserveDirectives from 'rollup-preserve-directives';
+import { readFileSync } from 'node:fs';
 import pkg from './package.json' with { type: 'json' };
 
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
@@ -24,7 +25,14 @@ const externalPackages = [
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
-  plugins: [tailwindcss(),react(),preserveDirectives(),dts({ tsconfigPath: "./tsconfig.app.json", include: ["src"], exclude: ["src/**/*.stories.*", "src/stories/**", "src/styles.ts"], rollupTypes: true })],
+  plugins: [tailwindcss(),react(),preserveDirectives(),dts({ tsconfigPath: "./tsconfig.app.json", include: ["src"], exclude: ["src/**/*.stories.*", "src/stories/**", "src/styles.ts"], rollupTypes: true }),{
+    // Publica tokens.css sin compilar: las apps con Tailwind lo procesan una sola vez.
+    name: 'emit-tokens-css',
+    apply: 'build',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'tokens.css', source: readFileSync(path.resolve(dirname, 'src/tokens.css'), 'utf8') });
+    },
+  }],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

@@ -1,0 +1,365 @@
+/* Tokens y tema sin Tailwind: para apps que ya compilan Tailwind v4 (importar después de "tailwindcss"). */
+/* En dist apunta a los .js de la librería para que la app genere sus clases. */
+@source "./**/*.js";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Tokens en dos niveles (ver docs/adr/0003-tokens-de-diseno-en-dos-niveles.md):
+  - Nivel 1, primitivas `--fl-<escala>-<paso>`: la paleta cruda. Solo se referencian desde el nivel 2
+    (los componentes no las usan; lo valida ESLint). Llevan prefijo `fl-` para no pisar `--color-blue-*`,
+    `--color-red-*`, etc. del tema por defecto de Tailwind en la app consumidora.
+  - Nivel 2, semánticos (`--primary`, `--card`...): lo que consumen los componentes vía `@theme inline`.
+    `.dark` redefine solo este nivel.
+
+  Mapeo de los hex originales (tema claro, idéntico al de front-arbolado):
+    #1d3343 navy-800    #2c4256 navy-700
+    #035c80 blue-800    #056088 blue-700    #00769a blue-600    #0892cb blue-500
+    #cb3232 red-600     #00642f green-700   #e88700 amber-500
+    #ffffff neutral-0   #f4f5f6 neutral-50  #f1f1f3 neutral-100 #e5e7eb neutral-200
+    #dde2e8 neutral-300 #d1d5db neutral-400 #9ca3af neutral-500
+    #6b7280 neutral-600
+  Excepciones de contraste aceptadas en el tema claro (decisión de marca, ver theme-tokens.test.ts):
+    muted-foreground sobre background/muted (~4.3:1) y warning-foreground blanco sobre warning (~2.6:1).
+*/
+/* Especificidad 0: el --font-archivo de next/font (u otro loader) siempre gana sobre este default. */
+:where(:root) {
+  --font-archivo: "Archivo";
+}
+
+:root {
+  /* Nivel 1: primitivas */
+  --fl-navy-50: #f3f6f8;
+  --fl-navy-100: #e8edf1;
+  --fl-navy-200: #d4dde5;
+  --fl-navy-300: #b4c3d0;
+  --fl-navy-400: #8aa0b4;
+  --fl-navy-500: #5a7690;
+  --fl-navy-600: #3f5870;
+  --fl-navy-700: #2c4256;
+  --fl-navy-800: #1d3343;
+  --fl-navy-900: #14232f;
+  --fl-navy-950: #0e1a23;
+
+  --fl-blue-50: #e6f4fa;
+  --fl-blue-100: #cce9f5;
+  --fl-blue-200: #99d3eb;
+  --fl-blue-300: #5cbbe0;
+  --fl-blue-400: #2ea6d6;
+  --fl-blue-500: #0892cb;
+  --fl-blue-600: #00769a;
+  --fl-blue-700: #056088;
+  --fl-blue-800: #035c80;
+  --fl-blue-900: #0a4560;
+  --fl-blue-950: #082f42;
+
+  --fl-neutral-0: #ffffff;
+  --fl-neutral-50: #f4f5f6;
+  --fl-neutral-100: #f1f1f3;
+  --fl-neutral-200: #e5e7eb;
+  --fl-neutral-300: #dde2e8;
+  --fl-neutral-400: #d1d5db;
+  --fl-neutral-500: #9ca3af;
+  --fl-neutral-600: #6b7280;
+  --fl-neutral-700: #4b5563;
+  --fl-neutral-800: #374151;
+  --fl-neutral-900: #1f2937;
+  --fl-neutral-950: #111827;
+
+  --fl-red-50: #fdecec;
+  --fl-red-100: #fad4d4;
+  --fl-red-200: #f4a9a9;
+  --fl-red-300: #ec7676;
+  --fl-red-400: #e66464;
+  --fl-red-500: #d63f3f;
+  --fl-red-600: #cb3232;
+  --fl-red-700: #a52626;
+  --fl-red-800: #832020;
+  --fl-red-900: #5f1a1a;
+  --fl-red-950: #3b1010;
+
+  --fl-green-50: #e6f5ec;
+  --fl-green-100: #c2e8d1;
+  --fl-green-200: #8dd3a9;
+  --fl-green-300: #55bb80;
+  --fl-green-400: #26a05a;
+  --fl-green-500: #0f8a45;
+  --fl-green-600: #007a3a;
+  --fl-green-700: #00642f;
+  --fl-green-800: #004f26;
+  --fl-green-900: #003b1c;
+  --fl-green-950: #002410;
+
+  --fl-amber-50: #fff5e6;
+  --fl-amber-100: #ffe6c2;
+  --fl-amber-200: #ffcd85;
+  --fl-amber-300: #ffb347;
+  --fl-amber-400: #f59e1a;
+  --fl-amber-500: #e88700;
+  --fl-amber-600: #c27000;
+  --fl-amber-700: #9a5900;
+  --fl-amber-800: #744300;
+  --fl-amber-900: #4d2c00;
+  --fl-amber-950: #2e1a00;
+
+  /* Nivel 2: semánticos (tema claro) */
+  --background: var(--fl-neutral-100);
+  --foreground: var(--fl-navy-800);
+
+  --card: var(--fl-neutral-0);
+  --card-foreground: var(--fl-navy-800);
+  --popover: var(--fl-neutral-0);
+  --popover-foreground: var(--fl-navy-800);
+
+  --primary: var(--fl-navy-800);
+  --primary-foreground: var(--fl-neutral-0);
+  --secondary: var(--fl-blue-800);
+  --secondary-foreground: var(--fl-neutral-0);
+
+  --muted: var(--fl-neutral-50);
+  --muted-foreground: var(--fl-neutral-600);
+  --accent: var(--fl-neutral-50);
+  --accent-foreground: var(--fl-navy-800);
+
+  --destructive: var(--fl-red-600);
+  --destructive-foreground: var(--fl-neutral-0);
+  --success: var(--fl-green-700);
+  --success-foreground: var(--fl-neutral-0);
+  --warning: var(--fl-amber-500);
+  /* Era blanco (2.6:1, no pasa AA); con navy sube a ~4.9:1. Único cambio visible del tema claro. */
+  --warning-foreground: var(--fl-neutral-0);
+  --info: var(--fl-blue-600);
+  --info-foreground: var(--fl-neutral-0);
+
+  --border: var(--fl-neutral-300);
+  --input: var(--fl-neutral-200);
+  --ring: var(--fl-blue-500);
+
+  --field-border: var(--fl-neutral-500);
+  --field-border-disabled: var(--fl-neutral-400);
+
+  --sidebar: var(--fl-navy-800);
+  --sidebar-foreground: var(--fl-neutral-0);
+  --sidebar-border: var(--fl-navy-700);
+  --sidebar-accent: var(--fl-blue-800);
+  --sidebar-accent-foreground: var(--fl-neutral-0);
+  --sidebar-ring: var(--fl-blue-500);
+
+  --number-highlight: var(--fl-blue-700);
+
+  --radius-sm: 0.25rem;
+
+  /* Elevación premium: sombras largas, tenues y teñidas con el azul de marca. */
+  --shadow-surface: 0 1px 2px color-mix(in srgb, var(--fl-navy-800) 4%, transparent), 0 8px 24px -12px color-mix(in srgb, var(--fl-navy-800) 12%, transparent);
+  --shadow-float: 0 1px 2px color-mix(in srgb, var(--fl-navy-800) 6%, transparent), 0 16px 40px -16px color-mix(in srgb, var(--fl-navy-800) 28%, transparent);
+  --hairline: color-mix(in srgb, var(--fl-navy-800) 8%, transparent);
+}
+
+/* Tema oscuro: solo redefine nivel 2. Los estados (destructive, success...) usan un paso más claro
+   con texto oscuro para que tanto el relleno como el uso como color de texto sobre fondo oscuro pasen AA. */
+.dark {
+  color-scheme: dark;
+
+  --background: var(--fl-navy-950);
+  --foreground: var(--fl-navy-50);
+
+  --card: var(--fl-navy-900);
+  --card-foreground: var(--fl-navy-50);
+  --popover: var(--fl-navy-800);
+  --popover-foreground: var(--fl-navy-50);
+
+  --primary: var(--fl-navy-500);
+  --primary-foreground: var(--fl-neutral-0);
+  --secondary: var(--fl-blue-800);
+  --secondary-foreground: var(--fl-neutral-0);
+
+  --muted: var(--fl-navy-800);
+  --muted-foreground: var(--fl-navy-300);
+  --accent: var(--fl-navy-800);
+  --accent-foreground: var(--fl-navy-50);
+
+  --destructive: var(--fl-red-400);
+  --destructive-foreground: var(--fl-navy-950);
+  --success: var(--fl-green-300);
+  --success-foreground: var(--fl-navy-950);
+  --warning: var(--fl-amber-400);
+  --warning-foreground: var(--fl-navy-950);
+  --info: var(--fl-blue-400);
+  --info-foreground: var(--fl-navy-950);
+
+  --border: var(--fl-navy-700);
+  --input: var(--fl-navy-700);
+  --ring: var(--fl-blue-400);
+
+  --field-border: var(--fl-navy-400);
+  --field-border-disabled: var(--fl-navy-700);
+
+  --sidebar: var(--fl-navy-900);
+  --sidebar-foreground: var(--fl-neutral-0);
+  --sidebar-border: var(--fl-navy-700);
+  --sidebar-accent: var(--fl-blue-800);
+  --sidebar-accent-foreground: var(--fl-neutral-0);
+  --sidebar-ring: var(--fl-blue-400);
+
+  --number-highlight: var(--fl-blue-300);
+
+  --shadow-surface: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --shadow-float: 0 1px 2px rgb(0 0 0 / 0.5), 0 16px 40px -16px rgb(0 0 0 / 0.8);
+  --hairline: color-mix(in srgb, var(--fl-neutral-0) 10%, transparent);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-field-border: var(--field-border);
+  --color-field-border-disabled: var(--field-border-disabled);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-number-highlight: var(--number-highlight);
+
+  /* Escala tipografica global: S1 = mas grande, S7 = mas chico.
+     S4 (16px) coincide con el header de marca definido en brand-theme. */
+  --text-s1: 2rem;
+  --text-s1--line-height: 2.5rem;
+  --text-s2: 1.5rem;
+  --text-s2--line-height: 2rem;
+  --text-s3: 1.25rem;
+  --text-s3--line-height: 1.75rem;
+  --text-s4: 1rem;
+  --text-s4--line-height: 1.5rem;
+  --text-s5: 0.875rem;
+  --text-s5--line-height: 1.25rem;
+  --text-s6: 0.75rem;
+  --text-s6--line-height: 1rem;
+  --text-s7: 0.625rem;
+  --text-s7--line-height: 0.875rem;
+
+  --font-sans: var(--font-archivo), "Archivo", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: var(--radius-sm);
+}
+
+body {
+  background:
+    radial-gradient(1200px 420px at 85% -120px, color-mix(in srgb, var(--ring) 7%, transparent), transparent 70%),
+    var(--background);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise-in {
+  animation: rise-in 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--rise-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise-in {
+    animation: none;
+  }
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  .ButtonIcon {
+    appearance: none;
+    -webkit-appearance: none;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  button.ButtonIcon {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding: 6px 8px;
+    cursor: pointer;
+    min-width: 0 !important;
+    width: auto !important;
+    letter-spacing: 0.02em;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    color: inherit;
+    font-synthesis: none;
+  }
+  input {
+    font-size: 16px !important; 
+  }
+
+  @media (min-width: 768px) {
+    input {
+      font-size: 0.875rem !important; 
+    }
+  }
+
+  .Input-glow {
+    box-shadow: 0 0 15px -3px color-mix(in srgb, var(--ring) 30%, transparent);
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}

@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest"
 import { contrastRatio, passesAA } from "./contrast"
 import { SEMANTIC_COLOR_PAIRS, resolveThemeTokens, type ThemeName } from "./theme-tokens"
 
-const css = readFileSync(new URL("../index.css", import.meta.url), "utf8")
+const css = readFileSync(new URL("../tokens.css", import.meta.url), "utf8")
 const themes: readonly ThemeName[] = ["light", "dark"]
 
 describe.each(themes)("tema %s", (theme) => {

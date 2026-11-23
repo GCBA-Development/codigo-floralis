@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import indexCss from "../../index.css?raw"
+import indexCss from "../../tokens.css?raw"
 import { contrastRatio, passesAA } from "../../lib/contrast"
 import { SEMANTIC_COLOR_PAIRS, isPrimitiveToken, resolveThemeTokens } from "../../lib/theme-tokens"
 
