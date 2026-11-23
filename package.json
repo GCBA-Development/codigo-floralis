@@ -1,8 +1,14 @@
 {
-  "name": "codigo-floralis",
-  "private": true,
+  "name": "@gcba-development/codigo-floralis",
   "version": "0.3.1",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GCBA-Development/codigo-floralis.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,7 +25,8 @@
       "types": "./dist/theme.d.ts",
       "import": "./dist/theme.js"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": "./dist/styles.css",
+    "./tokens.css": "./dist/tokens.css"
   },
   "files": [
     "dist"
@@ -37,8 +44,7 @@
     "build:lib": "vite build",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "changeset tag",
-    "prepare": "vite build"
+    "release": "changeset tag"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

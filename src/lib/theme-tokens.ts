@@ -1,4 +1,4 @@
-// Lee los tokens de `index.css` (única fuente de verdad) y resuelve `var(--x)` hasta llegar a un hex.
+// Lee los tokens de `tokens.css` (única fuente de verdad) y resuelve `var(--x)` hasta llegar a un hex.
 // Lo usan el test de contraste y la historia de Colors; no se exporta desde la librería.
 
 export type ThemeName = "light" | "dark"
@@ -8,7 +8,7 @@ const VAR_REFERENCE = /^var\((--[\w-]+)\)$/
 
 function extractBlock(css: string, selector: string): string {
   const start = css.indexOf(`${selector} {`)
-  if (start === -1) throw new Error(`No se encontró el bloque "${selector}" en index.css`)
+  if (start === -1) throw new Error(`No se encontró el bloque "${selector}" en tokens.css`)
   const end = css.indexOf("\n}", start)
   return css.slice(start, end)
 }
