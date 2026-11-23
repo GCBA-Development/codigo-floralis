@@ -1,5 +1,11 @@
 # codigo-floralis
 
+## 0.5.0
+
+### Minor Changes
+
+- 32116b4: Agrega y exporta `TableFooter` (`<tfoot>`) para filas de totales.
+
 ## 0.4.0
 
 ### Minor Changes
