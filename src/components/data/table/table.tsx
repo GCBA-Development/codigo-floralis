@@ -41,6 +41,16 @@ function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
   )
 }
 
+function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
+  return (
+    <tfoot
+      data-slot="table-footer"
+      className={cn("border-t border-(--hairline) bg-muted/30 font-semibold", className)}
+      {...props}
+    />
+  )
+}
+
 function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
   return (
     <tr data-slot="table-row" className={cn("transition-colors duration-150 hover:bg-muted/40 data-[state=selected]:bg-secondary/5", className)} {...props} />
@@ -117,4 +127,4 @@ function TableCell({ className, ...props }: React.ComponentProps<"td">) {
   )
 }
 
-export { Table, TableHeader, TableBody, TableRow, TableHead, TableSortableHead, TableCell }
+export { Table, TableHeader, TableBody, TableFooter, TableRow, TableHead, TableSortableHead, TableCell }
