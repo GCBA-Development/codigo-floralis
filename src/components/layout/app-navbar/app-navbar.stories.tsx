@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite"
-import { expect, fn, screen, userEvent, within } from "storybook/test"
+import { expect, fn, screen, userEvent, waitFor, within } from "storybook/test"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
   Calendar03Icon,
@@ -84,7 +84,9 @@ export const Default: Story = {
   args: { onLogout: fn() },
   play: async ({ args }) => {
     await userEvent.click(screen.getByRole("button", { name: "Menú de usuario" }))
-    await expect(await screen.findByText("ana.perez@example.com")).toBeVisible()
+    const email = await screen.findByText("ana.perez@example.com")
+    // El menú entra con opacity 0 (data-starting-style) y se anima: esperamos a que termine de aparecer.
+    await waitFor(() => expect(email).toBeVisible())
     await userEvent.click(await screen.findByRole("button", { name: "Cerrar sesión" }))
     await expect(args.onLogout).toHaveBeenCalledTimes(1)
   },

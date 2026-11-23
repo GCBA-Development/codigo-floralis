@@ -32,6 +32,9 @@ function Textarea({ className, label, description, error, ...props }: TextareaPr
     />
   )
 
+  // Sin decoración queda suelto: si lo envuelve un `FormField`, ese `Field` lo asocia.
+  if (!label && !description && !error) return textarea
+
   return (
     <Field invalid={Boolean(error)}>
       <div className="relative w-full">

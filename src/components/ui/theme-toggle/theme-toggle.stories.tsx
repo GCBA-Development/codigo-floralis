@@ -4,13 +4,12 @@ import { ThemeProvider } from "next-themes"
 
 import { ThemeToggle } from "./theme-toggle"
 
-function withProvider({ enableSystem }: { enableSystem: boolean }): Decorator {
-  return (Story) => (
-    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={enableSystem} disableTransitionOnChange storageKey={STORAGE_KEY}>
+// Un solo provider leyendo `parameters`: next-themes ignora un ThemeProvider anidado, así que un decorator por story no pisaría al del meta.
+const withProvider: Decorator = (Story, { parameters }) => (
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={parameters.enableSystem ?? true} disableTransitionOnChange storageKey={STORAGE_KEY}>
       <Story />
     </ThemeProvider>
-  )
-}
+)
 
 const STORAGE_KEY = "floralis-storybook-theme-toggle"
 
@@ -18,7 +17,7 @@ const meta: Meta<typeof ThemeToggle> = {
   title: "GCBA/UI/ThemeToggle",
   component: ThemeToggle,
   beforeEach: () => localStorage.removeItem(STORAGE_KEY),
-  decorators: [withProvider({ enableSystem: true })],
+  decorators: [withProvider],
 }
 export default meta
 type Story = StoryObj<typeof ThemeToggle>
@@ -42,7 +41,7 @@ export const Default: Story = {
 }
 
 export const SinSistema: Story = {
-  decorators: [withProvider({ enableSystem: false })],
+  parameters: { enableSystem: false },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     await canvas.findByRole("button", { name: "Cambiar tema (siguiente: oscuro)" })
