@@ -9,7 +9,7 @@ export function Chip({ label, onRemove }: { label: string; onRemove: () => void 
     <button
       type="button"
       onClick={onRemove}
-      className="group flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-s7 font-medium text-muted-foreground transition-colors hover:bg-muted/70 hover:text-foreground"
+      className="group flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-s7 font-medium text-foreground transition-colors hover:bg-muted/70"
     >
       {label}
       <HugeiconsIcon icon={Cancel01Icon} strokeWidth={2} className="size-3" />

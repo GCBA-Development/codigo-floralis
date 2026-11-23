@@ -30,6 +30,7 @@ export const ImageThumbnail = ({ src, onDelete, onClick }: ImageThumbnailProps) 
             type="button"
             variant="destructive"
             size="icon"
+            aria-label="Quitar imagen"
             className="h-8 w-8 rounded-lg opacity-0 shadow-lg transition-all duration-300 translate-y-[-10px] group-hover:opacity-100 group-hover:translate-y-0"
             onClick={(e) => {
               e.stopPropagation();

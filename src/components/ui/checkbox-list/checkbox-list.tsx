@@ -8,7 +8,6 @@ import { Tick02Icon } from "@hugeicons/core-free-icons";
 import { checkboxVariants } from "./checkbox-list.variants";
 import type { VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
-import { FieldMessages } from "@/components/ui/field";
 
 export interface CheckboxListOption {
   value: string | number;
@@ -102,7 +101,12 @@ const CheckboxList = React.forwardRef<HTMLDivElement, CheckboxListProps>(
             </div>
           </div>
         </Fieldset.Root>
-        <FieldMessages id={messageId} description={description} error={error} />
+        {/* Fuera de `Field.Root` no se pueden usar FieldError/FieldDescription: se vinculan por aria-describedby. */}
+        {typeof error === "string" && error ? (
+          <p id={messageId} role="alert" className="mt-1 px-2.5 text-s7 text-destructive">{error}</p>
+        ) : description ? (
+          <p id={messageId} className="mt-1 px-2.5 text-s7 text-muted-foreground">{description}</p>
+        ) : null}
       </div>
     );
   }

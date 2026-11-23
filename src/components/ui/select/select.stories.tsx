@@ -7,9 +7,15 @@ const meta: Meta<typeof Select> = { title: "GCBA/UI/Select", component: Select }
 export default meta
 type Story = StoryObj<typeof Select>
 
+// Base UI necesita `items` para que `SelectValue` muestre la etiqueta y no el value crudo.
+const ITEMS = [
+  { value: "1", label: "Comuna 1" },
+  { value: "2", label: "Comuna 2" },
+]
+
 export const Default: Story = {
   render: () => (
-    <Select defaultValue="1">
+    <Select defaultValue="1" items={ITEMS}>
       <SelectTrigger label="Comuna" className="w-60">
         <SelectValue />
       </SelectTrigger>
