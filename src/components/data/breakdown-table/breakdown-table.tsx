@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react"
 
 import { Table, TableBody, TableCell, TableHeader, TableRow, TableSortableHead } from "@/components/data/table"
+import { Skeleton } from "@/components/ui/skeleton"
 import { Text } from "@/components/ui/text"
 import { cn } from "@/lib/utils"
 
@@ -81,6 +82,25 @@ export function BreakdownTable({ items, labelHeader, limit, loading = false }: B
           </TableRow>
         </TableHeader>
         <TableBody>
+          {/* Sin datos todavía: `limit` filas de skeleton con el alto de una fila real, así la tabla no crece al llegar. */}
+          {loading && items.length === 0
+            ? Array.from({ length: limit }, (_, index) => (
+                <TableRow key={index} className="hover:bg-transparent">
+                  <TableCell className="w-full max-w-0 px-4 py-2.5">
+                    <div className="flex items-center gap-2.5">
+                      <Skeleton className="size-5 shrink-0 rounded-md" />
+                      <Skeleton className="h-4 w-2/3" />
+                    </div>
+                  </TableCell>
+                  <TableCell className="px-4 py-2.5">
+                    <Skeleton className="ml-auto h-4 w-8" />
+                  </TableCell>
+                  <TableCell className="hidden px-4 py-2.5 sm:table-cell">
+                    <Skeleton className="h-4 w-full" />
+                  </TableCell>
+                </TableRow>
+              ))
+            : null}
           {rows.map((item, index) => {
             const share = total > 0 ? item.value / total : 0
             const isTop = index === 0
