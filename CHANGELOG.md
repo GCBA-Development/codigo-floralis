@@ -1,5 +1,11 @@
 # codigo-floralis
 
+## 0.4.0
+
+### Minor Changes
+
+- Publica en GitHub Packages como `@gcba-development/codigo-floralis` y agrega `tokens.css` para apps que ya usan Tailwind v4 (evita duplicar preflight y utilidades).
+
 ## 0.3.2
 
 ### Patch Changes
