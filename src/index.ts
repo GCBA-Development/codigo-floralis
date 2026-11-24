@@ -43,6 +43,7 @@ export * from "./components/media/image-gallery"
 // hooks
 export * from "./hooks/use-in-view";
 export * from "./hooks/use-mobile";
+export * from "./hooks/use-polling";
 
 // lib
 export type { LinkComponent, LinkComponentProps } from "./lib/link-component";
