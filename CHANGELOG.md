@@ -1,5 +1,11 @@
 # codigo-floralis
 
+## 0.7.1
+
+### Patch Changes
+
+- b458b17: PageHeader: las `actions` quedan arriba a la derecha alineadas con el título (`items-start`) y admiten varios botones con wrap.
+
 ## 0.7.0
 
 ### Minor Changes
