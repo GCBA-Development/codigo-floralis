@@ -55,6 +55,7 @@ export const SEMANTIC_COLOR_PAIRS = [
   ["success-foreground", "success"],
   ["warning-foreground", "warning"],
   ["info-foreground", "info"],
+  ["highlight-foreground", "highlight"],
   ["sidebar-foreground", "sidebar"],
   ["sidebar-accent-foreground", "sidebar-accent"],
   ["number-highlight", "card"],

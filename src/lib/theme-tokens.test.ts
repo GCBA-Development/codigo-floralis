@@ -19,7 +19,6 @@ describe.each(themes)("tema %s", (theme) => {
 
 // Pares que no cumplen AA en el tema claro y se aceptan para conservar los colores de front-arbolado.
 const ACCEPTED_LIGHT_EXCEPTIONS = [
-  "muted-foreground/background",
   "muted-foreground/muted",
   "warning-foreground/warning",
 ]
@@ -43,21 +42,26 @@ const ALLOWED_SAME_IN_BOTH = [
   "--sidebar-border",
   "--sidebar-accent",
   "--sidebar-accent-foreground",
+  "--highlight",
+  "--highlight-foreground",
+  "--highlight-hover",
 ]
 
-// Colores del tema claro previos a la migración a dos niveles: no deben cambiar sin decisión explícita.
+// Colores del tema claro (originales de front-arbolado + manual de marca 2026): no deben cambiar sin decisión explícita.
 const ORIGINAL_LIGHT_TOKENS: Record<string, string> = {
-  "--background": "#f1f1f3", "--foreground": "#1d3343", "--card": "#ffffff", "--popover": "#ffffff",
+  "--background": "#fcfcfc", "--foreground": "#1d3343", "--card": "#ffffff", "--popover": "#ffffff",
   "--primary": "#1d3343", "--primary-foreground": "#ffffff", "--secondary": "#035c80",
   "--muted": "#f4f5f6", "--muted-foreground": "#6b7280", "--warning-foreground": "#ffffff", "--accent": "#f4f5f6", "--destructive": "#cb3232", "--success": "#00642f",
   "--warning": "#e88700", "--info": "#00769a", "--border": "#dde2e8", "--input": "#e5e7eb",
   "--ring": "#0892cb", "--field-border": "#9ca3af", "--field-border-disabled": "#d1d5db",
   "--sidebar": "#1d3343", "--sidebar-border": "#2c4256", "--sidebar-accent": "#035c80",
   "--number-highlight": "#056088",
+  // Manual de marca GCBA 2026: amarillo de acento (siempre con texto azul oscuro).
+  "--highlight": "#ffcd02", "--highlight-foreground": "#1d3343",
 }
 
 describe("tema claro", () => {
-  it("conserva los colores originales de front-arbolado", () => {
+  it("conserva los colores de marca (front-arbolado + manual 2026)", () => {
     const light = resolveThemeTokens(css, "light")
     for (const [name, hex] of Object.entries(ORIGINAL_LIGHT_TOKENS)) expect(light[name], name).toBe(hex)
   })

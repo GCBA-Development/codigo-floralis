@@ -1,5 +1,17 @@
 # codigo-floralis
 
+## 0.7.0
+
+### Minor Changes
+
+- Aplica el manual de marca GCBA 2026. Son cambios visibles para las apps consumidoras:
+  - Fondo del tema claro: `--background` pasa de `#f1f1f3` a `#fcfcfc` (nuevo `--fl-neutral-25`); las tarjetas y popovers siguen en blanco. El tema oscuro no cambia.
+  - Radios: nueva escala `--radius-sm` .25rem, `--radius-md` .5rem (antes .375rem de Tailwind), `--radius-lg` 1rem, `--radius-xl` 1.5rem. `Card` pasa de 20px a `rounded-xl`; `Dialog`, `AlertDialog`, `Popover` y `Select` usan `rounded-lg`; `Sheet` curva solo las esquinas expuestas.
+  - Pesos: botones y títulos de `Dialog`, `AlertDialog` y `Sheet` pasan a `font-bold` (Archivo Bold).
+  - Nuevo amarillo de marca `--fl-yellow-500` (`#ffcd02`) y tokens `--highlight` / `--highlight-foreground` (`bg-highlight text-highlight-foreground`). Solo con texto azul oscuro, nunca como color de texto.
+  - Nuevo `Button variant="cta"`: píldora amarilla con texto azul oscuro.
+  - Nuevo componente `IconPlate`: ícono blanco sobre placa azul o azul oscuro de vértices curvos.
+
 ## 0.6.0
 
 ### Minor Changes
