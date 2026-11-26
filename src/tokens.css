@@ -17,11 +17,12 @@
     #1d3343 navy-800    #2c4256 navy-700
     #035c80 blue-800    #056088 blue-700    #00769a blue-600    #0892cb blue-500
     #cb3232 red-600     #00642f green-700   #e88700 amber-500
-    #ffffff neutral-0   #f4f5f6 neutral-50  #f1f1f3 neutral-100 #e5e7eb neutral-200
+    #ffffff neutral-0   #fcfcfc neutral-25  #f4f5f6 neutral-50  #f1f1f3 neutral-100 #e5e7eb neutral-200
+    #ffcd02 yellow-500  (manual de marca GCBA 2026)
     #dde2e8 neutral-300 #d1d5db neutral-400 #9ca3af neutral-500
     #6b7280 neutral-600
   Excepciones de contraste aceptadas en el tema claro (decisión de marca, ver theme-tokens.test.ts):
-    muted-foreground sobre background/muted (~4.3:1) y warning-foreground blanco sobre warning (~2.6:1).
+    muted-foreground sobre muted (~4.3:1) y warning-foreground blanco sobre warning (~2.6:1).
 */
 /* Especificidad 0: el --font-archivo de next/font (u otro loader) siempre gana sobre este default. */
 :where(:root) {
@@ -55,6 +56,8 @@
   --fl-blue-950: #082f42;
 
   --fl-neutral-0: #ffffff;
+  /* Blanco de marca (manual GCBA 2026): fondo de página. Las superficies (card, popover) siguen en neutral-0. */
+  --fl-neutral-25: #fcfcfc;
   --fl-neutral-50: #f4f5f6;
   --fl-neutral-100: #f1f1f3;
   --fl-neutral-200: #e5e7eb;
@@ -103,8 +106,13 @@
   --fl-amber-900: #4d2c00;
   --fl-amber-950: #2e1a00;
 
+  /* Amarillo de marca (manual GCBA 2026). Solo como relleno con texto azul oscuro: nunca como color de texto ni con texto blanco. */
+  --fl-yellow-500: #ffcd02;
+  /* derivado, no está en el manual: hover del botón cta */
+  --fl-yellow-600: #e6b800;
+
   /* Nivel 2: semánticos (tema claro) */
-  --background: var(--fl-neutral-100);
+  --background: var(--fl-neutral-25);
   --foreground: var(--fl-navy-800);
 
   --card: var(--fl-neutral-0);
@@ -131,6 +139,9 @@
   --warning-foreground: var(--fl-neutral-0);
   --info: var(--fl-blue-600);
   --info-foreground: var(--fl-neutral-0);
+  --highlight: var(--fl-yellow-500);
+  --highlight-foreground: var(--fl-navy-800);
+  --highlight-hover: var(--fl-yellow-600);
 
   --border: var(--fl-neutral-300);
   --input: var(--fl-neutral-200);
@@ -148,7 +159,11 @@
 
   --number-highlight: var(--fl-blue-700);
 
+  /* Vértices curvos (manual GCBA 2026): sm controles chicos, md botones, lg diálogos/popovers/placas, xl tarjetas. */
   --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
 
   /* Elevación premium: sombras largas, tenues y teñidas con el azul de marca. */
   --shadow-surface: 0 1px 2px color-mix(in srgb, var(--fl-navy-800) 4%, transparent), 0 8px 24px -12px color-mix(in srgb, var(--fl-navy-800) 12%, transparent);
@@ -187,6 +202,9 @@
   --warning-foreground: var(--fl-navy-950);
   --info: var(--fl-blue-400);
   --info-foreground: var(--fl-navy-950);
+  --highlight: var(--fl-yellow-500);
+  --highlight-foreground: var(--fl-navy-800);
+  --highlight-hover: var(--fl-yellow-600);
 
   --border: var(--fl-navy-700);
   --input: var(--fl-navy-700);
@@ -236,6 +254,9 @@
   --color-warning-foreground: var(--warning-foreground);
   --color-info: var(--info);
   --color-info-foreground: var(--info-foreground);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-highlight-hover: var(--highlight-hover);
 
   --color-border: var(--border);
   --color-input: var(--input);
@@ -273,6 +294,9 @@
   --font-sans: var(--font-archivo), "Archivo", ui-sans-serif, system-ui, sans-serif;
 
   --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
 }
 
 body {

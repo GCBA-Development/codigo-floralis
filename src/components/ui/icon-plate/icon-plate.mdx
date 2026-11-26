@@ -1,0 +1,37 @@
+import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
+import * as Stories from "./icon-plate.stories";
+
+<Meta of={Stories} />
+
+# IconPlate
+
+Placa de vértices curvos con un ícono lineal blanco, según el manual de marca GCBA 2026. Fondo sólido azul (`blue`, por defecto) o azul oscuro (`navy`).
+
+## Cuándo usarlo
+
+- Destacar un ícono como ilustración de una sección, tarjeta o beneficio.
+
+## Cuándo NO usarlo
+
+- Botón con ícono: usá `Button` con `size="icon"`.
+- Ícono suelto dentro de texto o de un control: no necesita placa.
+
+## Props clave
+
+Variantes: `blue | navy`. Tamaños: `sm | md | lg`. El hijo es un ícono SVG; la placa le aplica trazo de 2 px y puntas redondeadas.
+
+<ArgTypes of={Stories} />
+
+## Ejemplos
+
+### Azul
+
+<Canvas of={Stories.Default} />
+
+### Azul oscuro
+
+<Canvas of={Stories.Navy} />
+
+### Tamaños
+
+<Canvas of={Stories.Sizes} />

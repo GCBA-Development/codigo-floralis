@@ -98,7 +98,7 @@ function SelectPopup({ className, ...props }: SelectPrimitive.Popup.Props) {
     <SelectPrimitive.Popup
       data-slot="select-popup"
       className={cn(
-        "max-h-[min(24rem,var(--available-height))] min-w-[var(--anchor-width)] overflow-y-auto rounded-md border-0 bg-popover bg-clip-padding p-1 text-popover-foreground shadow-lg transition duration-150 ease-in-out data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
+        "max-h-[min(24rem,var(--available-height))] min-w-[var(--anchor-width)] overflow-y-auto rounded-lg border-0 bg-popover bg-clip-padding p-1 text-popover-foreground shadow-lg transition duration-150 ease-in-out data-ending-style:scale-95 data-ending-style:opacity-0 data-starting-style:scale-95 data-starting-style:opacity-0",
         className,
       )}
       {...props}

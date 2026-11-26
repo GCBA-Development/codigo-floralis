@@ -21,7 +21,7 @@ Botón de acción. Base UI `Button` con variantes y tamaños de la librería. Pa
 
 ## Props clave
 
-Variantes: `primary | secondary | tertiary | outline | ghost | destructive | link`. Tamaños: `xs | sm | md | lg | icon | icon-xs | icon-sm | icon-lg` (`xs` solo para tablas densas). Hereda las props de Base UI `Button` (`disabled`, `render`, `focusableWhenDisabled`).
+Variantes: `primary | secondary | tertiary | outline | ghost | destructive | cta | link`. Tamaños: `xs | sm | md | lg | icon | icon-xs | icon-sm | icon-lg` (`xs` solo para tablas densas). Hereda las props de Base UI `Button` (`disabled`, `render`, `focusableWhenDisabled`).
 
 <ArgTypes of={Stories} />
 
@@ -34,6 +34,12 @@ Variantes: `primary | secondary | tertiary | outline | ghost | destructive | lin
 ### Secondary
 
 <Canvas of={Stories.Secondary} />
+
+### Cta
+
+Llamada a la acción del manual de marca: píldora amarilla con texto azul oscuro en Archivo Bold. Un solo `cta` por pantalla; el amarillo nunca va como color de texto ni con texto blanco.
+
+<Canvas of={Stories.Cta} />
 
 ### Destructive
 
