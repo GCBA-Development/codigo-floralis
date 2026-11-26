@@ -5,12 +5,13 @@ interface PageHeaderProps {
   subtitle?: string
   /** Etiqueta pequeña sobre el título (ej. "Panel general"). */
   eyebrow?: string
+  /** Acciones arriba a la derecha, alineadas con el título. Acepta uno o varios botones (usá un fragment para varios). */
   actions?: React.ReactNode
 }
 
 export function PageHeader({ title, subtitle, eyebrow, actions }: PageHeaderProps) {
   return (
-    <div className="rise-in flex items-end justify-between gap-6 pb-2 pt-1">
+    <div className="rise-in flex items-start justify-between gap-6 pb-2 pt-1">
       <div className="flex min-w-0 flex-col gap-2">
         {eyebrow ? (
           <span className="flex items-center gap-2 text-s7 font-semibold uppercase tracking-[0.16em] text-secondary">
@@ -27,7 +28,7 @@ export function PageHeader({ title, subtitle, eyebrow, actions }: PageHeaderProp
           </Text>
         ) : null}
       </div>
-      {actions ? <div className="flex shrink-0 items-center gap-2">{actions}</div> : null}
+      {actions ? <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">{actions}</div> : null}
     </div>
   )
 }
