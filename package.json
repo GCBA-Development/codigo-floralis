@@ -1,6 +1,6 @@
 {
   "name": "@gcba-development/codigo-floralis",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "type": "module",
   "repository": {
     "type": "git",
@@ -42,6 +42,7 @@
     "gc": "node scripts/generate.mjs",
     "build-storybook": "storybook build",
     "build:lib": "vite build",
+    "prepare": "vite build",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "changeset tag"

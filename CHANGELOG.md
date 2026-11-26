@@ -1,5 +1,11 @@
 # codigo-floralis
 
+## 0.7.2
+
+### Patch Changes
+
+- Restaura el script `prepare` para que la librería se compile al instalarla desde GitHub (`github:...#vX.Y.Z`) sin token.
+
 ## 0.7.1
 
 ### Patch Changes
