@@ -7,6 +7,8 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Text } from "@/components/ui/text"
 import { cn } from "@/lib/utils"
 
+import { breakdownTotal } from "./breakdown-total"
+
 export type BreakdownItem = { label: string; value: number }
 
 type SortKey = "label" | "value"
@@ -19,19 +21,25 @@ type BreakdownTableProps = {
   /** Cuántas filas se muestran. */
   limit: number
   loading?: boolean
+  /**
+   * Total real del desglose, cuando `items` es sólo un top N. Si se omite, la
+   * participación se calcula sobre la suma de `items`.
+   */
+  total?: number
 }
 
 const formatShare = (share: number) => `${(share * 100).toLocaleString("es-AR", { maximumFractionDigits: 1 })}%`
 
 /**
  * Tabla ordenable de un desglose. Cada fila muestra su participación sobre el
- * total de TODOS los ítems (no sólo los visibles) con una barra proporcional,
- * así se lee el peso relativo sin comparar números a ojo.
+ * total (`total` si se pasa, si no la suma de TODOS los ítems, no sólo los
+ * visibles) con una barra proporcional, así se lee el peso relativo sin
+ * comparar números a ojo.
  */
-export function BreakdownTable({ items, labelHeader, limit, loading = false }: BreakdownTableProps) {
+export function BreakdownTable({ items, labelHeader, limit, loading = false, total: totalProp }: BreakdownTableProps) {
   const [sort, setSort] = useState<{ key: SortKey; direction: SortDirection }>({ key: "value", direction: "desc" })
 
-  const total = useMemo(() => items.reduce((sum, item) => sum + item.value, 0), [items])
+  const total = useMemo(() => breakdownTotal(items, totalProp), [items, totalProp])
 
   const rows = useMemo(() => {
     const sorted = [...items].sort((a, b) => {

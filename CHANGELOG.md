@@ -1,5 +1,11 @@
 # codigo-floralis
 
+## 0.8.0
+
+### Minor Changes
+
+- BreakdownTable: nueva prop opcional `total`. Cuando `items` es sólo un top N, la participación se calcula sobre el total real y no sobre la suma de las filas visibles. Sin `total`, se comporta igual que antes.
+
 ## 0.7.2
 
 ### Patch Changes
