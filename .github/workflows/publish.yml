@@ -12,14 +12,26 @@ jobs:
       contents: read
       packages: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
           registry-url: https://npm.pkg.github.com
+          scope: "@gcba-development"
+      - name: Verificar que el tag coincide con package.json
+        run: |
+          set -euo pipefail
+          version="$(node -p "require('./package.json').version")"
+          if [ "${GITHUB_REF_NAME}" != "v${version}" ]; then
+            echo "::error::El tag ${GITHUB_REF_NAME} no coincide con package.json (v${version})"
+            exit 1
+          fi
       - run: npm ci
       - run: npm run build:lib
-      - run: npm publish
+      - name: Publicar (falla si la version ya existe)
+        run: |
+          set -euo pipefail
+          npm publish || { echo "::error::npm publish fallo; si la version ya esta publicada, subi la version (las versiones son inmutables)"; exit 1; }
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
