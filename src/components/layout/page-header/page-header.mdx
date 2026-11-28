@@ -5,7 +5,7 @@ import * as Stories from "./page-header.stories";
 
 # PageHeader
 
-Encabezado de página: título (`h1`), subtítulo, etiqueta superior y acciones.
+Encabezado estándar de página: `[start] [título + subtítulo] [end]`, con el título a la izquierda.
 
 ## Cuándo usarlo
 
@@ -17,7 +17,14 @@ Encabezado de página: título (`h1`), subtítulo, etiqueta superior y acciones.
 
 ## Props clave
 
-`size?` (`compact` por defecto, el de las pantallas de gestión; `large` para portadas), `title`, `subtitle?` (texto o contenido, ej. una línea con un link), `eyebrow?` (etiqueta chica sobre el título, solo en `large`), `actions?` (uno o varios `Button`, en un fragment si son varios; van arriba a la derecha, alineados con el título).
+- `title`, `subtitle?` (texto o contenido, ej. una línea con un link).
+- `start?`: a la izquierda del título, alineado con el título (no con el subtítulo). Para botón volver, ícono o badge. Si no se pasa, no deja hueco.
+- `end?`: a la derecha. Uno o varios `Button` (en un fragment). En mobile baja debajo del título.
+- `size?`: `md` (default, pantallas de gestión) o `lg` (portadas), con `eyebrow?` solo en `lg`.
+
+### Deprecado
+
+`actions` es alias de `end` (si se pasan ambos, gana `end`) y `size="compact"`/`"large"` son alias de `md`/`lg`. Se quitan en una próxima major.
 
 ## Ejemplos
 
@@ -25,9 +32,21 @@ Encabezado de página: título (`h1`), subtítulo, etiqueta superior y acciones.
 
 <Canvas of={Stories.Default} />
 
+### Con start
+
+<Canvas of={Stories.ConStart} />
+
 ### Con acciones
 
 <Canvas of={Stories.ConAcciones} />
+
+### Completo
+
+<Canvas of={Stories.Completo} />
+
+### Título largo
+
+<Canvas of={Stories.TituloLargo} />
 
 ### Large
 

@@ -3,7 +3,7 @@ import { expect, screen, userEvent, within } from "storybook/test"
 import { Camera01Icon, File01Icon, Home01Icon, Wallet01Icon } from "@hugeicons/core-free-icons"
 
 import { SidebarInset, SidebarProvider } from "@/components/layout/sidebar"
-import { AppSidebar, AppSidebarGroup, AppSidebarItem, AppSidebarSubItem, type AppSidebarProps } from "."
+import { AppSidebar, AppSidebarGroup, AppSidebarItem, AppSidebarNav, AppSidebarSubItem, type AppSidebarProps } from "."
 
 function DemoSidebar(props: Omit<AppSidebarProps, "children">) {
   return (
@@ -96,5 +96,46 @@ export const SubItemsColapsado: StoryObj<typeof SubItemsSidebar> = {
     // El popover se renderiza en un portal, fuera del canvas.
     await expect(await screen.findByRole("link", { name: "Corridas" })).toHaveAttribute("aria-current", "page")
     await expect(screen.getByRole("link", { name: "Indicadores" })).not.toHaveAttribute("aria-current")
+  },
+}
+
+function NavSidebar(props: Omit<AppSidebarProps, "children">) {
+  return (
+    <SidebarProvider>
+      <AppSidebar {...props}>
+        <AppSidebarNav
+          groups={[
+            {
+              label: "Módulos",
+              items: [
+                { title: "Inicio", href: "/", icon: Home01Icon, match: "exact" },
+                {
+                  title: "Reclamos",
+                  href: "/reclamos",
+                  icon: File01Icon,
+                  badge: 12,
+                  children: [
+                    { title: "Pendientes", href: "/reclamos/pendientes" },
+                    { title: "Nuevo", href: "/reclamos/nuevo" },
+                  ],
+                },
+                { title: "Cámaras", href: "/camaras", icon: Camera01Icon },
+              ],
+            },
+          ]}
+        />
+      </AppSidebar>
+      <SidebarInset />
+    </SidebarProvider>
+  )
+}
+
+export const ConNav: StoryObj<typeof NavSidebar> = {
+  render: (args) => <NavSidebar {...args} />,
+  args: { activeHref: "/reclamos/nuevo" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    await expect(canvas.getByRole("link", { name: "Nuevo" })).toHaveAttribute("aria-current", "page")
+    await expect(canvas.getByRole("link", { name: /Reclamos/ })).not.toHaveAttribute("aria-current")
   },
 }

@@ -1,0 +1,31 @@
+import { Meta, Canvas } from "@storybook/addon-docs/blocks";
+import * as Stories from "./app-shell.stories";
+
+<Meta of={Stories} />
+
+# AppShell
+
+Layout en "T" de las apps: el navbar cruza todo el ancho arriba, el sidebar arranca debajo y el contenido ocupa el resto. Reemplaza el armado de `SidebarProvider` + `SidebarInset` que cada app copiaba.
+
+## Cuándo usarlo
+
+- Una vez, en el layout de las rutas autenticadas.
+
+## Uso
+
+```tsx
+<AppShell navbar={<MiNavbar />} sidebar={<MiSidebar />}>
+  <PageHeader title="Reclamos" end={<Button>Nuevo</Button>} />
+  {children}
+</AppShell>
+```
+
+No depende de Next ni de auth: la redirección al login y el guard quedan en la app.
+
+## Props
+
+`navbar`, `sidebar`, `children`, `className?` (wrapper raíz), `contentClassName?` (contenedor del contenido, default `p-4`).
+
+Navbar y sidebar se ocultan al imprimir.
+
+<Canvas of={Stories.Default} />

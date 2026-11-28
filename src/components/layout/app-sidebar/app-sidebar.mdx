@@ -1,6 +1,5 @@
 import { Meta, Canvas, ArgTypes } from "@storybook/addon-docs/blocks";
 import * as Stories from "./app-sidebar.stories";
-import * as ShellStories from "./app-shell.stories";
 
 <Meta of={Stories} />
 
@@ -34,6 +33,20 @@ Barra lateral de navegación lista para usar: grupos (`AppSidebarGroup`), ítems
 ## Props clave
 
 `AppSidebar`: `activeHref` (ruta actual), `linkComponent`, `onNavigate`, `loading`. `AppSidebarItem`: `href`, `icon`, `badge`, `match` (`prefix` default o `exact`), y con sub-items `open` / `onOpenChange` / `defaultOpen`. `AppSidebarSubItem`: `href`, `icon`, `badge`, `match`. `AppSidebar` también acepta `collapsible="icon"`.
+
+## AppSidebarNav
+
+Si la navegación es data (rutas por rol, menú del BFF), usá `AppSidebarNav` dentro de `AppSidebar` en vez de mapear a mano:
+
+```tsx
+<AppSidebar activeHref={pathname}>
+  <AppSidebarNav groups={[{ label: "Módulos", items: [{ title: "Reclamos", href: "/reclamos", icon: File01Icon, children: [{ title: "Nuevo", href: "/reclamos/nuevo" }] }] }]} />
+</AppSidebar>
+```
+
+`loading?` pisa el de `AppSidebar` y muestra el skeleton de cada grupo.
+
+<Canvas of={Stories.ConNav} />
 
 ## Sub-items
 
@@ -76,7 +89,7 @@ Los `AppSidebarSubItem` van como hijos de `AppSidebarItem`, junto al texto del �
 
 ### Shell completo (navbar + sidebar)
 
-<Canvas of={ShellStories.Default} />
+Para armar el layout completo usá `AppShell` (ver GCBA/Layout/AppShell).
 
 ## Accesibilidad
 

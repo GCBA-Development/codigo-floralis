@@ -34,6 +34,7 @@ export * from "./components/data/table"
 
 // layout
 export * from "./components/layout/app-navbar"
+export * from "./components/layout/app-shell"
 export * from "./components/layout/app-sidebar"
 export * from "./components/layout/page-header"
 export * from "./components/layout/sidebar"

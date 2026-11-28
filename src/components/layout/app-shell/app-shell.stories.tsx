@@ -3,6 +3,7 @@ import { expect, fn, userEvent, waitFor, within } from "storybook/test"
 import { useState } from "react"
 import { HugeiconsIcon } from "@hugeicons/react"
 import {
+  ArrowLeft01Icon,
   Camera01Icon,
   ChartBarLineIcon,
   File01Icon,
@@ -11,7 +12,8 @@ import {
   Tree03Icon,
 } from "@hugeicons/core-free-icons"
 
-import { SidebarInset, SidebarProvider } from "@/components/layout/sidebar"
+import { Button } from "@/components/ui/button"
+import { PageHeader } from "@/components/layout/page-header"
 import {
   AppNavbar,
   AppNavbarAction,
@@ -22,64 +24,71 @@ import {
   AppNavbarStart,
   AppNavbarUser,
 } from "@/components/layout/app-navbar"
-import { AppSidebar, AppSidebarFooter, AppSidebarGroup, AppSidebarHeader, AppSidebarItem } from "."
+import { AppSidebar, AppSidebarFooter, AppSidebarHeader, AppSidebarNav, type AppSidebarNavGroup } from "@/components/layout/app-sidebar"
+import { AppShell } from "./app-shell"
+
+const groups: AppSidebarNavGroup[] = [
+  {
+    label: "Módulos",
+    items: [
+      { title: "Inicio", href: "/", icon: Home01Icon, match: "exact" },
+      { title: "Reclamos", href: "/reclamos", icon: File01Icon, badge: 12 },
+      { title: "Cámaras", href: "/camaras", icon: Camera01Icon },
+    ],
+  },
+  { label: "Análisis", items: [{ title: "Reportes", href: "/reportes", icon: ChartBarLineIcon }] },
+]
 
 function DemoShell({ loading = false, initialPath = "/reclamos/12" }: { loading?: boolean; initialPath?: string }) {
   const [path, setPath] = useState(initialPath)
   return (
-    <SidebarProvider className="flex-col">
-      <AppNavbar>
-        <AppNavbarStart>
-          <AppNavbarSidebarTrigger />
-          <AppNavbarBrand
-            href="/"
-            logo={<HugeiconsIcon icon={Tree03Icon} strokeWidth={2} className="size-8" />}
-            title="GCBA"
-            subtitle="Arbolado"
-          />
-        </AppNavbarStart>
-        <AppNavbarEnd>
-          <AppNavbarActions>
-            <AppNavbarAction icon={Notification03Icon} label="Avisos" badge={3} />
-          </AppNavbarActions>
-          <AppNavbarUser name="Ana Pérez" email="ana@example.com" onLogout={fn()} />
-        </AppNavbarEnd>
-      </AppNavbar>
-      <div className="flex flex-1">
+    <AppShell
+      navbar={
+        <AppNavbar>
+          <AppNavbarStart>
+            <AppNavbarSidebarTrigger />
+            <AppNavbarBrand
+              href="/"
+              logo={<HugeiconsIcon icon={Tree03Icon} strokeWidth={2} className="size-8" />}
+              title="GCBA"
+              subtitle="Arbolado"
+            />
+          </AppNavbarStart>
+          <AppNavbarEnd>
+            <AppNavbarActions>
+              <AppNavbarAction icon={Notification03Icon} label="Avisos" badge={3} />
+            </AppNavbarActions>
+            <AppNavbarUser name="Ana Pérez" email="ana@example.com" onLogout={fn()} />
+          </AppNavbarEnd>
+        </AppNavbar>
+      }
+      sidebar={
         <AppSidebar activeHref={path} loading={loading} onNavigate={fn()}>
           <AppSidebarHeader>
             <p className="px-2 text-s6 text-sidebar-foreground/70">Comuna 4</p>
           </AppSidebarHeader>
-          <AppSidebarGroup label="Módulos">
-            <AppSidebarItem href="/" icon={Home01Icon} match="exact">
-              Inicio
-            </AppSidebarItem>
-            <AppSidebarItem href="/reclamos" icon={File01Icon} badge={12}>
-              Reclamos
-            </AppSidebarItem>
-            <AppSidebarItem href="/camaras" icon={Camera01Icon}>
-              Cámaras
-            </AppSidebarItem>
-          </AppSidebarGroup>
-          <AppSidebarGroup label="Análisis">
-            <AppSidebarItem href="/reportes" icon={ChartBarLineIcon}>
-              Reportes
-            </AppSidebarItem>
-          </AppSidebarGroup>
+          <AppSidebarNav groups={groups} />
           <AppSidebarFooter>
             <p className="px-2 text-s7 text-sidebar-foreground/60">v0.1.0</p>
           </AppSidebarFooter>
         </AppSidebar>
-        <SidebarInset>
-          <div className="flex flex-col gap-3 p-6">
-            <p className="text-s5">Ruta actual: {path}</p>
-            <button type="button" className="w-fit rounded-md border px-3 py-1 text-s6" onClick={() => setPath("/camaras")}>
-              Ir a cámaras
-            </button>
-          </div>
-        </SidebarInset>
-      </div>
-    </SidebarProvider>
+      }
+    >
+      <PageHeader
+        start={
+          <Button size="icon-sm" variant="ghost" aria-label="Volver">
+            <HugeiconsIcon icon={ArrowLeft01Icon} strokeWidth={2} />
+          </Button>
+        }
+        title="Reclamo #12"
+        subtitle={`Ruta actual: ${path}`}
+        end={
+          <Button size="sm" variant="outline" onClick={() => setPath("/camaras")}>
+            Ir a cámaras
+          </Button>
+        }
+      />
+    </AppShell>
   )
 }
 
