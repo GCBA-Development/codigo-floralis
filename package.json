@@ -42,7 +42,6 @@
     "gc": "node scripts/generate.mjs",
     "build-storybook": "storybook build",
     "build:lib": "vite build",
-    "prepare": "vite build",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "changeset tag"

@@ -1,6 +1,6 @@
 # 0004. Distribución por git con tags y `prepare`
 
-Estado: aceptada
+Estado: reemplazada por [0007](0007-distribucion-por-github-packages.md)
 
 ## Contexto
 La librería es privada (no se publica en npm) y la consumen apps internas, en particular Next.js.
