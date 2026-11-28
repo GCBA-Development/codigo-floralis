@@ -1,104 +1,51 @@
 # codigo-floralis
 
-Design system de React 19 + Tailwind v4 + Base UI. Se publica en GitHub Packages como `@gcba-development/codigo-floralis`.
+Design system oficial para las aplicaciones web del **Gobierno de la Ciudad de Buenos Aires**. Aplica el manual de marca GCBA en componentes React listos para usar, para que todas las apps se vean y se comporten igual sin que cada equipo rehaga la UI.
+
+**Stack:** React 19 · Tailwind CSS v4 · Base UI · Hugeicons · TypeScript.
+
+## Qué trae
+
+| Capa | Contenido |
+|------|-----------|
+| **Tokens** | Colores, tipografía (Archivo), espaciados y tema claro/oscuro del manual de marca. |
+| **UI** | Button, Input, Select, Dialog, Sheet, Toast, Tooltip, Badge, Pagination, Stepper, Dropzone y más. |
+| **Datos** | Table, KpiCard, StatCard, BreakdownTable. Gráficos en un entry aparte (`/charts`). |
+| **Layout** | AppShell, AppNavbar, AppSidebar (con AppSidebarNav) y PageHeader: el esqueleto común de toda app de gestión. |
+
+El catálogo completo, con ejemplos y reglas de uso de cada componente, está en **Storybook** (`npm run storybook`).
 
 ## Instalación
 
-En la app, `.npmrc` (el token necesita `read:packages`; en CI alcanza con `GITHUB_TOKEN` si el repo tiene acceso al paquete):
+Se publica en **GitHub Packages** como `@gcba-development/codigo-floralis`. Instalala con alias para importar desde `codigo-floralis`:
 
-```
-@gcba-development:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}
-```
-
-Instalalo con alias para mantener los imports `codigo-floralis`:
-
-```bash
-npm install codigo-floralis@npm:@gcba-development/codigo-floralis
+```json
+"codigo-floralis": "npm:@gcba-development/codigo-floralis@^0.10.0"
 ```
 
-## Publicación
+Hace falta un token con `read:packages` (en local, la variable `GITHUB_TOKEN`; en GitHub Actions alcanza el `GITHUB_TOKEN` del workflow si el repo tiene acceso al paquete). Configuración de npm/yarn, acceso desde CI y Docker: [`docs/consumir-desde-github-packages.md`](docs/consumir-desde-github-packages.md).
 
-`npm run version-packages` → commit → `npm run release` (crea el tag `vX.Y.Z`) → `git push --follow-tags`. El workflow `publish.yml` compila y publica.
+Peer dependencies que tiene que tener la app: `react`, `react-dom`, `@base-ui/react`, `@hugeicons/react`, `@hugeicons/core-free-icons`. Opcionales: `recharts` (solo para `/charts`) y `next-themes` (solo para `/theme`).
 
-## Uso
-
-```tsx
-// Una sola vez, en el layout raiz de la app
-import "codigo-floralis/styles.css";
-
-import { Button } from "codigo-floralis";
-```
-
-Los estilos ya no se importan desde `codigo-floralis` (el barrel no tiene efectos de CSS): hay que importar `styles.css` explicitamente.
-
-### Apps que ya usan Tailwind v4 (recomendado)
-
-`styles.css` trae Tailwind compilado (preflight + utilidades). En una app con Tailwind eso duplica la base y mezcla capas. Usá `tokens.css` desde el CSS global de la app, en lugar de `styles.css`:
+## Uso rápido (Next.js)
 
 ```css
-/* app/globals.css */
+/* app/globals.css: la app ya usa Tailwind v4 */
 @import "tailwindcss";
 @import "codigo-floralis/tokens.css";
 ```
 
-`tokens.css` trae los tokens, el tema y un `@source` a los componentes de la librería: la app genera esas clases en su propio build, una sola vez.
-
-## Tipografia (Archivo)
-
-`styles.css` **no carga la fuente**: usa `var(--font-archivo)` y cae a `"Archivo"` del sistema. Asi la app decide como cargarla y no hay un request externo extra.
-
-Next.js:
-
 ```tsx
 // app/layout.tsx
 import { Archivo } from "next/font/google";
+import { FloralisProvider } from "codigo-floralis/theme";
+import "./globals.css";
 
 const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap" });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="es" className={archivo.variable} suppressHydrationWarning>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-Otras apps: agrega el link de Google Fonts en el `<head>`.
-
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&display=swap" rel="stylesheet" />
-```
-
-Storybook de la libreria la carga desde `.storybook/preview-head.html`.
-
-## Tema claro/oscuro (opcional)
-
-`FloralisProvider` y `ThemeToggle` viven en el entry `codigo-floralis/theme` y requieren `next-themes` (peer dependency opcional). Setup en Next.js (App Router):
-
-```bash
-npm i next-themes
-```
-
-```css
-/* app/globals.css: Tailwind tiene que escanear las clases de la libreria */
-@import "tailwindcss";
-@source "../node_modules/codigo-floralis/dist";
-```
-
-```tsx
-// app/layout.tsx
-import "./globals.css";
-import "codigo-floralis/styles.css";
-import { FloralisProvider } from "codigo-floralis/theme";
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    // suppressHydrationWarning: next-themes agrega la clase `dark` antes de hidratar
-    <html lang="es" suppressHydrationWarning>
       <body>
         <FloralisProvider>{children}</FloralisProvider>
       </body>
@@ -107,40 +54,46 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 ```
 
-`FloralisProvider` incluye `TooltipProvider` y `<Toaster />`. Props: `theme` (sobrescribe next-themes), `toaster` (`false` si montas el tuyo), `tooltipDelay`. Para cambiar de tema usa `<ThemeToggle />` o `useTheme()` (reexportado). Sin dark mode no hace falta nada de esto: alcanza con `styles.css`.
-
-## Desarrollo
-
-- `npm run storybook`: Storybook en el puerto 6006.
-- `npm run build:lib`: genera `dist/`.
-- `npm run test:unit`: tests unitarios.
-
-## Graficos (opcional)
-
-Los componentes basados en `recharts` viven en un entry aparte para que el barrel principal no arrastre esa dependencia. `recharts` es una peer dependency opcional: instalala solo si usas graficos.
-
 ```tsx
-import { SimpleBarChart } from "codigo-floralis/charts";
+// cualquier página
+import { Button, PageHeader } from "codigo-floralis";
+
+<PageHeader title="Gestión de usuarios" subtitle="Alta, edición y baja." actions={<Button size="sm">Nuevo</Button>} />
 ```
 
-## Peer dependencies
+- **App sin Tailwind:** en vez de `tokens.css`, importá `codigo-floralis/styles.css` una vez (trae Tailwind compilado).
+- **La fuente no viene incluida:** cargá Archivo como arriba, o con el `<link>` de Google Fonts en apps que no son Next.
+- **`FloralisProvider` es opcional:** suma tema claro/oscuro (`next-themes`), tooltips y toasts. Sin dark mode alcanza con los estilos.
 
-`react`, `react-dom`, `@base-ui/react`, `@hugeicons/react` y `@hugeicons/core-free-icons` deben estar instaladas en la app consumidora (`recharts` solo para `codigo-floralis/charts`, `next-themes` solo para `codigo-floralis/theme`).
+## Entry points
 
-## Versionado
+| Import | Para qué |
+|--------|----------|
+| `codigo-floralis` | Componentes, hooks y utilidades. |
+| `codigo-floralis/theme` | `FloralisProvider`, `ThemeToggle`, `useTheme`. |
+| `codigo-floralis/charts` | Gráficos (`recharts`). |
+| `codigo-floralis/tokens.css` | Tokens para apps con Tailwind v4 (recomendado). |
+| `codigo-floralis/styles.css` | Estilos completos para apps sin Tailwind. |
 
-Usamos [Changesets](https://github.com/changesets/changesets). El paquete es privado (no se publica en npm): solo se versiona y se taggea. Estamos en `0.x`: la API no esta congelada.
+## Principios
 
-1. En tu PR corre `npm run changeset`, elegi el tipo de cambio (patch/minor/major) y describilo. Commitea el archivo generado en `.changeset/`.
-2. Al preparar un release: `npm run version-packages` (actualiza `package.json` y `CHANGELOG.md`), commit, y luego `npm run release` (crea el tag `v0.x.y`).
-3. Push del commit y de los tags (`git push --follow-tags`).
+- **Una sola fuente de verdad visual:** si una app necesita un estilo que no existe, se agrega acá, no en la app.
+- **API consistente:** todas las props siguen [`docs/conventions.md`](docs/conventions.md) (`variant`, `size`, `error`, controlados).
+- **Accesible por defecto:** los componentes se prueban con el addon a11y de Storybook.
+- **Decisiones registradas:** cada decisión de arquitectura tiene su ADR en [`docs/adr/`](docs/adr/).
 
-La app consumidora fija la version por tag:
+## Contribuir
 
-```json
-"codigo-floralis": "github:GCBA-Development/codigo-floralis#v0.1.0"
+```bash
+npm install
+npm run storybook    # desarrollo (puerto 6006)
+npm run test:unit    # tests unitarios
+npm run lint
+npm run build:lib    # genera dist/
 ```
 
-### dist y `prepare`
+1. Cada componente vive en `src/components/<capa>/<nombre>/` con su `.tsx`, `.stories.tsx`, `.mdx` e `index.ts`, y se exporta en `src/index.ts`.
+2. En el PR corré `npm run changeset` y describí el cambio (patch/minor/major).
+3. **Release:** `npm run version-packages`, commit, merge a `main` y tag `vX.Y.Z` sobre ese commit. El workflow `publish.yml` verifica que el tag coincida con la versión y publica en GitHub Packages.
 
-`dist` esta en `.gitignore`, asi que al instalar desde git el script `prepare` ejecuta `vite build` para generarlo. Tradeoff: cada `npm install` del consumidor compila la libreria (mas lento, requiere las devDependencies del DS y memoria suficiente). Si molesta, la alternativa es commitear `dist` en el tag de release.
+Estamos en `0.x`: la API todavía puede cambiar entre versiones minor. Revisá el [`CHANGELOG`](CHANGELOG.md) antes de actualizar.
