@@ -17,13 +17,21 @@ Encabezado de página: título (`h1`), subtítulo, etiqueta superior y acciones.
 
 ## Props clave
 
-`title`, `subtitle?`, `eyebrow?` (etiqueta chica sobre el título), `actions?` (uno o varios `Button`, en un fragment si son varios; van arriba a la derecha, alineados con el título).
+`size?` (`compact` por defecto, el de las pantallas de gestión; `large` para portadas), `title`, `subtitle?` (texto o contenido, ej. una línea con un link), `eyebrow?` (etiqueta chica sobre el título, solo en `large`), `actions?` (uno o varios `Button`, en un fragment si son varios; van arriba a la derecha, alineados con el título).
 
 ## Ejemplos
 
 ### Default
 
 <Canvas of={Stories.Default} />
+
+### Con acciones
+
+<Canvas of={Stories.ConAcciones} />
+
+### Large
+
+<Canvas of={Stories.Large} />
 
 ## Accesibilidad
 
